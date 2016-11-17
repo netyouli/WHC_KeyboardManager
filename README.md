@@ -11,10 +11,9 @@ WHC_KeyboradManager
 - **咨询**: 712641411
 - **作者**: 吴海超
 
-性能测试
+演示
 ==============
-Time lost (Benchmark 1000 times)
-<img src = "https://github.com/netyouli/WHC_KeyboradManager/blob/master/WHC_KeyboradManager/demo/k1.gif", width = 375><img src = "https://github.com/netyouli/WHC_KeyboradManager/blob/master/WHC_KeyboradManager/demo/k2.gif", width = 375>
+<img src = "https://github.com/netyouli/WHC_KeyboradManager/blob/master/WHC_KeyboradManager/demo/k1.gif", width = "375"><img src = "https://github.com/netyouli/WHC_KeyboradManager/blob/master/WHC_KeyboradManager/demo/k2.gif", width = "375">
 
 
 要求
