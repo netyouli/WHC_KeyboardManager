@@ -330,7 +330,7 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate, UITextViewDelegate,UISc
                 UIView.animate(withDuration: moveViewAnimationDuration, animations: {
                     if scrollMoveView!.contentOffset.y < -scrollMoveView!.contentInset.top {
                         scrollMoveView!.contentOffset = CGPoint(x: (scrollMoveView?.contentOffset.x)!, y: -scrollMoveView!.contentInset.top)
-                    }else if scrollMoveView!.contentOffset.y > (scrollMoveView!.contentSize.height - scrollMoveView!.bounds.height - scrollMoveView!.contentInset.bottom) {
+                    }else if scrollMoveView!.contentOffset.y > (scrollMoveView!.contentSize.height - scrollMoveView!.bounds.height + scrollMoveView!.contentInset.bottom) {
                         scrollMoveView!.contentOffset = CGPoint(x: (scrollMoveView?.contentOffset.x)!, y: (scrollMoveView!.contentSize.height - scrollMoveView!.bounds.height + scrollMoveView!.contentInset.bottom))
                     }
                 })
@@ -375,7 +375,7 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate, UITextViewDelegate,UISc
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if topViewController == nil {
-            topViewController = NSObject().currentViewController()
+            topViewController = self.currentViewController()
         }
         currentField = textField
         sendFieldViewNotify()
