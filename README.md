@@ -1,8 +1,5 @@
 WHC_KeyboradManager
 ==============
-![Build Status](https://api.travis-ci.org/netyouli/WHC_Model.svg?branch=master)
-[![Pod Version](http://img.shields.io/cocoapods/v/WHC_Model.svg?style=flat)](http://cocoadocs.org/docsets/WHC_Model/)
-[![Pod Platform](http://img.shields.io/cocoapods/p/WHC_Model.svg?style=flat)](http://cocoadocs.org/docsets/WHC_Model/)
 [![Pod License](http://img.shields.io/cocoapods/l/WHC_Model.svg?style=flat)](https://opensource.org/licenses/MIT)
 简介
 ==============
@@ -17,10 +14,8 @@ WHC_KeyboradManager
 性能测试
 ==============
 Time lost (Benchmark 1000 times)
-<img src = "https://github.com/netyouli/WHC_Model/blob/master/Result/b.png">
-<img src = "https://github.com/netyouli/WHC_Model/blob/master/Result/a.png">
+<img src = "https://github.com/netyouli/WHC_KeyboradManager/blob/master/WHC_KeyboradManager/demo/k1.gif", width = 375><img src = "https://github.com/netyouli/WHC_KeyboradManager/blob/master/WHC_KeyboradManager/demo/k2.gif", width = 375>
 
-* 查看性能测试请运行项目： Benchmark/ModelBenchmark.xcodeproj 
 
 要求
 ==============
@@ -37,8 +32,7 @@ Time lost (Benchmark 1000 times)
 用法
 ==============
 
-###一,json -> model
-```Objective-C
+```Swift
 /// 创建键盘管理器
 var keyborad = WHC_KeyboradManager()
 
@@ -65,7 +59,7 @@ keyborad.whc_AutoMonitor(view: cell!)
 
 文档
 ==============
-```Objective-C
+```Swift
 
 //MARK: - 公开接口Api -
 
