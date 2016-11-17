@@ -1,0 +1,370 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FE1031B41DD999F900A9F284 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031B31DD999F900A9F284 /* AppDelegate.swift */; };
+		FE1031B61DD999F900A9F284 /* StyleVC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031B51DD999F900A9F284 /* StyleVC1.swift */; };
+		FE1031BB1DD999F900A9F284 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE1031BA1DD999F900A9F284 /* Assets.xcassets */; };
+		FE1031BE1DD999F900A9F284 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE1031BC1DD999F900A9F284 /* LaunchScreen.storyboard */; };
+		FE1031C71DD99A6A00A9F284 /* WHC_KeyboradManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031C61DD99A6A00A9F284 /* WHC_KeyboradManager.swift */; };
+		FE1031CD1DDAEDE600A9F284 /* WHC_AutoCellHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031C91DDAEDE500A9F284 /* WHC_AutoCellHeight.swift */; };
+		FE1031CE1DDAEDE600A9F284 /* WHC_AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031CA1DDAEDE500A9F284 /* WHC_AutoLayout.swift */; };
+		FE1031CF1DDAEDE600A9F284 /* WHC_Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031CB1DDAEDE500A9F284 /* WHC_Frame.swift */; };
+		FE1031D01DDAEDE600A9F284 /* WHC_StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031CC1DDAEDE500A9F284 /* WHC_StackView.swift */; };
+		FE1031D21DDAF27800A9F284 /* WHC_ExtensionKeyboradObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031D11DDAF27800A9F284 /* WHC_ExtensionKeyboradObject.swift */; };
+		FE1031D41DDC460600A9F284 /* WHC_KeyboradHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031D31DDC460600A9F284 /* WHC_KeyboradHeaderView.swift */; };
+		FE8BB4C81DDD76A300934189 /* StyleVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8BB4C61DDD76A300934189 /* StyleVC2.swift */; };
+		FE8BB4C91DDD76A300934189 /* StyleVC2.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8BB4C71DDD76A300934189 /* StyleVC2.xib */; };
+		FE8BB4CB1DDD76C200934189 /* StyleVC1.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8BB4CA1DDD76C200934189 /* StyleVC1.xib */; };
+		FE8BB4CF1DDD799C00934189 /* op_check.png in Resources */ = {isa = PBXBuildFile; fileRef = FE8BB4CD1DDD799C00934189 /* op_check.png */; };
+		FE8BB4D01DDD799C00934189 /* op_uncheck.png in Resources */ = {isa = PBXBuildFile; fileRef = FE8BB4CE1DDD799C00934189 /* op_uncheck.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FE1031B01DD999F900A9F284 /* WHC_KeyboradManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WHC_KeyboradManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE1031B31DD999F900A9F284 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FE1031B51DD999F900A9F284 /* StyleVC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleVC1.swift; sourceTree = "<group>"; };
+		FE1031BA1DD999F900A9F284 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FE1031BD1DD999F900A9F284 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FE1031BF1DD999F900A9F284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE1031C61DD99A6A00A9F284 /* WHC_KeyboradManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_KeyboradManager.swift; sourceTree = "<group>"; };
+		FE1031C91DDAEDE500A9F284 /* WHC_AutoCellHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_AutoCellHeight.swift; sourceTree = "<group>"; };
+		FE1031CA1DDAEDE500A9F284 /* WHC_AutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_AutoLayout.swift; sourceTree = "<group>"; };
+		FE1031CB1DDAEDE500A9F284 /* WHC_Frame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_Frame.swift; sourceTree = "<group>"; };
+		FE1031CC1DDAEDE500A9F284 /* WHC_StackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_StackView.swift; sourceTree = "<group>"; };
+		FE1031D11DDAF27800A9F284 /* WHC_ExtensionKeyboradObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_ExtensionKeyboradObject.swift; sourceTree = "<group>"; };
+		FE1031D31DDC460600A9F284 /* WHC_KeyboradHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_KeyboradHeaderView.swift; sourceTree = "<group>"; };
+		FE8BB4C61DDD76A300934189 /* StyleVC2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleVC2.swift; sourceTree = "<group>"; };
+		FE8BB4C71DDD76A300934189 /* StyleVC2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StyleVC2.xib; sourceTree = "<group>"; };
+		FE8BB4CA1DDD76C200934189 /* StyleVC1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StyleVC1.xib; sourceTree = "<group>"; };
+		FE8BB4CD1DDD799C00934189 /* op_check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = op_check.png; sourceTree = "<group>"; };
+		FE8BB4CE1DDD799C00934189 /* op_uncheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = op_uncheck.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FE1031AD1DD999F900A9F284 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FE1031A71DD999F900A9F284 = {
+			isa = PBXGroup;
+			children = (
+				FE1031B21DD999F900A9F284 /* WHC_KeyboradManager */,
+				FE1031B11DD999F900A9F284 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FE1031B11DD999F900A9F284 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FE1031B01DD999F900A9F284 /* WHC_KeyboradManager.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FE1031B21DD999F900A9F284 /* WHC_KeyboradManager */ = {
+			isa = PBXGroup;
+			children = (
+				FE8BB4CC1DDD799C00934189 /* images */,
+				FE1031C81DDAEDE500A9F284 /* WHC_AutoLayoutKit */,
+				FE1031C51DD99A4B00A9F284 /* WHC_KeyboradManager */,
+				FE1031B31DD999F900A9F284 /* AppDelegate.swift */,
+				FE1031B51DD999F900A9F284 /* StyleVC1.swift */,
+				FE8BB4CA1DDD76C200934189 /* StyleVC1.xib */,
+				FE8BB4C61DDD76A300934189 /* StyleVC2.swift */,
+				FE8BB4C71DDD76A300934189 /* StyleVC2.xib */,
+				FE1031BA1DD999F900A9F284 /* Assets.xcassets */,
+				FE1031BC1DD999F900A9F284 /* LaunchScreen.storyboard */,
+				FE1031BF1DD999F900A9F284 /* Info.plist */,
+			);
+			path = WHC_KeyboradManager;
+			sourceTree = "<group>";
+		};
+		FE1031C51DD99A4B00A9F284 /* WHC_KeyboradManager */ = {
+			isa = PBXGroup;
+			children = (
+				FE1031C61DD99A6A00A9F284 /* WHC_KeyboradManager.swift */,
+				FE1031D11DDAF27800A9F284 /* WHC_ExtensionKeyboradObject.swift */,
+				FE1031D31DDC460600A9F284 /* WHC_KeyboradHeaderView.swift */,
+			);
+			path = WHC_KeyboradManager;
+			sourceTree = "<group>";
+		};
+		FE1031C81DDAEDE500A9F284 /* WHC_AutoLayoutKit */ = {
+			isa = PBXGroup;
+			children = (
+				FE1031C91DDAEDE500A9F284 /* WHC_AutoCellHeight.swift */,
+				FE1031CA1DDAEDE500A9F284 /* WHC_AutoLayout.swift */,
+				FE1031CB1DDAEDE500A9F284 /* WHC_Frame.swift */,
+				FE1031CC1DDAEDE500A9F284 /* WHC_StackView.swift */,
+			);
+			path = WHC_AutoLayoutKit;
+			sourceTree = "<group>";
+		};
+		FE8BB4CC1DDD799C00934189 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				FE8BB4CD1DDD799C00934189 /* op_check.png */,
+				FE8BB4CE1DDD799C00934189 /* op_uncheck.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FE1031AF1DD999F900A9F284 /* WHC_KeyboradManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE1031C21DD999F900A9F284 /* Build configuration list for PBXNativeTarget "WHC_KeyboradManager" */;
+			buildPhases = (
+				FE1031AC1DD999F900A9F284 /* Sources */,
+				FE1031AD1DD999F900A9F284 /* Frameworks */,
+				FE1031AE1DD999F900A9F284 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WHC_KeyboradManager;
+			productName = WHC_KeyboradManager;
+			productReference = FE1031B01DD999F900A9F284 /* WHC_KeyboradManager.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FE1031A81DD999F900A9F284 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = WHC;
+				TargetAttributes = {
+					FE1031AF1DD999F900A9F284 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 7F5YZXGNJ3;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = FE1031AB1DD999F900A9F284 /* Build configuration list for PBXProject "WHC_KeyboradManager" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FE1031A71DD999F900A9F284;
+			productRefGroup = FE1031B11DD999F900A9F284 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FE1031AF1DD999F900A9F284 /* WHC_KeyboradManager */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FE1031AE1DD999F900A9F284 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE8BB4CB1DDD76C200934189 /* StyleVC1.xib in Resources */,
+				FE8BB4CF1DDD799C00934189 /* op_check.png in Resources */,
+				FE1031BE1DD999F900A9F284 /* LaunchScreen.storyboard in Resources */,
+				FE1031BB1DD999F900A9F284 /* Assets.xcassets in Resources */,
+				FE8BB4D01DDD799C00934189 /* op_uncheck.png in Resources */,
+				FE8BB4C91DDD76A300934189 /* StyleVC2.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FE1031AC1DD999F900A9F284 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE1031B61DD999F900A9F284 /* StyleVC1.swift in Sources */,
+				FE1031D41DDC460600A9F284 /* WHC_KeyboradHeaderView.swift in Sources */,
+				FE1031D21DDAF27800A9F284 /* WHC_ExtensionKeyboradObject.swift in Sources */,
+				FE1031CE1DDAEDE600A9F284 /* WHC_AutoLayout.swift in Sources */,
+				FE1031CF1DDAEDE600A9F284 /* WHC_Frame.swift in Sources */,
+				FE8BB4C81DDD76A300934189 /* StyleVC2.swift in Sources */,
+				FE1031B41DD999F900A9F284 /* AppDelegate.swift in Sources */,
+				FE1031D01DDAEDE600A9F284 /* WHC_StackView.swift in Sources */,
+				FE1031CD1DDAEDE600A9F284 /* WHC_AutoCellHeight.swift in Sources */,
+				FE1031C71DD99A6A00A9F284 /* WHC_KeyboradManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FE1031BC1DD999F900A9F284 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE1031BD1DD999F900A9F284 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FE1031C01DD999F900A9F284 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FE1031C11DD999F900A9F284 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FE1031C31DD999F900A9F284 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7F5YZXGNJ3;
+				INFOPLIST_FILE = WHC_KeyboradManager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "WHC.WHC-KeyboradManager";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		FE1031C41DD999F900A9F284 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7F5YZXGNJ3;
+				INFOPLIST_FILE = WHC_KeyboradManager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "WHC.WHC-KeyboradManager";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FE1031AB1DD999F900A9F284 /* Build configuration list for PBXProject "WHC_KeyboradManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE1031C01DD999F900A9F284 /* Debug */,
+				FE1031C11DD999F900A9F284 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE1031C21DD999F900A9F284 /* Build configuration list for PBXNativeTarget "WHC_KeyboradManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE1031C31DD999F900A9F284 /* Debug */,
+				FE1031C41DD999F900A9F284 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FE1031A81DD999F900A9F284 /* Project object */;
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StyleVC2" customModule="WHC_KeyboradManager" customModuleProvider="target">
+            <connections>
+                <outlet property="scrollView" destination="eiz-Li-6oj" id="bFp-dq-kv7"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiz-Li-6oj"/>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="eiz-Li-6oj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="9WZ-dP-R6M"/>
+                <constraint firstAttribute="trailing" secondItem="eiz-Li-6oj" secondAttribute="trailing" id="Cdf-gZ-ObB"/>
+                <constraint firstItem="eiz-Li-6oj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="YMZ-xm-dFl"/>
+                <constraint firstAttribute="bottom" secondItem="eiz-Li-6oj" secondAttribute="bottom" id="vIf-hO-KUB"/>
+            </constraints>
+            <point key="canvasLocation" x="33.5" y="54.5"/>
+        </view>
+    </objects>
+</document>
