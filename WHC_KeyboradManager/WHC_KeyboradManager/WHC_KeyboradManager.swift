@@ -349,9 +349,9 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     /// - parameter vc: 设置要监听的控制器
     /// return 返回默认的键盘头部配置对象
     @discardableResult
-    func whc_AddMonitorViewController(_ vc:UIViewController) -> WHC_KeyboradManager.Configuration {
+    func addMonitorViewController(_ vc:UIViewController) -> WHC_KeyboradManager.Configuration {
         let configuration = WHC_KeyboradManager.Configuration()
-        whc_AddMonitorViewController(vc, configuration: configuration)
+        addMonitorViewController(vc, configuration: configuration)
         return configuration
     }
     
@@ -359,7 +359,7 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     ///
     /// - parameter vc:           设置要监听的控制器
     /// - parameter configuration: 设置键盘处理配置
-    func whc_AddMonitorViewController(_ vc:UIViewController, configuration: WHC_KeyboradManager.Configuration?) {
+    func addMonitorViewController(_ vc:UIViewController, configuration: WHC_KeyboradManager.Configuration?) {
         self.KeyboradConfiguration = configuration
         if configuration == nil {
             KeyboradConfigurations.updateValue(WHC_KeyboradManager.Configuration(), forKey: vc)
@@ -373,7 +373,7 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     /// 移除监听的控制器对象
     ///
     /// - parameter vc: 要移除的控制器
-    func whc_RemoveMonitorViewController(_ vc: UIViewController?) -> Void {
+    func removeMonitorViewController(_ vc: UIViewController?) -> Void {
         if vc != nil {
             KeyboradConfigurations.removeValue(forKey: vc!)
             if monitorViewControllers.contains(vc!) {

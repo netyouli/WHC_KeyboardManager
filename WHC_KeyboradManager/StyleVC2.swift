@@ -17,13 +17,13 @@ class StyleVC2: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "ScrollView"
+        self.navigationItem.title = "ScrollView无键盘头"
         self.view.backgroundColor = UIColor.white
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "done", style: .plain, target: self, action: #selector(clickRight(sender:)))
         
         /// 键盘处理配置
         /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
-        let configuration = WHC_KeyboradManager.share.whc_AddMonitorViewController(self)
+        let configuration = WHC_KeyboradManager.share.addMonitorViewController(self)
         /// 不要键盘头
         configuration.enableHeader = false
         
