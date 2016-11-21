@@ -4,12 +4,13 @@ WHC_KeyboradManager
 简介
 ==============
 - **高效**: 轻量级拒绝复杂或看不懂的Api
-- **安全**: 无入侵性
+- **安全**: 无入侵性,局部键盘监控处理
 - **优势**: 集成简单设置灵活
-- **特性**: 支持自定义键盘头视图
+- **简单**: 无需任何复杂配置
+- **灵活**: 可自定义键盘处理配置
 - **兼容**: 支持横竖屏切换适配
 - **咨询**: 712641411
-- **作者**: 吴海超 & xxx
+- **作者**: 吴海超
 
 演示
 ==============
@@ -31,25 +32,26 @@ WHC_KeyboradManager
 用法
 ==============
 
+- 无配置演示
 ```Swift
-/// 创建键盘管理器
-var keyborad = WHC_KeyboradManager()
-
-/// 设置键盘头部视图如果不需要可以忽略
-keyborad.whc_SetHeader(view: WHC_KeyboradHeaderView())
-
-/// 设置当键盘挡住输入控件时的偏移视图
-keyborad.whc_SetOffsetView {[unowned self] (field) -> UIView? in
-    return self.tableView
+override func viewDidLoad() {
+    super.viewDidLoad()
+    /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
+    WHC_KeyboradManager.share.whc_AddMonitorViewController(self)
 }
+```
+- 自定义配置演示
 
-/// 设置键盘挡住输入控件时偏移视图的里键盘头的偏移量
-keyborad.whc_SetOffset { (field) -> CGFloat in
-    return 40
+```Swift
+override func viewDidLoad() {
+    super.viewDidLoad()
+    /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
+    let configuration = WHC_KeyboradManager.share.whc_AddMonitorViewController(self)
+    /// 不要键盘头
+    configuration.enableHeader = false
+
+    /***configuration里面有丰富实用的自定义配置具体可参看代码***/
 }
-
-/// 添加要监听的视图(包含输入的控件)
-keyborad.whc_AutoMonitor(view: cell!)
 ```
 
 推荐

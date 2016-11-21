@@ -22,11 +22,10 @@ class StyleVC2: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "done", style: .plain, target: self, action: #selector(clickRight(sender:)))
         
         /// 键盘处理配置
-        let configuration = WHC_KeyboradManager.Configuration()
+        /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
+        let configuration = WHC_KeyboradManager.share.whc_AddMonitorViewController(self)
         /// 不要键盘头
         configuration.enableHeader = false
-        /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
-        WHC_KeyboradManager.share.whc_AddMonitorViewController(self, configuration: configuration)
         
         /********************* 构建UI ***********************/
         /// 设置垂直布局
