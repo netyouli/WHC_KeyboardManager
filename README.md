@@ -4,7 +4,7 @@ WHC_KeyboradManager
 简介
 ==============
 - **高效**: 轻量级拒绝复杂或看不懂的Api
-- **安全**: 无入侵性,局部键盘监控处理
+- **安全**: 拒绝监听干扰整个App,无入侵性,局部键盘监控处理
 - **优势**: 集成简单设置灵活
 - **简单**: 无需任何复杂配置
 - **灵活**: 可自定义键盘处理配置
@@ -58,61 +58,6 @@ override func viewDidLoad() {
 ==============
 - WHC_DataModelFactory mac工具github地址：https://github.com/netyouli/WHC_DataModelFactory
 
-文档
-==============
-```Swift
-
-//MARK: - 公开接口Api -
-
-/// 设置键盘头视图
-///
-/// - parameter view: 键盘出现时要置顶的视图
-func whc_SetHeader(view: UIView?) {
-    headerView = view
-}
-
-/// 自动监听容器视图里的输入视图的键盘状态或者单个UITextfield/UITextView
-///
-/// - parameter vc:
-func whc_AutoMonitor(view: UIView) {
-    autoMonitor(view: view)
-}
-
-/// 设置键盘挡住要移动视图的偏移量
-///
-/// - parameter block: 回调block
-func whc_SetOffset(block: @escaping ((_ field: UIView?) -> CGFloat)) {
-    offsetBlock = block
-}
-
-
-/// 设置键盘挡住的Field要移动的视图
-///
-/// - parameter block: 回调block
-func whc_SetOffsetView(block: @escaping ((_ field: UIView?) -> UIView?)) {
-    offsetViewBlock = block
-}
-
-/// 清空所有缓存的field(再reloadData需要调用)
-func whc_ClearCacheField() {
-    fieldViews.removeAll()
-    fieldDelegates.removeAll()
-}
-
-/// 设置键盘将要出现的回调
-///
-/// - parameter block: 回调块
-func whc_SetKeyboradWillShow(block: @escaping ((_ notify: Notification) -> Void)) {
-    keyboradWillShowBlock = block
-}
-
-/// 设置键盘将要隐藏的回调
-///
-/// - parameter block: 回调块
-func whc_SetKeyboradWillHide(block: @escaping ((_ notify: Notification) -> Void)) {
-    keyboradWillHideBlock = block
-}
-```
 ## <a id="期待"></a>期待
 
 - 如果您在使用过程中有任何问题，欢迎issue me! 很乐意为您解答任何相关问题!
