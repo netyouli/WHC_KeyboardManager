@@ -13,19 +13,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let tabbarVC = UITabBarController()
         let nav1 = UINavigationController(rootViewController: StyleVC1(nibName: "StyleVC1",bundle: nil))
         let nav2 = UINavigationController(rootViewController: StyleVC2(nibName: "StyleVC2",bundle: nil))
+        let nav3 = UINavigationController(rootViewController: StyleVC3(nibName: "StyleVC3",bundle: nil))
         nav1.tabBarItem.title = "样式1"
         nav1.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 5, 5, 5)
         nav1.tabBarItem.image = UIImage(named: "op_uncheck")
         nav2.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 5, 5, 5)
         nav2.tabBarItem.title = "样式2"
         nav2.tabBarItem.image = UIImage(named: "op_uncheck")
-        tabbarVC.viewControllers = [nav1,nav2]
+        nav3.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 5, 5, 5)
+        nav3.tabBarItem.title = "样式3"
+        nav3.tabBarItem.image = UIImage(named: "op_uncheck")
+        tabbarVC.viewControllers = [nav1,nav2,nav3]
+        
+//        IQKeyboardManager.sharedManager().enable = true
+//        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+    
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white

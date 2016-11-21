@@ -11,7 +11,6 @@ import UIKit
 class StyleVC2: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
-    private lazy var keyborad = WHC_KeyboradManager()
     private lazy var stackView: WHC_StackView = WHC_StackView()
     
     override func viewDidLoad() {
@@ -20,6 +19,14 @@ class StyleVC2: UIViewController {
         // Do any additional setup after loading the view.
         self.navigationItem.title = "ScrollView"
         self.view.backgroundColor = UIColor.white
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "done", style: .plain, target: self, action: #selector(clickRight(sender:)))
+        
+        /// 键盘处理配置
+        let configuration = WHC_KeyboradManager.Configuration()
+        /// 不要键盘头
+        configuration.enableHeader = false
+        /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
+        WHC_KeyboradManager.share.whc_AddMonitorViewController(self, configuration: configuration)
         
         /********************* 构建UI ***********************/
         /// 设置垂直布局
@@ -51,56 +58,15 @@ class StyleVC2: UIViewController {
             }
         }
         stackView.whc_StartLayout()
-        
-        
-        /******************** 设置键盘处理器 *******************/
-        
-        let header = WHC_KeyboradHeaderView()
-        header.nextButton.setTitleColor(UIColor.white, for: .normal)
-        header.frontButton.setTitleColor(UIColor.white, for: .normal)
-        header.doneButton.setTitleColor(UIColor.white, for: .normal)
-        header.backgroundColor = UIColor.orange
-        
-        header.clickDoneButtonBlock = {
-            print("点击完成")
-        }
-        
-        header.clickFrontButtonBlock = {
-            print("点击前一个")
-        }
-        
-        header.clickNextButtonBlock = {
-            print("点击下一个")
-        }
-        
-        /// 更多api请查看WHC_KeyboradManager文件
-        
-        /// 设置监视器视图
-        keyborad.whc_AutoMonitor(view: scrollView)
-        /// 设置键盘头视图
-        keyborad.whc_SetHeader(view: header)
-        /// 设置偏移视图
-        keyborad.whc_SetOffsetView {[unowned self] (field) -> UIView? in
-            return self.scrollView
-        }
-        /// 当挡住的时候设置偏移距离
-        keyborad.whc_SetOffset { (field) -> CGFloat in
-            return 40
-        }
-        
-        
-        keyborad.whc_SetKeyboradWillHide { (notification) in
-            print("监听键盘将要隐藏")
-        }
-        
-        keyborad.whc_SetKeyboradWillShow { (notification) in
-            print("监听键盘将要显示")
-        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func clickRight(sender: UIBarButtonItem) {
+        self.view.endEditing(true)
     }
 
 }

@@ -18,6 +18,8 @@
 		FE1031D01DDAEDE600A9F284 /* WHC_StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031CC1DDAEDE500A9F284 /* WHC_StackView.swift */; };
 		FE1031D21DDAF27800A9F284 /* WHC_ExtensionKeyboradObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031D11DDAF27800A9F284 /* WHC_ExtensionKeyboradObject.swift */; };
 		FE1031D41DDC460600A9F284 /* WHC_KeyboradHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031D31DDC460600A9F284 /* WHC_KeyboradHeaderView.swift */; };
+		FE6DCE0C1DE1740600E7992A /* StyleVC3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6DCE0A1DE1740600E7992A /* StyleVC3.swift */; };
+		FE6DCE0D1DE1740600E7992A /* StyleVC3.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE6DCE0B1DE1740600E7992A /* StyleVC3.xib */; };
 		FE8BB4C81DDD76A300934189 /* StyleVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8BB4C61DDD76A300934189 /* StyleVC2.swift */; };
 		FE8BB4C91DDD76A300934189 /* StyleVC2.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8BB4C71DDD76A300934189 /* StyleVC2.xib */; };
 		FE8BB4CB1DDD76C200934189 /* StyleVC1.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8BB4CA1DDD76C200934189 /* StyleVC1.xib */; };
@@ -39,6 +41,8 @@
 		FE1031CC1DDAEDE500A9F284 /* WHC_StackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_StackView.swift; sourceTree = "<group>"; };
 		FE1031D11DDAF27800A9F284 /* WHC_ExtensionKeyboradObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_ExtensionKeyboradObject.swift; sourceTree = "<group>"; };
 		FE1031D31DDC460600A9F284 /* WHC_KeyboradHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_KeyboradHeaderView.swift; sourceTree = "<group>"; };
+		FE6DCE0A1DE1740600E7992A /* StyleVC3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleVC3.swift; sourceTree = "<group>"; };
+		FE6DCE0B1DE1740600E7992A /* StyleVC3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StyleVC3.xib; sourceTree = "<group>"; };
 		FE8BB4C61DDD76A300934189 /* StyleVC2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleVC2.swift; sourceTree = "<group>"; };
 		FE8BB4C71DDD76A300934189 /* StyleVC2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StyleVC2.xib; sourceTree = "<group>"; };
 		FE8BB4CA1DDD76C200934189 /* StyleVC1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StyleVC1.xib; sourceTree = "<group>"; };
@@ -84,6 +88,8 @@
 				FE8BB4CA1DDD76C200934189 /* StyleVC1.xib */,
 				FE8BB4C61DDD76A300934189 /* StyleVC2.swift */,
 				FE8BB4C71DDD76A300934189 /* StyleVC2.xib */,
+				FE6DCE0A1DE1740600E7992A /* StyleVC3.swift */,
+				FE6DCE0B1DE1740600E7992A /* StyleVC3.xib */,
 				FE1031BA1DD999F900A9F284 /* Assets.xcassets */,
 				FE1031BC1DD999F900A9F284 /* LaunchScreen.storyboard */,
 				FE1031BF1DD999F900A9F284 /* Info.plist */,
@@ -183,6 +189,7 @@
 			files = (
 				FE8BB4CB1DDD76C200934189 /* StyleVC1.xib in Resources */,
 				FE8BB4CF1DDD799C00934189 /* op_check.png in Resources */,
+				FE6DCE0D1DE1740600E7992A /* StyleVC3.xib in Resources */,
 				FE1031BE1DD999F900A9F284 /* LaunchScreen.storyboard in Resources */,
 				FE1031BB1DD999F900A9F284 /* Assets.xcassets in Resources */,
 				FE8BB4D01DDD799C00934189 /* op_uncheck.png in Resources */,
@@ -204,6 +211,7 @@
 				FE1031CF1DDAEDE600A9F284 /* WHC_Frame.swift in Sources */,
 				FE8BB4C81DDD76A300934189 /* StyleVC2.swift in Sources */,
 				FE1031B41DD999F900A9F284 /* AppDelegate.swift in Sources */,
+				FE6DCE0C1DE1740600E7992A /* StyleVC3.swift in Sources */,
 				FE1031D01DDAEDE600A9F284 /* WHC_StackView.swift in Sources */,
 				FE1031CD1DDAEDE600A9F284 /* WHC_AutoCellHeight.swift in Sources */,
 				FE1031C71DD99A6A00A9F284 /* WHC_KeyboradManager.swift in Sources */,

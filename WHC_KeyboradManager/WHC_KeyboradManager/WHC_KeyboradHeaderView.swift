@@ -31,9 +31,10 @@ import UIKit
 
 class WHC_KeyboradHeaderView: UIView {
 
-    private var currentFieldView: UIView?
-    private var nextFieldView: UIView?
-    private var frontFieldView: UIView?
+    private(set) var currentFieldView: UIView?
+    private(set) var nextFieldView: UIView?
+    private(set) var frontFieldView: UIView?
+    
     private let kMargin: CGFloat = 0
     private let kWidth: CGFloat = 60
     
@@ -44,9 +45,11 @@ class WHC_KeyboradHeaderView: UIView {
     /// 点击完成按钮回调
     var clickDoneButtonBlock: (() -> Void)!
     
-    lazy var nextButton = UIButton()
-    lazy var frontButton = UIButton()
-    lazy var doneButton = UIButton()
+    /// 只读
+    private(set) lazy var nextButton = UIButton()
+    private(set) lazy var frontButton = UIButton()
+    private(set) lazy var doneButton = UIButton()
+    private(set) lazy var lineView = UIView()
     
     /// 隐藏上一个下一个按钮只保留done按钮
     var hideNextAndFrontButton = false {
@@ -62,6 +65,9 @@ class WHC_KeyboradHeaderView: UIView {
         self.addSubview(nextButton)
         self.addSubview(frontButton)
         self.addSubview(doneButton)
+        self.addSubview(lineView)
+        
+        lineView.backgroundColor = UIColor.init(white: 0.8, alpha: 1)
         
         frontButton.setTitle("←", for: .normal)
         nextButton.setTitle("→", for: .normal)
@@ -71,31 +77,62 @@ class WHC_KeyboradHeaderView: UIView {
         nextButton.setTitleColor(UIColor.black, for: .normal)
         doneButton.setTitleColor(UIColor.black, for: .normal)
         
+        frontButton.setTitleColor(UIColor.gray, for: .selected)
+        nextButton.setTitleColor(UIColor.gray, for: .selected)
+        
+        frontButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        nextButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        
         frontButton.addTarget(self, action: #selector(clickFront(button:)), for: .touchUpInside)
         nextButton.addTarget(self, action: #selector(clickNext(button:)), for: .touchUpInside)
         doneButton.addTarget(self, action: #selector(clickDone(button:)), for: .touchUpInside)
         
-        frontButton.whc_Left(kMargin)
-                   .whc_Top(0)
-                   .whc_Bottom(0)
-                   .whc_Width(kWidth)
+        frontButton.translatesAutoresizingMaskIntoConstraints = false
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        lineView.translatesAutoresizingMaskIntoConstraints = false
         
-        nextButton.whc_Left(kMargin, toView: frontButton)
-                  .whc_Top(0)
-                  .whc_Bottom(0)
-                  .whc_Width(kWidth)
+        self.addConstraint(NSLayoutConstraint(item: frontButton, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.left, multiplier: 1, constant: kMargin))
         
-        doneButton.whc_Trailing(kMargin)
-                  .whc_Top(0)
-                  .whc_Bottom(0)
-                  .whc_Width(kWidth)
+        frontButton.addConstraint(NSLayoutConstraint(item: frontButton, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: kWidth))
         
-        self.whc_AddTopLine(0.5, color: UIColor.init(white: 0.8, alpha: 1.0))
+        self.addConstraint(NSLayoutConstraint(item: frontButton, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0))
+        
+        self.addConstraint(NSLayoutConstraint(item: frontButton, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0))
+        
+        self.addConstraint(NSLayoutConstraint(item: nextButton, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: frontButton, attribute: NSLayoutAttribute.right, multiplier: 1, constant: kMargin))
+        
+        nextButton.addConstraint(NSLayoutConstraint(item: nextButton, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: kWidth))
+        
+        self.addConstraint(NSLayoutConstraint(item: nextButton, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0))
+        
+        self.addConstraint(NSLayoutConstraint(item: nextButton, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0))
+        
+        self.addConstraint(NSLayoutConstraint(item: doneButton, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.trailing, multiplier: 1, constant: -kMargin))
+        
+        doneButton.addConstraint(NSLayoutConstraint(item: doneButton, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: kWidth))
+        
+        self.addConstraint(NSLayoutConstraint(item: doneButton, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0))
+        
+        self.addConstraint(NSLayoutConstraint(item: doneButton, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0))
+    
+        
+        self.addConstraint(NSLayoutConstraint(item: lineView, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.left, multiplier: 1, constant: 0))
+        
+        lineView.addConstraint(NSLayoutConstraint(item: lineView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 0.5))
+        
+        self.addConstraint(NSLayoutConstraint(item: lineView, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.right, multiplier: 1, constant: 0))
+        
+        self.addConstraint(NSLayoutConstraint(item: lineView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0))
         
         /// 监听WHC_KeyboradManager通知
         NotificationCenter.default.addObserver(self, selector: #selector(getCurrentFieldView(notify:)), name: NSNotification.Name.CurrentFieldView, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(getFrontFieldView(notify:)), name: NSNotification.Name.FrontFieldView, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(getNextFieldView(notify:)), name: NSNotification.Name.NextFieldView, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -109,10 +146,12 @@ class WHC_KeyboradHeaderView: UIView {
     
     @objc private func getFrontFieldView(notify: Notification) {
         frontFieldView = notify.object as? UIView
+        frontButton.isSelected = frontFieldView == nil
     }
     
     @objc private func getNextFieldView(notify: Notification) {
         nextFieldView = notify.object as? UIView
+        nextButton.isSelected = nextFieldView == nil
     }
     
     //MARK: - ACTION -
