@@ -37,7 +37,7 @@ WHC_KeyboradManager
 override func viewDidLoad() {
     super.viewDidLoad()
     /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
-    WHC_KeyboradManager.share.whc_AddMonitorViewController(self)
+    WHC_KeyboradManager.share.addMonitorViewController(self)
 }
 ```
 - 自定义配置演示
@@ -46,7 +46,7 @@ override func viewDidLoad() {
 override func viewDidLoad() {
     super.viewDidLoad()
     /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
-    let configuration = WHC_KeyboradManager.share.whc_AddMonitorViewController(self)
+    let configuration = WHC_KeyboradManager.share.addMonitorViewController(self)
     /// 不要键盘头
     configuration.enableHeader = false
 
