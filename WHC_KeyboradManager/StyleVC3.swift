@@ -14,8 +14,6 @@ class StyleVC3: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "点击", style: .plain, target: self, action: #selector(clickRight(sender:)))
         // Do any additional setup after loading the view.
         
         self.navigationItem.title = "UIView"
@@ -25,14 +23,12 @@ class StyleVC3: UIViewController {
         /********************* 构建UI ***********************/
         /// 设置垂直布局
         stackView.whc_Orientation = .vertical
-        /// 设置分割线高度
-        stackView.whc_SegmentLineSize = 0.5
         /// 设置子视图高度
         stackView.whc_SubViewHeight = 40
         /// 设置垂直间隙
         stackView.whc_VSpace = 20
         /// 设置子视图内边距
-        stackView.whc_Edge = UIEdgeInsetsMake(0, 16, 0, 16)
+        stackView.whc_Edge = UIEdgeInsetsMake(16, 16, 0, 16)
         
         self.view.addSubview(stackView)
         stackView.whc_Left(0)
@@ -40,7 +36,7 @@ class StyleVC3: UIViewController {
             .whc_Right(0)
             .whc_HeightAuto()
         
-        for i in 0 ..< 7 {
+        for i in 0 ..< 8 {
             let text = UITextField()
             text.backgroundColor = UIColor.init(red: 253.0 / 255, green: 246.0 / 255.0, blue: 220.0 / 255, alpha: 1)
             text.placeholder = "UITextField \(i)"
@@ -52,10 +48,6 @@ class StyleVC3: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func clickRight(sender: UIBarButtonItem) {
-        print("的顶顶顶顶顶")
     }
 
 }
