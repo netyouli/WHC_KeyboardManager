@@ -170,7 +170,7 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
             var subFields = [UIView]()
             if view.isUserInteractionEnabled && view.alpha != 0 && !view.isHidden {
                 if view is UITextView {
-                    if  !subFields.contains(view) && (view as! UITextView).isEditable {
+                    if !subFields.contains(view) && (view as! UITextView).isEditable {
                             subFields.append(view)
                     }
                 }else if view is UITextField {
@@ -351,24 +351,13 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     @discardableResult
     func addMonitorViewController(_ vc:UIViewController) -> WHC_KeyboradManager.Configuration {
         let configuration = WHC_KeyboradManager.Configuration()
-        addMonitorViewController(vc, configuration: configuration)
+        self.KeyboradConfiguration = configuration
+        KeyboradConfigurations.updateValue(configuration, forKey: vc)
+        if !monitorViewControllers.contains(vc) {
+            monitorViewControllers.append(vc)
+        }
         return configuration
     }
-    
-    /// 设置要监听处理键盘的控制器
-    ///
-    /// - parameter vc:           设置要监听的控制器
-    /// - parameter configuration: 设置键盘处理配置
-    func addMonitorViewController(_ vc:UIViewController, configuration: WHC_KeyboradManager.Configuration?) {
-        self.KeyboradConfiguration = configuration
-        if configuration == nil {
-            KeyboradConfigurations.updateValue(WHC_KeyboradManager.Configuration(), forKey: vc)
-        }else {
-            KeyboradConfigurations.updateValue(configuration!, forKey: vc)
-        }
-        monitorViewControllers.append(vc)
-    }
-    
     
     /// 移除监听的控制器对象
     ///
