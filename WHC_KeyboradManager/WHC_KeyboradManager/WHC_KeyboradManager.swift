@@ -87,11 +87,11 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     /// 监视控制器和配置集合
     private var KeyboradConfigurations = [UIViewController: Configuration]()
     /// 当前的输入视图(UITextView/UITextField)
-    private var currentField: UIView!
+    private(set) var currentField: UIView!
     /// 上一个输入视图
-    private var frontField: UIView!
+    private(set) var frontField: UIView!
     /// 下一个输入视图
-    private var nextField: UIView!
+    private(set) var nextField: UIView!
     /// 要监视处理的控制器集合
     private var monitorViewControllers = [UIViewController]()
     /// 当前监视处理的控制器
@@ -301,8 +301,6 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
                 moveView is UICollectionView {
                 let moveScrollView = moveView as? UIScrollView
                 moveScrollView?.addObserver(self, forKeyPath: kContentOffset, options: NSKeyValueObservingOptions.new, context: nil)
-            }else {
-//                moveView.transform = CGAffineTransform.identity
             }
             headerView?.layoutIfNeeded()
             let convertRect = currentField.convert(currentField.bounds, to: currentMonitorViewController!.view)
