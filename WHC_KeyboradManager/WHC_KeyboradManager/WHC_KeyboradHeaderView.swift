@@ -62,6 +62,20 @@ class WHC_KeyboradHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.white
+        if #available(iOS 8.0, *) {
+            let blurEffect = UIBlurEffect(style: .extraLight)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            self.addSubview(blurEffectView)
+            blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+            self.addConstraint(NSLayoutConstraint(item: blurEffectView, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.left, multiplier: 1, constant: 0))
+            
+            self.addConstraint(NSLayoutConstraint(item: blurEffectView, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.right, multiplier: 1, constant: 0))
+            
+            self.addConstraint(NSLayoutConstraint(item: blurEffectView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0))
+            
+            self.addConstraint(NSLayoutConstraint(item: blurEffectView, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0))
+        }
+        
         self.addSubview(nextButton)
         self.addSubview(frontButton)
         self.addSubview(doneButton)
@@ -86,7 +100,7 @@ class WHC_KeyboradHeaderView: UIView {
         frontButton.addTarget(self, action: #selector(clickFront(button:)), for: .touchUpInside)
         nextButton.addTarget(self, action: #selector(clickNext(button:)), for: .touchUpInside)
         doneButton.addTarget(self, action: #selector(clickDone(button:)), for: .touchUpInside)
-        
+    
         frontButton.translatesAutoresizingMaskIntoConstraints = false
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         doneButton.translatesAutoresizingMaskIntoConstraints = false

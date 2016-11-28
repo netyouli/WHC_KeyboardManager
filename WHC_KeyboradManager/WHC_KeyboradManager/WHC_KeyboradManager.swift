@@ -106,6 +106,8 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     private let kContentOffset = "contentOffset"
     /// 是否已经显示了header
     private var didShowHeader = false
+    /// 是否已经移除了键盘监听
+    private var didRemoveKBObserve = false
     
     /// 单利对象
     static var share: WHC_KeyboradManager {
@@ -121,13 +123,7 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     }
     
     deinit {
-        let moveView = getCurrentOffsetView()
-        if moveView is UITableView ||
-            moveView is UIScrollView ||
-            moveView is UICollectionView {
-            (moveView as? UIScrollView)?.removeObserver(self, forKeyPath: kContentOffset)
-        }
-        NotificationCenter.default.removeObserver(self)
+        removeKeyboradObserver()
     }
     
     //MARK: - 私有方法 -
@@ -231,13 +227,13 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     }
     
     /// 动态更新键盘头部视图
-    private func updateHeaderView(rect: CGRect, keyboradDuration: TimeInterval?,complete: (() -> Void)!) {
+    private func updateHeaderView(complete: (() -> Void)!) {
         let headerView: UIView! = KeyboradConfiguration?.headerView
         if headerView != nil {
-            if rect.width == 0 {
+            if keyboradFrame.width == 0 {
                 if headerView.superview != nil {
                     UIView.animate(withDuration: moveViewAnimationDuration, animations: { 
-                        headerView.layer.transform = CATransform3DMakeTranslation(0, rect.height + headerView.frame.height, 0)
+                        headerView.layer.transform = CATransform3DMakeTranslation(0, self.keyboradFrame.height + headerView.frame.height, 0)
                         }, completion: { (finished) in
                             headerView.layer.transform = CATransform3DIdentity
                             self.didShowHeader = false
@@ -246,18 +242,21 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
                     })
                 }
             }else {
+                let addHeaderViewConstraint = {(headerView: UIView) in
+                    headerView.superview?.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: headerView.superview!, attribute: NSLayoutAttribute.left, multiplier: 1, constant: 0))
+                    
+                    headerView.superview?.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: headerView.superview!, attribute: NSLayoutAttribute.right, multiplier: 1, constant: 0))
+                    
+                    headerView.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 44))
+                    
+                    headerView.superview?.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.lastBaseline, relatedBy: NSLayoutRelation.equal, toItem: headerView.superview!, attribute: NSLayoutAttribute.lastBaseline, multiplier: 1, constant: -self.keyboradFrame.height))
+                }
                 if headerView.superview == nil {
                     currentMonitorViewController.view.window?.addSubview(headerView)
                     if headerView.translatesAutoresizingMaskIntoConstraints {
                         headerView.translatesAutoresizingMaskIntoConstraints = false
                     }
-                    headerView.superview?.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: headerView.superview!, attribute: NSLayoutAttribute.left, multiplier: 1, constant: 0))
-
-                    headerView.superview?.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: headerView.superview!, attribute: NSLayoutAttribute.right, multiplier: 1, constant: 0))
-
-                    headerView.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 44))
-
-                    headerView.superview?.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.lastBaseline, relatedBy: NSLayoutRelation.equal, toItem: headerView.superview!, attribute: NSLayoutAttribute.lastBaseline, multiplier: 1, constant: -rect.height))
+                    addHeaderViewConstraint(headerView)
                 }else {
                     if !headerView.translatesAutoresizingMaskIntoConstraints {
                         for constraint in headerView.superview!.constraints {
@@ -265,13 +264,7 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
                                 headerView.superview?.removeConstraint(constraint)
                             }
                         }
-                        headerView.superview?.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: headerView.superview!, attribute: NSLayoutAttribute.left, multiplier: 1, constant: 0))
-                        
-                        headerView.superview?.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: headerView.superview!, attribute: NSLayoutAttribute.right, multiplier: 1, constant: 0))
-                        
-                        headerView.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 0, constant: 44))
-                        
-                        headerView.superview?.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.lastBaseline, relatedBy: NSLayoutRelation.equal, toItem: headerView.superview!, attribute: NSLayoutAttribute.lastBaseline, multiplier: 1, constant: -rect.height))
+                        addHeaderViewConstraint(headerView)
                     }
                 }
                 if !didShowHeader {
@@ -296,28 +289,30 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
         let offsetBlock = KeyboradConfiguration?.offsetBlock
         if keyboradFrame != nil && keyboradFrame.height != 0 && currentField != nil {
             let moveView = getCurrentOffsetView()
+            var moveScrollView: UIScrollView!
             if moveView is UITableView ||
                 moveView is UIScrollView ||
                 moveView is UICollectionView {
-                let moveScrollView = moveView as? UIScrollView
+                moveScrollView = moveView as? UIScrollView
                 moveScrollView?.addObserver(self, forKeyPath: kContentOffset, options: NSKeyValueObservingOptions.new, context: nil)
             }
             headerView?.layoutIfNeeded()
-            let convertRect = currentField.convert(currentField.bounds, to: currentMonitorViewController!.view)
+            let convertView: UIView? = moveScrollView == nil ? currentMonitorViewController!.view : currentMonitorViewController!.view.window
+            var convertRect = currentField.convert(currentField.bounds, to: convertView)
+            if convertView!.frame.height < UIScreen.main.bounds.height && currentMonitorViewController.navigationController != nil {
+                convertRect.origin.y += currentMonitorViewController.navigationController!.navigationBar.frame.height
+            }
             let yOffset = convertRect.maxY - keyboradFrame!.minY
             let headerHeight: CGFloat = headerView != nil ? headerView.frame.height : 0
             var moveOffset: CGFloat = offsetBlock == nil ? headerHeight : offsetBlock!(currentField) + headerHeight
             
             if offsetBlock == nil && headerView == nil {
                 if nextField != nil {
-                    let nextFrame = nextField.convert(nextField.bounds, to: currentMonitorViewController.view)
+                    let nextFrame = nextField.convert(nextField.bounds, to: convertView)
                     moveOffset += nextFrame.maxY - convertRect.maxY
                 }
             }
-            if moveView is UITableView ||
-                moveView is UIScrollView ||
-                moveView is UICollectionView {
-                let moveScrollView = moveView as! UIScrollView
+            if moveScrollView != nil {
                 var sumOffsetY = moveScrollView.contentOffset.y + moveOffset + yOffset
                 sumOffsetY = max(sumOffsetY, -moveScrollView.contentInset.top)
                 UIView.animate(withDuration: moveViewAnimationDuration, animations: {
@@ -326,8 +321,10 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
             }else {
                 var sumOffsetY = -(moveOffset + yOffset)
                 sumOffsetY = min(0, sumOffsetY)
+                var moveViewFrame = moveView.frame
+                moveViewFrame.origin.y = sumOffsetY
                 UIView.animate(withDuration: moveViewAnimationDuration, animations: {
-                    moveView.transform  = CGAffineTransform(translationX: 0, y: sumOffsetY)
+                    moveView.frame = moveViewFrame
                 })
             }
         }
@@ -356,6 +353,10 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
         if !monitorViewControllers.contains(vc) {
             monitorViewControllers.append(vc)
         }
+        if didRemoveKBObserve {
+            addKeyboradMonitor()
+            didRemoveKBObserve = false
+        }
         return configuration
     }
     
@@ -369,6 +370,15 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
                 monitorViewControllers.remove(at: monitorViewControllers.index(of: vc!)!)
             }
         }
+    }
+    
+    
+    /// 移除键盘管理监听
+    func removeKeyboradObserver() {
+        KeyboradConfigurations.removeAll()
+        monitorViewControllers.removeAll()
+        NotificationCenter.default.removeObserver(self)
+        didRemoveKBObserve = true
     }
     
     //MARK: - 发送通知 -
@@ -390,17 +400,15 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
         let userInfo = notify.userInfo
         keyboradFrame = (userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
         keyboradDuration = (userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
-        updateHeaderView(rect: keyboradFrame, keyboradDuration: keyboradDuration, complete: nil)
+        updateHeaderView(complete: nil)
         handleKeyboradDidShowToAdjust()
     }
     
     @objc private func keyboradWillHide(notify: Notification) {
         if currentMonitorViewController == nil {return}
-        if keyboradFrame == nil {
-            keyboradFrame = CGRect.zero
-        }
         keyboradFrame.size.width = 0
-        updateHeaderView(rect: keyboradFrame, keyboradDuration: 0, complete: nil)
+        keyboradDuration = 0
+        updateHeaderView(complete: nil)
         keyboradFrame = CGRect.zero
         let moveView = getCurrentOffsetView()
         if moveView is UITableView ||
@@ -408,18 +416,21 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
             moveView is UICollectionView {
             let scrollMoveView = moveView as? UIScrollView
             if scrollMoveView != nil {
+                scrollMoveView!.removeObserver(self, forKeyPath: kContentOffset)
                 UIView.animate(withDuration: moveViewAnimationDuration, animations: {
                     if scrollMoveView!.contentOffset.y < -scrollMoveView!.contentInset.top {
-                        scrollMoveView!.setContentOffset(CGPoint(x: (scrollMoveView?.contentOffset.x)!, y: -scrollMoveView!.contentInset.top), animated: true)
+                        scrollMoveView!.contentOffset = CGPoint(x: (scrollMoveView?.contentOffset.x)!, y: -scrollMoveView!.contentInset.top)
                     }else if scrollMoveView!.contentOffset.y > (scrollMoveView!.contentSize.height - scrollMoveView!.bounds.height + scrollMoveView!.contentInset.bottom) {
                         
-                        scrollMoveView!.setContentOffset(CGPoint(x: (scrollMoveView?.contentOffset.x)!, y: (scrollMoveView!.contentSize.height - scrollMoveView!.bounds.height + scrollMoveView!.contentInset.bottom)), animated: true)
+                        scrollMoveView!.contentOffset = CGPoint(x: (scrollMoveView?.contentOffset.x)!, y: (scrollMoveView!.contentSize.height - scrollMoveView!.bounds.height + scrollMoveView!.contentInset.bottom))
                     }
                 })
             }
         }else {
+            var moveViewFrame = moveView.frame
+            moveViewFrame.origin.y = 0
             UIView.animate(withDuration: moveViewAnimationDuration, animations: {
-                moveView.transform = CGAffineTransform.identity
+                moveView.frame = moveViewFrame
             })
         }
     }
@@ -432,7 +443,7 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
             if contentOffset != nil {
                 let scrollView = object as? UIScrollView
                 if scrollView != nil && (scrollView!.isDragging || scrollView!.isDecelerating) {
-                    let convertRect = currentField.convert(currentField.bounds, to: currentMonitorViewController!.view)
+                    let convertRect = currentField.convert(currentField.bounds, to: currentMonitorViewController!.view.window!)
                     let yOffset = convertRect.maxY - keyboradFrame!.minY
                     if yOffset > 0 || convertRect.minY < 0 {
                         if currentField is UITextView {

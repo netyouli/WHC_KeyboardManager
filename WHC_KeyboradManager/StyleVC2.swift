@@ -42,7 +42,7 @@ class StyleVC2: UIViewController {
         .whc_Top(0)
         .whc_Right(0, toView: self.view)
         .whc_HeightAuto()
-        .whc_Bottom(0, keepHeightConstraint: true)
+        .whc_Bottom(0, keepHeightConstraint: true)/// scrollview contentSize自动
         
         for i in 0 ..< 30 {
             if i < 15 {

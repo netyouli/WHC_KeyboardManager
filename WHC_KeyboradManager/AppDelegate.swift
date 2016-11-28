@@ -29,11 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         nav3.tabBarItem.title = "样式3"
         nav3.tabBarItem.image = UIImage(named: "op_uncheck")
         tabbarVC.viewControllers = [nav1,nav2,nav3]
-        
-//        IQKeyboardManager.sharedManager().enable = true
-//        IQKeyboardManager.sharedManager().enableAutoToolbar = false
-    
-        
+
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
         

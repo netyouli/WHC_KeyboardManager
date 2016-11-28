@@ -1,6 +1,9 @@
 WHC_KeyboradManager
 ==============
-[![Pod License](http://img.shields.io/cocoapods/l/WHC_Model.svg?style=flat)](https://opensource.org/licenses/MIT)
+![Build Status](https://api.travis-ci.org/netyouli/WHC_KeyboradManager.svg?branch=master)
+[![Pod Version](http://img.shields.io/cocoapods/v/WHC_KeyboradManager.svg?style=flat)](http://cocoadocs.org/docsets/WHC_KeyboradManager/)
+[![Pod Platform](http://img.shields.io/cocoapods/p/WHC_KeyboradManager.svg?style=flat)](http://cocoadocs.org/docsets/WHC_KeyboradManager/)
+[![Pod License](http://img.shields.io/cocoapods/l/WHC_KeyboradManager.svg?style=flat)](https://opensource.org/licenses/MIT)
 简介
 ==============
 - **高效**: 轻量级拒绝复杂或看不懂的Api
@@ -19,15 +22,21 @@ WHC_KeyboradManager
 
 要求
 ==============
-* iOS 8.0 or later
+* iOS 6.0 or later
 * Xcode 8.0 or later
 
 集成
 ==============
 * 使用CocoaPods:
-  -  pod 'WHC_KeyboradManager', '~> 1.0.0'
+  -  【Objective-c】 pod 'WHC_KeyboradManager_oc', '~> 1.0.0'
+  -  【Swift】 pod 'WHC_KeyboradManager', '~> 1.0.0'
 * 手工集成:
-  -  导入文件夹WHC_KeyboradManager
+  -  【Objective-c】 导入文件夹WHC_KeyboradManager(OC)
+  -  【Swift】 导入文件夹WHC_KeyboradManager
+
+使用到第三方库
+==============
+* 超好用自动布局库[WHC_AutoLayoutKit](https://github.com/netyouli/WHC_AutoLayoutKit)</br>
 
 用法
 ==============
