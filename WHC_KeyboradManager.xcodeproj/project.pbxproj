@@ -64,7 +64,7 @@
 		FE1031A71DD999F900A9F284 = {
 			isa = PBXGroup;
 			children = (
-				FE1031B21DD999F900A9F284 /* WHC_KeyboradManager */,
+				FE1031B21DD999F900A9F284 /* WHC_KeyboardManager */,
 				FE1031B11DD999F900A9F284 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -77,7 +77,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FE1031B21DD999F900A9F284 /* WHC_KeyboradManager */ = {
+		FE1031B21DD999F900A9F284 /* WHC_KeyboardManager */ = {
 			isa = PBXGroup;
 			children = (
 				FE8BB4CC1DDD799C00934189 /* images */,
@@ -94,6 +94,7 @@
 				FE1031BC1DD999F900A9F284 /* LaunchScreen.storyboard */,
 				FE1031BF1DD999F900A9F284 /* Info.plist */,
 			);
+			name = WHC_KeyboardManager;
 			path = WHC_KeyboradManager;
 			sourceTree = "<group>";
 		};

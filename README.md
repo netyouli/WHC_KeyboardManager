@@ -17,7 +17,7 @@ WHC_KeyboardManager
 
 演示
 ==============
-<img src = "https://github.com/netyouli/WHC_KeyboardManager/blob/master/WHC_KeyboardManager/demo/k1.gif", width = "375"><img src = "https://github.com/netyouli/WHC_KeyboardManager/blob/master/WHC_KeyboardManager/demo/k2.gif", width = "375">
+<img src = "https://github.com/netyouli/WHC_KeyboradManager/tree/master/WHC_KeyboradManager/demo/k1.gif", width = "375"><img src = "https://github.com/netyouli/WHC_KeyboradManager/tree/master/WHC_KeyboradManager/demo/k2.gif", width = "375">
 
 
 要求

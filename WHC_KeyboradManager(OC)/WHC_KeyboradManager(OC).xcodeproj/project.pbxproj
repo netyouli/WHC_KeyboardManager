@@ -73,7 +73,7 @@
 		FE6DCE0E1DE1C73E00E7992A = {
 			isa = PBXGroup;
 			children = (
-				FE6DCE191DE1C73E00E7992A /* WHC_KeyboradManager(OC) */,
+				FE6DCE191DE1C73E00E7992A /* WHC_KeyboardManager(OC) */,
 				FE6DCE181DE1C73E00E7992A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -86,7 +86,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FE6DCE191DE1C73E00E7992A /* WHC_KeyboradManager(OC) */ = {
+		FE6DCE191DE1C73E00E7992A /* WHC_KeyboardManager(OC) */ = {
 			isa = PBXGroup;
 			children = (
 				FEA91D151DE97F6A0096927F /* WHC_AutoLayoutKit */,
@@ -107,6 +107,7 @@
 				FE6DCE2B1DE1C73E00E7992A /* Info.plist */,
 				FE6DCE1A1DE1C73E00E7992A /* Supporting Files */,
 			);
+			name = "WHC_KeyboardManager(OC)";
 			path = "WHC_KeyboradManager(OC)";
 			sourceTree = "<group>";
 		};
