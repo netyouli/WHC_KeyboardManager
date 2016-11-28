@@ -1,6 +1,6 @@
 //
 //  StyleVC3.m
-//  WHC_KeyboradManager(OC)
+//  WHC_KeyboardManager(OC)
 //
 //  Created by WHC on 16/11/26.
 //  Copyright © 2016年 WHC. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import "StyleVC3.h"
 #import "WHC_StackView.h"
-#import "WHC_KeyboradManager.h"
+#import "WHC_KeyboardManager.h"
 
 @interface StyleVC3 ()
 @property (nonatomic, strong)WHC_StackView * stackView;
@@ -22,8 +22,8 @@
     self.navigationItem.title = @"UIView";
     self.view.backgroundColor = [UIColor whiteColor];
     /// 键盘处理配置
-    /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
-    [[WHC_KeyboradManager share] addMonitorViewController:self];
+    /*******只需要在要处理键盘的界面创建WHC_KeyboardManager对象即可无需任何其他设置*******/
+    [[WHC_KeyboardManager share] addMonitorViewController:self];
     
     /********************* 构建UI ***********************/
     _stackView = [WHC_StackView new];

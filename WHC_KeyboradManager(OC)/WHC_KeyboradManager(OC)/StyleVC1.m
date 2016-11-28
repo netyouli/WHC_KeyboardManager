@@ -1,6 +1,6 @@
 //
 //  StyleVC1.m
-//  WHC_KeyboradManager(OC)
+//  WHC_KeyboardManager(OC)
 //
 //  Created by WHC on 16/11/26.
 //  Copyright © 2016年 WHC. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import "StyleVC1.h"
 #import "UIView+WHC_AutoLayout.h"
-#import "WHC_KeyboradManager.h"
+#import "WHC_KeyboardManager.h"
 
 #define kCellName (@"whc")
 @interface StyleVC1 ()<UITableViewDelegate,UITableViewDataSource>
@@ -29,7 +29,7 @@
     self.navigationItem.title = @"Tableview";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [[WHC_KeyboradManager share] addMonitorViewController:self];
+    [[WHC_KeyboardManager share] addMonitorViewController:self];
     
 }
 

@@ -18,7 +18,7 @@ class StyleVC3: UIViewController {
         
         self.navigationItem.title = "UIView"
         /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
-        WHC_KeyboradManager.share.addMonitorViewController(self)
+        WHC_KeyboardManager.share.addMonitorViewController(self)
         
         /********************* 构建UI ***********************/
         /// 设置垂直布局

@@ -1,11 +1,11 @@
 //
-//  WHC_KeyboradManager.m
-//  WHC_KeyboradManager(OC)
+//  WHC_KeyboardManager.m
+//  WHC_KeyboardManager(OC)
 //
 //  Created by WHC on 16/11/20.
 //  Copyright © 2016年 WHC. All rights reserved.
 //
-//  Github <https://github.com/netyouli/WHC_KeyboradManager>
+//  Github <https://github.com/netyouli/WHC_KeyboardManager>
 
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,7 +26,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "WHC_KeyboradManager.h"
+#import "WHC_KeyboardManager.h"
 #import "NSObject+WHC_Extension.h"
 
 /// 获取下一个编辑框视图的通知
@@ -51,7 +51,7 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
 
 - (instancetype)init {
     self = [super init];
-    _headerView = WHC_KeyboradHeaderView.new;
+    _headerView = WHC_KeyboardHeaderView.new;
     return self;
 }
 
@@ -59,7 +59,7 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
     _enableHeader = enableHeader;
     if (_enableHeader) {
         if (_headerView == nil) {
-            _headerView = WHC_KeyboradHeaderView.new;
+            _headerView = WHC_KeyboardHeaderView.new;
         }
     }else {
         _headerView = nil;
@@ -76,11 +76,11 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
 
 @end
 
-@interface WHC_KeyboradManager ()
+@interface WHC_KeyboardManager ()
 /// 当前控制器的键盘配置
-@property (nonatomic, strong) WHC_KBMConfiguration * KeyboradConfiguration;
+@property (nonatomic, strong) WHC_KBMConfiguration * KeyboardConfiguration;
 /// 监视控制器和配置集合
-@property (nonatomic, strong) NSMutableDictionary<NSString *,WHC_KBMConfiguration *> * KeyboradConfigurations;
+@property (nonatomic, strong) NSMutableDictionary<NSString *,WHC_KBMConfiguration *> * KeyboardConfigurations;
 /// 当前的输入视图(UITextView/UITextField)
 @property (nonatomic, strong) UIView * currentField;
 /// 上一个输入视图
@@ -94,9 +94,9 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
 /// 设置移动的视图动画周期
 @property (nonatomic, assign) NSTimeInterval moveViewAnimationDuration;
 /// 键盘出现的动画周期
-@property (nonatomic, assign) NSTimeInterval keyboradDuration;
+@property (nonatomic, assign) NSTimeInterval keyboardDuration;
 /// 存储键盘的frame
-@property (nonatomic, assign) CGRect keyboradFrame;
+@property (nonatomic, assign) CGRect keyboardFrame;
 /// 是否已经显示了header
 @property (nonatomic, assign) BOOL didShowHeader;
 /// 是否已经移除了键盘监听
@@ -104,13 +104,13 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
 
 @end
 
-@implementation WHC_KeyboradManager
+@implementation WHC_KeyboardManager
 
 + (instancetype)share {
     static dispatch_once_t onceToken;
-    static WHC_KeyboradManager * kbManager = nil;
+    static WHC_KeyboardManager * kbManager = nil;
     dispatch_once(&onceToken, ^{
-        kbManager = WHC_KeyboradManager.new;
+        kbManager = WHC_KeyboardManager.new;
     });
     return kbManager;
 }
@@ -118,7 +118,7 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _KeyboradConfigurations = [NSMutableDictionary dictionary];
+        _KeyboardConfigurations = [NSMutableDictionary dictionary];
         _monitorViewControllers = [NSMutableArray array];
         _moveViewAnimationDuration = 0.5;
         [self addKeyboardMonitor];
@@ -127,7 +127,7 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
 }
 
 - (void)dealloc {
-    [self removeKeyboradObserver];
+    [self removeKeyboardObserver];
 }
 
 #pragma mark - 私有方法 -
@@ -236,8 +236,8 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
 
 /// 动态获取偏移视图
 - (UIView *)getCurrentOffsetView {
-    if (_KeyboradConfiguration && _KeyboradConfiguration.offsetViewBlock) {
-        UIView * offsetView = _KeyboradConfiguration.offsetViewBlock(_currentField);
+    if (_KeyboardConfiguration && _KeyboardConfiguration.offsetViewBlock) {
+        UIView * offsetView = _KeyboardConfiguration.offsetViewBlock(_currentField);
         if (offsetView) return offsetView;
     }
     if (_currentField) {
@@ -262,14 +262,14 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
 /// 动态更新键盘头部视图
 - (void)updateHeaderViewWithComplete:(void(^)(void))complete {
     UIView * headerView = nil;
-    if (_KeyboradConfiguration) {
-        headerView = _KeyboradConfiguration.headerView;
+    if (_KeyboardConfiguration) {
+        headerView = _KeyboardConfiguration.headerView;
     }
     if (headerView) {
-        if (_keyboradFrame.size.width == 0) {
+        if (_keyboardFrame.size.width == 0) {
             if (headerView.superview) {
                 [UIView animateWithDuration:_moveViewAnimationDuration animations:^{
-                    headerView.layer.transform = CATransform3DMakeTranslation(0, _keyboradFrame.size.height + headerView.frame.size.height, 0);
+                    headerView.layer.transform = CATransform3DMakeTranslation(0, _keyboardFrame.size.height + headerView.frame.size.height, 0);
                 } completion:^(BOOL finished) {
                     headerView.layer.transform = CATransform3DIdentity;
                     _didShowHeader = NO;
@@ -284,7 +284,7 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
                 [headerView.superview addConstraint:[NSLayoutConstraint constraintWithItem:headerView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:headerView.superview attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
                 [headerView.superview addConstraint:[NSLayoutConstraint constraintWithItem:headerView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:headerView.superview attribute:NSLayoutAttributeRight multiplier:1 constant:0]];
                 [headerView addConstraint:[NSLayoutConstraint constraintWithItem:headerView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:44]];
-                [headerView.superview addConstraint:[NSLayoutConstraint constraintWithItem:headerView attribute:NSLayoutAttributeLastBaseline relatedBy:NSLayoutRelationEqual toItem:headerView.superview attribute:NSLayoutAttributeLastBaseline multiplier:1 constant:-_keyboradFrame.size.height]];
+                [headerView.superview addConstraint:[NSLayoutConstraint constraintWithItem:headerView attribute:NSLayoutAttributeLastBaseline relatedBy:NSLayoutRelationEqual toItem:headerView.superview attribute:NSLayoutAttributeLastBaseline multiplier:1 constant:-_keyboardFrame.size.height]];
             };
             if (headerView.superview == nil) {
                 if (_currentMonitorViewController.view.window) {
@@ -306,7 +306,7 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
             }
             if (!_didShowHeader) {
                 headerView.alpha = 0;
-                NSTimeInterval duration = _keyboradDuration == 0 ? 0.25 : _keyboradDuration;
+                NSTimeInterval duration = _keyboardDuration == 0 ? 0.25 : _keyboardDuration;
                 [UIView animateWithDuration:_moveViewAnimationDuration delay:duration options:UIViewAnimationOptionCurveEaseOut animations:^{
                     headerView.alpha = 1;
                 } completion:^(BOOL finished) {
@@ -325,13 +325,13 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
 }
 
 /// 处理键盘出现时自动调整当前UI(输入视图不被遮挡)
-- (void)handleKeyboradDidShowToAdjust {
+- (void)handleKeyboardDidShowToAdjust {
     UIView * headerView = nil;
-    if (_KeyboradConfiguration) {
-        headerView = _KeyboradConfiguration.headerView;
+    if (_KeyboardConfiguration) {
+        headerView = _KeyboardConfiguration.headerView;
     }
-    CGFloat(^offsetBlock)(UIView * field) = _KeyboradConfiguration.offsetBlock;
-    if (_keyboradFrame.size.height != 0 && _currentField != nil) {
+    CGFloat(^offsetBlock)(UIView * field) = _KeyboardConfiguration.offsetBlock;
+    if (_keyboardFrame.size.height != 0 && _currentField != nil) {
         UIView * moveView = [self getCurrentOffsetView];
         UIScrollView * moveScrollView = nil;
         if ([moveView isKindOfClass:[UITableView class]] ||
@@ -346,7 +346,7 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
         if (convertView.frame.size.height < [UIScreen mainScreen].bounds.size.height && _currentMonitorViewController.navigationController) {
             convertRect.origin.y += CGRectGetMaxY(_currentMonitorViewController.navigationController.navigationBar.frame);
         }
-        CGFloat yOffset = CGRectGetMaxY(convertRect) - CGRectGetMinY(_keyboradFrame);
+        CGFloat yOffset = CGRectGetMaxY(convertRect) - CGRectGetMinY(_keyboardFrame);
         CGFloat headerHeight = headerView != nil ? headerView.frame.size.height : 0;
         CGFloat moveOffset = offsetBlock == nil ? headerHeight : offsetBlock(_currentField) + headerHeight;
         if (offsetBlock == nil && headerView == nil) {
@@ -380,7 +380,7 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
         _currentMonitorViewController = nil;
         if (topViewController != nil && [_monitorViewControllers containsObject:topViewController]) {
             _currentMonitorViewController = topViewController;
-            _KeyboradConfiguration = _KeyboradConfigurations[_currentMonitorViewController.description];
+            _KeyboardConfiguration = _KeyboardConfigurations[_currentMonitorViewController.description];
         }
     }
 }
@@ -388,8 +388,8 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
 #pragma mark - 公开Api -
 - (WHC_KBMConfiguration *)addMonitorViewController:(UIViewController *)vc {
     WHC_KBMConfiguration * configuration = [WHC_KBMConfiguration new];
-    self.KeyboradConfiguration = configuration;
-    _KeyboradConfigurations[vc.description] = configuration;
+    self.KeyboardConfiguration = configuration;
+    _KeyboardConfigurations[vc.description] = configuration;
     if (![_monitorViewControllers containsObject:vc]) {
         [_monitorViewControllers addObject:vc];
     }
@@ -402,15 +402,15 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
 
 - (void)removeMonitorViewController:(UIViewController *)vc {
     if (vc != nil) {
-        [_KeyboradConfigurations removeObjectForKey:vc.description];
+        [_KeyboardConfigurations removeObjectForKey:vc.description];
         if ([_monitorViewControllers containsObject:vc]) {
             [_monitorViewControllers removeObject:vc];
         }
     }
 }
 
-- (void)removeKeyboradObserver {
-    [_KeyboradConfigurations removeAllObjects];
+- (void)removeKeyboardObserver {
+    [_KeyboardConfigurations removeAllObjects];
     [_monitorViewControllers removeAllObjects];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     _didRemoveKBObserve = YES;
@@ -418,7 +418,7 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
 
 //MARK: - 发送通知 -
 - (void)sendFieldViewNotify {
-    if (_KeyboradConfiguration && _KeyboradConfiguration.headerView) {
+    if (_KeyboardConfiguration && _KeyboardConfiguration.headerView) {
         NSNotificationCenter * nCenter = [NSNotificationCenter defaultCenter];
         [nCenter postNotificationName:(NSString *)WHC_KBM_CurrentFieldView object:_currentField];
         [nCenter postNotificationName:(NSString *)WHC_KBM_FrontFieldView object:_frontField];
@@ -434,18 +434,18 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
     }
     if (_currentMonitorViewController == nil) return;
     NSDictionary * userInfo = notify.userInfo;
-    _keyboradFrame = ((NSValue *)userInfo[UIKeyboardFrameEndUserInfoKey]).CGRectValue;
-    _keyboradDuration = ((NSNumber *)userInfo[UIKeyboardAnimationDurationUserInfoKey]).doubleValue;
+    _keyboardFrame = ((NSValue *)userInfo[UIKeyboardFrameEndUserInfoKey]).CGRectValue;
+    _keyboardDuration = ((NSNumber *)userInfo[UIKeyboardAnimationDurationUserInfoKey]).doubleValue;
     [self updateHeaderViewWithComplete:nil];
-    [self handleKeyboradDidShowToAdjust];
+    [self handleKeyboardDidShowToAdjust];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notify {
     if (_currentMonitorViewController == nil) return;
-    _keyboradFrame.size.width = 0;
-    _keyboradDuration = 0;
+    _keyboardFrame.size.width = 0;
+    _keyboardDuration = 0;
     [self updateHeaderViewWithComplete:nil];
-    _keyboradFrame = CGRectZero;
+    _keyboardFrame = CGRectZero;
     UIView * moveView = [self getCurrentOffsetView];
     if ([moveView isKindOfClass:[UITableView class]] ||
         [moveView isKindOfClass:[UIScrollView class]] ||
@@ -477,7 +477,7 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
         UIScrollView * scrollView = object;
             if (scrollView != nil && (scrollView.dragging || scrollView.decelerating)) {
                 CGRect convertRect = [_currentField convertRect:_currentField.bounds toView:_currentMonitorViewController.view.window];
-                CGFloat yOffset = CGRectGetMaxY(convertRect) - CGRectGetMinY(_keyboradFrame);
+                CGFloat yOffset = CGRectGetMaxY(convertRect) - CGRectGetMinY(_keyboardFrame);
                 if (yOffset > 0 || CGRectGetMinY(convertRect) < 0) {
                     if ([_currentField isKindOfClass:[UITextView class]]) {
                         [((UITextView *)_currentField) resignFirstResponder];
@@ -499,7 +499,7 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
         _currentField = notify.object;
         [self scanFrontNextField];
         [self sendFieldViewNotify];
-        [self handleKeyboradDidShowToAdjust];
+        [self handleKeyboardDidShowToAdjust];
     }
 }
 

@@ -23,7 +23,7 @@ class StyleVC2: UIViewController {
         
         /// 键盘处理配置
         /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
-        let configuration = WHC_KeyboradManager.share.addMonitorViewController(self)
+        let configuration = WHC_KeyboardManager.share.addMonitorViewController(self)
         /// 不要键盘头
         configuration.enableHeader = false
         

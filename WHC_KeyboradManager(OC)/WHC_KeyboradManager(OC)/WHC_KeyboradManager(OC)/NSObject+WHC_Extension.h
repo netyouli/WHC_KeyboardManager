@@ -1,11 +1,11 @@
 //
 //  NSObject+WHC_ExtensionObject.h
-//  WHC_KeyboradManager(OC)
+//  WHC_KeyboardManager(OC)
 //
 //  Created by WHC on 16/11/20.
 //  Copyright © 2016年 WHC. All rights reserved.
 //
-//  Github <https://github.com/netyouli/WHC_KeyboradManager>
+//  Github <https://github.com/netyouli/WHC_KeyboardManager>
 
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy

@@ -1,12 +1,12 @@
 //
-//  WHC_KeyboradManager.swift
-//  WHC_KeyboradManager
+//  WHC_KeyboardManager.swift
+//  WHC_KeyboardManager
 //
 //  Created by WHC on 16/11/14.
 //  Copyright © 2016年 WHC. All rights reserved.
 //
 
-//  Github <https://github.com/netyouli/WHC_KeyboradManager>
+//  Github <https://github.com/netyouli/WHC_KeyboardManager>
 
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -38,7 +38,7 @@ extension NSNotification.Name {
     static let FrontFieldView: NSNotification.Name = NSNotification.Name(rawValue: "GetFrontFieldViewNotification")
 }
 
-class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
+class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     
     /// 键盘头部视图配置类
     class Configuration: NSObject {
@@ -47,14 +47,14 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
         /// 获取移动视图回调
         fileprivate var offsetViewBlock: ((_ field: UIView?) -> UIView?)?
         /// 存储键盘头视图
-        fileprivate var headerView: UIView? = WHC_KeyboradHeaderView()
+        fileprivate var headerView: UIView? = WHC_KeyboardHeaderView()
         
         /// 是否启用键盘头部工具条
         open var enableHeader: Bool {
             set {
                 if newValue {
                     if headerView == nil {
-                        headerView = WHC_KeyboradHeaderView()
+                        headerView = WHC_KeyboardHeaderView()
                     }
                 }else {
                     headerView = nil
@@ -83,9 +83,9 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     }
     
     /// 当前控制器的键盘配置
-    private(set) var KeyboradConfiguration: Configuration?
+    private(set) var KeyboardConfiguration: Configuration?
     /// 监视控制器和配置集合
-    private var KeyboradConfigurations = [UIViewController: Configuration]()
+    private var KeyboardConfigurations = [UIViewController: Configuration]()
     /// 当前的输入视图(UITextView/UITextField)
     private(set) var currentField: UIView!
     /// 上一个输入视图
@@ -99,9 +99,9 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     /// 设置移动的视图动画周期
     private lazy var moveViewAnimationDuration: TimeInterval = 0.5
     /// 键盘出现的动画周期
-    private var keyboradDuration: TimeInterval?
+    private var keyboardDuration: TimeInterval?
     /// 存储键盘的frame
-    private var keyboradFrame: CGRect!
+    private var keyboardFrame: CGRect!
     /// 监听UIScrollView内容偏移
     private let kContentOffset = "contentOffset"
     /// 是否已经显示了header
@@ -110,26 +110,26 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     private var didRemoveKBObserve = false
     
     /// 单利对象
-    static var share: WHC_KeyboradManager {
-        struct WHC_KeyboradManagerInstance {
-            static let kbManager = WHC_KeyboradManager()
+    static var share: WHC_KeyboardManager {
+        struct WHC_KeyboardManagerInstance {
+            static let kbManager = WHC_KeyboardManager()
         }
-        return WHC_KeyboradManagerInstance.kbManager
+        return WHC_KeyboardManagerInstance.kbManager
     }
     
     override init() {
         super.init()
-        addKeyboradMonitor()
+        addKeyboardMonitor()
     }
     
     deinit {
-        removeKeyboradObserver()
+        removeKeyboardObserver()
     }
     
     //MARK: - 私有方法 -
-    private func addKeyboradMonitor() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboradWillShow(notify:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboradWillHide(notify:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    private func addKeyboardMonitor() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notify:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notify:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(myTextFieldDidBeginEditing(notify:)), name: NSNotification.Name.UITextFieldTextDidBeginEditing, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(myTextFieldDidEndEditing(notify:)), name: NSNotification.Name.UITextFieldTextDidEndEditing, object: nil)
@@ -205,7 +205,7 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     
     /// 动态获取偏移视图
     private func getCurrentOffsetView() -> UIView {
-        if let offsetView = KeyboradConfiguration?.offsetViewBlock?(currentField) {
+        if let offsetView = KeyboardConfiguration?.offsetViewBlock?(currentField) {
             return offsetView
         }
         if currentField != nil {
@@ -228,12 +228,12 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     
     /// 动态更新键盘头部视图
     private func updateHeaderView(complete: (() -> Void)!) {
-        let headerView: UIView! = KeyboradConfiguration?.headerView
+        let headerView: UIView! = KeyboardConfiguration?.headerView
         if headerView != nil {
-            if keyboradFrame.width == 0 {
+            if keyboardFrame.width == 0 {
                 if headerView.superview != nil {
                     UIView.animate(withDuration: moveViewAnimationDuration, animations: { 
-                        headerView.layer.transform = CATransform3DMakeTranslation(0, self.keyboradFrame.height + headerView.frame.height, 0)
+                        headerView.layer.transform = CATransform3DMakeTranslation(0, self.keyboardFrame.height + headerView.frame.height, 0)
                         }, completion: { (finished) in
                             headerView.layer.transform = CATransform3DIdentity
                             self.didShowHeader = false
@@ -249,7 +249,7 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
                     
                     headerView.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 44))
                     
-                    headerView.superview?.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.lastBaseline, relatedBy: NSLayoutRelation.equal, toItem: headerView.superview!, attribute: NSLayoutAttribute.lastBaseline, multiplier: 1, constant: -self.keyboradFrame.height))
+                    headerView.superview?.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.lastBaseline, relatedBy: NSLayoutRelation.equal, toItem: headerView.superview!, attribute: NSLayoutAttribute.lastBaseline, multiplier: 1, constant: -self.keyboardFrame.height))
                 }
                 if headerView.superview == nil {
                     currentMonitorViewController.view.window?.addSubview(headerView)
@@ -269,7 +269,7 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
                 }
                 if !didShowHeader {
                     headerView.alpha = 0
-                    let duration = keyboradDuration == nil ? 0.25 : keyboradDuration!
+                    let duration = keyboardDuration == nil ? 0.25 : keyboardDuration!
                     UIView.animate(withDuration: duration, delay: duration, options: UIViewAnimationOptions.curveEaseOut, animations: {
                             headerView.alpha = 1
                         }, completion: { (finished) in
@@ -284,10 +284,10 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     }
     
     /// 处理键盘出现时自动调整当前UI(输入视图不被遮挡)
-    private func handleKeyboradDidShowToAdjust() {
-        let headerView: UIView! = KeyboradConfiguration?.headerView
-        let offsetBlock = KeyboradConfiguration?.offsetBlock
-        if keyboradFrame != nil && keyboradFrame.height != 0 && currentField != nil {
+    private func handleKeyboardDidShowToAdjust() {
+        let headerView: UIView! = KeyboardConfiguration?.headerView
+        let offsetBlock = KeyboardConfiguration?.offsetBlock
+        if keyboardFrame != nil && keyboardFrame.height != 0 && currentField != nil {
             let moveView = getCurrentOffsetView()
             var moveScrollView: UIScrollView!
             if moveView is UITableView ||
@@ -302,7 +302,7 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
             if convertView!.frame.height < UIScreen.main.bounds.height && currentMonitorViewController.navigationController != nil {
                 convertRect.origin.y += currentMonitorViewController.navigationController!.navigationBar.frame.height
             }
-            let yOffset = convertRect.maxY - keyboradFrame!.minY
+            let yOffset = convertRect.maxY - keyboardFrame!.minY
             let headerHeight: CGFloat = headerView != nil ? headerView.frame.height : 0
             var moveOffset: CGFloat = offsetBlock == nil ? headerHeight : offsetBlock!(currentField) + headerHeight
             
@@ -335,7 +335,7 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
         currentMonitorViewController = nil
         if topViewController != nil && monitorViewControllers.contains(topViewController!) {
             currentMonitorViewController = topViewController
-            KeyboradConfiguration = KeyboradConfigurations[currentMonitorViewController]
+            KeyboardConfiguration = KeyboardConfigurations[currentMonitorViewController]
         }
     }
     
@@ -346,15 +346,15 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     /// - parameter vc: 设置要监听的控制器
     /// return 返回默认的键盘头部配置对象
     @discardableResult
-    func addMonitorViewController(_ vc:UIViewController) -> WHC_KeyboradManager.Configuration {
-        let configuration = WHC_KeyboradManager.Configuration()
-        self.KeyboradConfiguration = configuration
-        KeyboradConfigurations.updateValue(configuration, forKey: vc)
+    func addMonitorViewController(_ vc:UIViewController) -> WHC_KeyboardManager.Configuration {
+        let configuration = WHC_KeyboardManager.Configuration()
+        self.KeyboardConfiguration = configuration
+        KeyboardConfigurations.updateValue(configuration, forKey: vc)
         if !monitorViewControllers.contains(vc) {
             monitorViewControllers.append(vc)
         }
         if didRemoveKBObserve {
-            addKeyboradMonitor()
+            addKeyboardMonitor()
             didRemoveKBObserve = false
         }
         return configuration
@@ -365,7 +365,7 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     /// - parameter vc: 要移除的控制器
     func removeMonitorViewController(_ vc: UIViewController?) -> Void {
         if vc != nil {
-            KeyboradConfigurations.removeValue(forKey: vc!)
+            KeyboardConfigurations.removeValue(forKey: vc!)
             if monitorViewControllers.contains(vc!) {
                 monitorViewControllers.remove(at: monitorViewControllers.index(of: vc!)!)
             }
@@ -374,8 +374,8 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     
     
     /// 移除键盘管理监听
-    func removeKeyboradObserver() {
-        KeyboradConfigurations.removeAll()
+    func removeKeyboardObserver() {
+        KeyboardConfigurations.removeAll()
         monitorViewControllers.removeAll()
         NotificationCenter.default.removeObserver(self)
         didRemoveKBObserve = true
@@ -383,7 +383,7 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     
     //MARK: - 发送通知 -
     private func sendFieldViewNotify() {
-        if KeyboradConfiguration?.headerView != nil {
+        if KeyboardConfiguration?.headerView != nil {
             NotificationCenter.default.post(name: NSNotification.Name.CurrentFieldView, object: currentField)
             NotificationCenter.default.post(name: NSNotification.Name.NextFieldView, object: nextField)
             NotificationCenter.default.post(name: NSNotification.Name.FrontFieldView, object: frontField)
@@ -392,24 +392,24 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
     
     // MARK: - 键盘监听处理 -
     
-    @objc private func keyboradWillShow(notify: Notification) {
+    @objc private func keyboardWillShow(notify: Notification) {
         if currentField == nil {
             setCurrentMonitorViewController()
         }
         if currentMonitorViewController == nil {return}
         let userInfo = notify.userInfo
-        keyboradFrame = (userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-        keyboradDuration = (userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
+        keyboardFrame = (userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        keyboardDuration = (userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
         updateHeaderView(complete: nil)
-        handleKeyboradDidShowToAdjust()
+        handleKeyboardDidShowToAdjust()
     }
     
-    @objc private func keyboradWillHide(notify: Notification) {
+    @objc private func keyboardWillHide(notify: Notification) {
         if currentMonitorViewController == nil {return}
-        keyboradFrame.size.width = 0
-        keyboradDuration = 0
+        keyboardFrame.size.width = 0
+        keyboardDuration = 0
         updateHeaderView(complete: nil)
-        keyboradFrame = CGRect.zero
+        keyboardFrame = CGRect.zero
         let moveView = getCurrentOffsetView()
         if moveView is UITableView ||
             moveView is UIScrollView ||
@@ -444,7 +444,7 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
                 let scrollView = object as? UIScrollView
                 if scrollView != nil && (scrollView!.isDragging || scrollView!.isDecelerating) {
                     let convertRect = currentField.convert(currentField.bounds, to: currentMonitorViewController!.view.window!)
-                    let yOffset = convertRect.maxY - keyboradFrame!.minY
+                    let yOffset = convertRect.maxY - keyboardFrame!.minY
                     if yOffset > 0 || convertRect.minY < 0 {
                         if currentField is UITextView {
                             (currentField as! UITextView).resignFirstResponder()
@@ -466,7 +466,7 @@ class WHC_KeyboradManager: NSObject,UITextFieldDelegate {
             currentField = notify.object as? UIView
             scanFrontNextField()
             sendFieldViewNotify()
-            handleKeyboradDidShowToAdjust()
+            handleKeyboardDidShowToAdjust()
         }
     }
     

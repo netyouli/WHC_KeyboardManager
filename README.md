@@ -1,9 +1,9 @@
-WHC_KeyboradManager
+WHC_KeyboardManager
 ==============
-![Build Status](https://api.travis-ci.org/netyouli/WHC_KeyboradManager.svg?branch=master)
-[![Pod Version](http://img.shields.io/cocoapods/v/WHC_KeyboradManager.svg?style=flat)](http://cocoadocs.org/docsets/WHC_KeyboradManager/)
-[![Pod Platform](http://img.shields.io/cocoapods/p/WHC_KeyboradManager.svg?style=flat)](http://cocoadocs.org/docsets/WHC_KeyboradManager/)
-[![Pod License](http://img.shields.io/cocoapods/l/WHC_KeyboradManager.svg?style=flat)](https://opensource.org/licenses/MIT)
+![Build Status](https://api.travis-ci.org/netyouli/WHC_KeyboardManager.svg?branch=master)
+[![Pod Version](http://img.shields.io/cocoapods/v/WHC_KeyboardManager.svg?style=flat)](http://cocoadocs.org/docsets/WHC_KeyboardManager/)
+[![Pod Platform](http://img.shields.io/cocoapods/p/WHC_KeyboardManager.svg?style=flat)](http://cocoadocs.org/docsets/WHC_KeyboardManager/)
+[![Pod License](http://img.shields.io/cocoapods/l/WHC_KeyboardManager.svg?style=flat)](https://opensource.org/licenses/MIT)
 简介
 ==============
 - **高效**: 轻量级拒绝复杂或看不懂的Api
@@ -17,7 +17,7 @@ WHC_KeyboradManager
 
 演示
 ==============
-<img src = "https://github.com/netyouli/WHC_KeyboradManager/blob/master/WHC_KeyboradManager/demo/k1.gif", width = "375"><img src = "https://github.com/netyouli/WHC_KeyboradManager/blob/master/WHC_KeyboradManager/demo/k2.gif", width = "375">
+<img src = "https://github.com/netyouli/WHC_KeyboardManager/blob/master/WHC_KeyboardManager/demo/k1.gif", width = "375"><img src = "https://github.com/netyouli/WHC_KeyboardManager/blob/master/WHC_KeyboardManager/demo/k2.gif", width = "375">
 
 
 要求
@@ -28,11 +28,11 @@ WHC_KeyboradManager
 集成
 ==============
 * 使用CocoaPods:
-  -  【Objective-c】 pod 'WHC_KeyboradManager_oc', '~> 1.0.0'
-  -  【Swift】 pod 'WHC_KeyboradManager', '~> 1.0.0'
+  -  【Objective-c】 pod 'WHC_KeyboardManager_oc', '~> 1.0.2'
+  -  【Swift】 pod 'WHC_KeyboardManager', '~> 1.0.2'
 * 手工集成:
-  -  【Objective-c】 导入文件夹WHC_KeyboradManager(OC)
-  -  【Swift】 导入文件夹WHC_KeyboradManager
+  -  【Objective-c】 导入文件夹WHC_KeyboardManager(OC)
+  -  【Swift】 导入文件夹WHC_KeyboardManager
 
 使用到第三方库
 ==============
@@ -45,8 +45,8 @@ WHC_KeyboradManager
 ```Swift
 override func viewDidLoad() {
     super.viewDidLoad()
-    /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
-    WHC_KeyboradManager.share.addMonitorViewController(self)
+    /*******只需要在要处理键盘的界面创建WHC_KeyboardManager对象即可无需任何其他设置*******/
+    WHC_KeyboardManager.share.addMonitorViewController(self)
 }
 ```
 - 自定义配置演示
@@ -54,8 +54,8 @@ override func viewDidLoad() {
 ```Swift
 override func viewDidLoad() {
     super.viewDidLoad()
-    /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
-    let configuration = WHC_KeyboradManager.share.addMonitorViewController(self)
+    /*******只需要在要处理键盘的界面创建WHC_KeyboardManager对象即可无需任何其他设置*******/
+    let configuration = WHC_KeyboardManager.share.addMonitorViewController(self)
     /// 不要键盘头
     configuration.enableHeader = false
 

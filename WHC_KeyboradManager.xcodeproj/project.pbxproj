@@ -11,13 +11,13 @@
 		FE1031B61DD999F900A9F284 /* StyleVC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031B51DD999F900A9F284 /* StyleVC1.swift */; };
 		FE1031BB1DD999F900A9F284 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE1031BA1DD999F900A9F284 /* Assets.xcassets */; };
 		FE1031BE1DD999F900A9F284 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE1031BC1DD999F900A9F284 /* LaunchScreen.storyboard */; };
-		FE1031C71DD99A6A00A9F284 /* WHC_KeyboradManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031C61DD99A6A00A9F284 /* WHC_KeyboradManager.swift */; };
+		FE1031C71DD99A6A00A9F284 /* WHC_KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031C61DD99A6A00A9F284 /* WHC_KeyboardManager.swift */; };
 		FE1031CD1DDAEDE600A9F284 /* WHC_AutoCellHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031C91DDAEDE500A9F284 /* WHC_AutoCellHeight.swift */; };
 		FE1031CE1DDAEDE600A9F284 /* WHC_AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031CA1DDAEDE500A9F284 /* WHC_AutoLayout.swift */; };
 		FE1031CF1DDAEDE600A9F284 /* WHC_Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031CB1DDAEDE500A9F284 /* WHC_Frame.swift */; };
 		FE1031D01DDAEDE600A9F284 /* WHC_StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031CC1DDAEDE500A9F284 /* WHC_StackView.swift */; };
-		FE1031D21DDAF27800A9F284 /* WHC_ExtensionKeyboradObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031D11DDAF27800A9F284 /* WHC_ExtensionKeyboradObject.swift */; };
-		FE1031D41DDC460600A9F284 /* WHC_KeyboradHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031D31DDC460600A9F284 /* WHC_KeyboradHeaderView.swift */; };
+		FE1031D21DDAF27800A9F284 /* WHC_ExtensionKeyboardObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031D11DDAF27800A9F284 /* WHC_ExtensionKeyboardObject.swift */; };
+		FE1031D41DDC460600A9F284 /* WHC_KeyboardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031D31DDC460600A9F284 /* WHC_KeyboardHeaderView.swift */; };
 		FE6DCE0C1DE1740600E7992A /* StyleVC3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6DCE0A1DE1740600E7992A /* StyleVC3.swift */; };
 		FE6DCE0D1DE1740600E7992A /* StyleVC3.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE6DCE0B1DE1740600E7992A /* StyleVC3.xib */; };
 		FE8BB4C81DDD76A300934189 /* StyleVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8BB4C61DDD76A300934189 /* StyleVC2.swift */; };
@@ -34,13 +34,13 @@
 		FE1031BA1DD999F900A9F284 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE1031BD1DD999F900A9F284 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FE1031BF1DD999F900A9F284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FE1031C61DD99A6A00A9F284 /* WHC_KeyboradManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_KeyboradManager.swift; sourceTree = "<group>"; };
+		FE1031C61DD99A6A00A9F284 /* WHC_KeyboardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_KeyboardManager.swift; sourceTree = "<group>"; };
 		FE1031C91DDAEDE500A9F284 /* WHC_AutoCellHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_AutoCellHeight.swift; sourceTree = "<group>"; };
 		FE1031CA1DDAEDE500A9F284 /* WHC_AutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_AutoLayout.swift; sourceTree = "<group>"; };
 		FE1031CB1DDAEDE500A9F284 /* WHC_Frame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_Frame.swift; sourceTree = "<group>"; };
 		FE1031CC1DDAEDE500A9F284 /* WHC_StackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_StackView.swift; sourceTree = "<group>"; };
-		FE1031D11DDAF27800A9F284 /* WHC_ExtensionKeyboradObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_ExtensionKeyboradObject.swift; sourceTree = "<group>"; };
-		FE1031D31DDC460600A9F284 /* WHC_KeyboradHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_KeyboradHeaderView.swift; sourceTree = "<group>"; };
+		FE1031D11DDAF27800A9F284 /* WHC_ExtensionKeyboardObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_ExtensionKeyboardObject.swift; sourceTree = "<group>"; };
+		FE1031D31DDC460600A9F284 /* WHC_KeyboardHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_KeyboardHeaderView.swift; sourceTree = "<group>"; };
 		FE6DCE0A1DE1740600E7992A /* StyleVC3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleVC3.swift; sourceTree = "<group>"; };
 		FE6DCE0B1DE1740600E7992A /* StyleVC3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StyleVC3.xib; sourceTree = "<group>"; };
 		FE8BB4C61DDD76A300934189 /* StyleVC2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleVC2.swift; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 			children = (
 				FE8BB4CC1DDD799C00934189 /* images */,
 				FE1031C81DDAEDE500A9F284 /* WHC_AutoLayoutKit */,
-				FE1031C51DD99A4B00A9F284 /* WHC_KeyboradManager */,
+				FE1031C51DD99A4B00A9F284 /* WHC_KeyboardManager */,
 				FE1031B31DD999F900A9F284 /* AppDelegate.swift */,
 				FE1031B51DD999F900A9F284 /* StyleVC1.swift */,
 				FE8BB4CA1DDD76C200934189 /* StyleVC1.xib */,
@@ -97,13 +97,14 @@
 			path = WHC_KeyboradManager;
 			sourceTree = "<group>";
 		};
-		FE1031C51DD99A4B00A9F284 /* WHC_KeyboradManager */ = {
+		FE1031C51DD99A4B00A9F284 /* WHC_KeyboardManager */ = {
 			isa = PBXGroup;
 			children = (
-				FE1031C61DD99A6A00A9F284 /* WHC_KeyboradManager.swift */,
-				FE1031D11DDAF27800A9F284 /* WHC_ExtensionKeyboradObject.swift */,
-				FE1031D31DDC460600A9F284 /* WHC_KeyboradHeaderView.swift */,
+				FE1031C61DD99A6A00A9F284 /* WHC_KeyboardManager.swift */,
+				FE1031D11DDAF27800A9F284 /* WHC_ExtensionKeyboardObject.swift */,
+				FE1031D31DDC460600A9F284 /* WHC_KeyboardHeaderView.swift */,
 			);
+			name = WHC_KeyboardManager;
 			path = WHC_KeyboradManager;
 			sourceTree = "<group>";
 		};
@@ -205,8 +206,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE1031B61DD999F900A9F284 /* StyleVC1.swift in Sources */,
-				FE1031D41DDC460600A9F284 /* WHC_KeyboradHeaderView.swift in Sources */,
-				FE1031D21DDAF27800A9F284 /* WHC_ExtensionKeyboradObject.swift in Sources */,
+				FE1031D41DDC460600A9F284 /* WHC_KeyboardHeaderView.swift in Sources */,
+				FE1031D21DDAF27800A9F284 /* WHC_ExtensionKeyboardObject.swift in Sources */,
 				FE1031CE1DDAEDE600A9F284 /* WHC_AutoLayout.swift in Sources */,
 				FE1031CF1DDAEDE600A9F284 /* WHC_Frame.swift in Sources */,
 				FE8BB4C81DDD76A300934189 /* StyleVC2.swift in Sources */,
@@ -214,7 +215,7 @@
 				FE6DCE0C1DE1740600E7992A /* StyleVC3.swift in Sources */,
 				FE1031D01DDAEDE600A9F284 /* WHC_StackView.swift in Sources */,
 				FE1031CD1DDAEDE600A9F284 /* WHC_AutoCellHeight.swift in Sources */,
-				FE1031C71DD99A6A00A9F284 /* WHC_KeyboradManager.swift in Sources */,
+				FE1031C71DD99A6A00A9F284 /* WHC_KeyboardManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,11 +1,11 @@
 //
-//  WHC_KeyboradHeaderView.m
-//  WHC_KeyboradManager(OC)
+//  WHC_KeyboardHeaderView.m
+//  WHC_KeyboardManager(OC)
 //
 //  Created by WHC on 16/11/20.
 //  Copyright © 2016年 WHC. All rights reserved.
 //
-//  Github <https://github.com/netyouli/WHC_KeyboradManager>
+//  Github <https://github.com/netyouli/WHC_KeyboardManager>
 
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,10 +26,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "WHC_KeyboradHeaderView.h"
-#import "WHC_KeyboradManager.h"
+#import "WHC_KeyboardHeaderView.h"
+#import "WHC_KeyboardManager.h"
 
-@implementation WHC_KeyboradHeaderView
+@implementation WHC_KeyboardHeaderView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -103,7 +103,7 @@
         [self addConstraint:[NSLayoutConstraint constraintWithItem:_lineView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:0]];
         [self addConstraint:[NSLayoutConstraint constraintWithItem:_lineView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
         
-        /// 监听WHC_KeyboradManager通知
+        /// 监听WHC_KeyboardManager通知
         NSNotificationCenter * nCenter = [NSNotificationCenter defaultCenter];
         [nCenter addObserver:self selector:@selector(getCurrentFieldView:) name:(NSString *)WHC_KBM_CurrentFieldView object:nil];
         [nCenter addObserver:self selector:@selector(getNextFieldView:) name:(NSString *)WHC_KBM_NextFieldView object:nil];
@@ -117,7 +117,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - 获取WHC_KeyboradManager发来的通知 -
+#pragma mark - 获取WHC_KeyboardManager发来的通知 -
 - (void)getCurrentFieldView:(NSNotification *)notify {
     _currentFieldView = notify.object;
 }

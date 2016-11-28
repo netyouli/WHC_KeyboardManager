@@ -11,8 +11,8 @@
 		FE6DCE1F1DE1C73E00E7992A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6DCE1E1DE1C73E00E7992A /* AppDelegate.m */; };
 		FE6DCE271DE1C73E00E7992A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE6DCE261DE1C73E00E7992A /* Assets.xcassets */; };
 		FE6DCE2A1DE1C73E00E7992A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE6DCE281DE1C73E00E7992A /* LaunchScreen.storyboard */; };
-		FE6DCE3B1DE1C7BA00E7992A /* WHC_KeyboradManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6DCE3A1DE1C7BA00E7992A /* WHC_KeyboradManager.m */; };
-		FE6DCE3E1DE1C7E600E7992A /* WHC_KeyboradHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6DCE3D1DE1C7E600E7992A /* WHC_KeyboradHeaderView.m */; };
+		FE6DCE3B1DE1C7BA00E7992A /* WHC_KeyboardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6DCE3A1DE1C7BA00E7992A /* WHC_KeyboardManager.m */; };
+		FE6DCE3E1DE1C7E600E7992A /* WHC_KeyboardHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6DCE3D1DE1C7E600E7992A /* WHC_KeyboardHeaderView.m */; };
 		FE6DCE411DE1C82500E7992A /* NSObject+WHC_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6DCE401DE1C82500E7992A /* NSObject+WHC_Extension.m */; };
 		FEA91D091DE97DAB0096927F /* StyleVC1.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA91D071DE97DAB0096927F /* StyleVC1.m */; };
 		FEA91D0A1DE97DAB0096927F /* StyleVC1.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEA91D081DE97DAB0096927F /* StyleVC1.xib */; };
@@ -34,10 +34,10 @@
 		FE6DCE261DE1C73E00E7992A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE6DCE291DE1C73E00E7992A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FE6DCE2B1DE1C73E00E7992A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FE6DCE391DE1C7BA00E7992A /* WHC_KeyboradManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHC_KeyboradManager.h; sourceTree = "<group>"; };
-		FE6DCE3A1DE1C7BA00E7992A /* WHC_KeyboradManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHC_KeyboradManager.m; sourceTree = "<group>"; };
-		FE6DCE3C1DE1C7E600E7992A /* WHC_KeyboradHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHC_KeyboradHeaderView.h; sourceTree = "<group>"; };
-		FE6DCE3D1DE1C7E600E7992A /* WHC_KeyboradHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHC_KeyboradHeaderView.m; sourceTree = "<group>"; };
+		FE6DCE391DE1C7BA00E7992A /* WHC_KeyboardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHC_KeyboardManager.h; sourceTree = "<group>"; };
+		FE6DCE3A1DE1C7BA00E7992A /* WHC_KeyboardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHC_KeyboardManager.m; sourceTree = "<group>"; };
+		FE6DCE3C1DE1C7E600E7992A /* WHC_KeyboardHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHC_KeyboardHeaderView.h; sourceTree = "<group>"; };
+		FE6DCE3D1DE1C7E600E7992A /* WHC_KeyboardHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHC_KeyboardHeaderView.m; sourceTree = "<group>"; };
 		FE6DCE3F1DE1C82500E7992A /* NSObject+WHC_Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+WHC_Extension.h"; sourceTree = "<group>"; };
 		FE6DCE401DE1C82500E7992A /* NSObject+WHC_Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+WHC_Extension.m"; sourceTree = "<group>"; };
 		FEA91D061DE97DAB0096927F /* StyleVC1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleVC1.h; sourceTree = "<group>"; };
@@ -90,7 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				FEA91D151DE97F6A0096927F /* WHC_AutoLayoutKit */,
-				FE6DCE351DE1C79F00E7992A /* WHC_KeyboradManager(OC) */,
+				FE6DCE351DE1C79F00E7992A /* WHC_KeyboardManager(OC) */,
 				FE6DCE1D1DE1C73E00E7992A /* AppDelegate.h */,
 				FE6DCE1E1DE1C73E00E7992A /* AppDelegate.m */,
 				FEA91D061DE97DAB0096927F /* StyleVC1.h */,
@@ -118,16 +118,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		FE6DCE351DE1C79F00E7992A /* WHC_KeyboradManager(OC) */ = {
+		FE6DCE351DE1C79F00E7992A /* WHC_KeyboardManager(OC) */ = {
 			isa = PBXGroup;
 			children = (
-				FE6DCE391DE1C7BA00E7992A /* WHC_KeyboradManager.h */,
-				FE6DCE3A1DE1C7BA00E7992A /* WHC_KeyboradManager.m */,
-				FE6DCE3C1DE1C7E600E7992A /* WHC_KeyboradHeaderView.h */,
-				FE6DCE3D1DE1C7E600E7992A /* WHC_KeyboradHeaderView.m */,
+				FE6DCE391DE1C7BA00E7992A /* WHC_KeyboardManager.h */,
+				FE6DCE3A1DE1C7BA00E7992A /* WHC_KeyboardManager.m */,
+				FE6DCE3C1DE1C7E600E7992A /* WHC_KeyboardHeaderView.h */,
+				FE6DCE3D1DE1C7E600E7992A /* WHC_KeyboardHeaderView.m */,
 				FE6DCE3F1DE1C82500E7992A /* NSObject+WHC_Extension.h */,
 				FE6DCE401DE1C82500E7992A /* NSObject+WHC_Extension.m */,
 			);
+			name = "WHC_KeyboardManager(OC)";
 			path = "WHC_KeyboradManager(OC)";
 			sourceTree = "<group>";
 		};
@@ -223,9 +224,9 @@
 			files = (
 				FEA91D211DE97F6B0096927F /* WHC_StackView.m in Sources */,
 				FE6DCE411DE1C82500E7992A /* NSObject+WHC_Extension.m in Sources */,
-				FE6DCE3E1DE1C7E600E7992A /* WHC_KeyboradHeaderView.m in Sources */,
+				FE6DCE3E1DE1C7E600E7992A /* WHC_KeyboardHeaderView.m in Sources */,
 				FEA91D131DE97DD00096927F /* StyleVC3.m in Sources */,
-				FE6DCE3B1DE1C7BA00E7992A /* WHC_KeyboradManager.m in Sources */,
+				FE6DCE3B1DE1C7BA00E7992A /* WHC_KeyboardManager.m in Sources */,
 				FE6DCE1F1DE1C73E00E7992A /* AppDelegate.m in Sources */,
 				FEA91D1E1DE97F6A0096927F /* UITableViewCell+WHC_AutoHeightForCell.m in Sources */,
 				FEA91D091DE97DAB0096927F /* StyleVC1.m in Sources */,

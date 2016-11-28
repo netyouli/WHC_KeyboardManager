@@ -1,6 +1,6 @@
 //
 //  StyleVC2.m
-//  WHC_KeyboradManager(OC)
+//  WHC_KeyboardManager(OC)
 //
 //  Created by WHC on 16/11/26.
 //  Copyright © 2016年 WHC. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import "StyleVC2.h"
 #import "WHC_StackView.h"
-#import "WHC_KeyboradManager.h"
+#import "WHC_KeyboardManager.h"
 
 @interface StyleVC2 ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -27,8 +27,8 @@
     
     [_scrollView whc_AutoSize:0 top:0 right:0 bottom:0];
     /// 键盘处理配置
-    /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
-    WHC_KBMConfiguration * configuration = [[WHC_KeyboradManager share] addMonitorViewController:self];
+    /*******只需要在要处理键盘的界面创建WHC_KeyboardManager对象即可无需任何其他设置*******/
+    WHC_KBMConfiguration * configuration = [[WHC_KeyboardManager share] addMonitorViewController:self];
     /// 不要键盘头
     configuration.enableHeader = false;
     

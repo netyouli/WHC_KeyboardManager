@@ -1,12 +1,12 @@
 //
-//  WHC_KeyboradHeaderView.swift
-//  WHC_KeyboradManager
+//  WHC_KeyboardHeaderView.swift
+//  WHC_KeyboardManager
 //
 //  Created by WHC on 16/11/16.
 //  Copyright © 2016年 WHC. All rights reserved.
 //
 
-//  Github <https://github.com/netyouli/WHC_KeyboradManager>
+//  Github <https://github.com/netyouli/WHC_KeyboardManager>
 
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,7 +29,7 @@
 
 import UIKit
 
-class WHC_KeyboradHeaderView: UIView {
+class WHC_KeyboardHeaderView: UIView {
 
     private(set) var currentFieldView: UIView?
     private(set) var nextFieldView: UIView?
@@ -139,7 +139,7 @@ class WHC_KeyboradHeaderView: UIView {
         
         self.addConstraint(NSLayoutConstraint(item: lineView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0))
         
-        /// 监听WHC_KeyboradManager通知
+        /// 监听WHC_KeyboardManager通知
         NotificationCenter.default.addObserver(self, selector: #selector(getCurrentFieldView(notify:)), name: NSNotification.Name.CurrentFieldView, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(getFrontFieldView(notify:)), name: NSNotification.Name.FrontFieldView, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(getNextFieldView(notify:)), name: NSNotification.Name.NextFieldView, object: nil)
@@ -153,7 +153,7 @@ class WHC_KeyboradHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - 获取WHC_KeyboradManager发来的通知 -
+    //MARK: - 获取WHC_KeyboardManager发来的通知 -
     @objc private func getCurrentFieldView(notify: Notification) {
         currentFieldView = notify.object as? UIView
     }

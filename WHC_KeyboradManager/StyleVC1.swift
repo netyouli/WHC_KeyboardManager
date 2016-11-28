@@ -18,8 +18,8 @@ class StyleVC1: UIViewController,UITableViewDelegate,UITableViewDataSource {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
-        WHC_KeyboradManager.share.addMonitorViewController(self)
+        /*******只需要在要处理键盘的界面创建WHC_KeyboardManager对象即可无需任何其他设置*******/
+        WHC_KeyboardManager.share.addMonitorViewController(self)
         
         self.navigationItem.title = "Tableview"
         self.view.backgroundColor = UIColor.white

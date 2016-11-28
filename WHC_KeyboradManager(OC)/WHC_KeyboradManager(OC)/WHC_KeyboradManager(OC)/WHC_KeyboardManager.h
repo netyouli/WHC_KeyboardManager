@@ -1,11 +1,11 @@
 //
-//  WHC_KeyboradManager.h
-//  WHC_KeyboradManager(OC)
+//  WHC_KeyboardManager.h
+//  WHC_KeyboardManager(OC)
 //
 //  Created by WHC on 16/11/20.
 //  Copyright © 2016年 WHC. All rights reserved.
 //
-//  Github <https://github.com/netyouli/WHC_KeyboradManager>
+//  Github <https://github.com/netyouli/WHC_KeyboardManager>
 
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,7 +27,7 @@
 // THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
-#import "WHC_KeyboradHeaderView.h"
+#import "WHC_KeyboardHeaderView.h"
 
 /// 获取下一个编辑框视图的通知
 extern const NSString * WHC_KBM_NextFieldView;
@@ -39,7 +39,7 @@ extern const NSString * WHC_KBM_FrontFieldView;
 
 @interface WHC_KBMConfiguration : NSObject
 /// 存储键盘头视图
-@property (nonatomic, strong, readonly)WHC_KeyboradHeaderView * headerView;
+@property (nonatomic, strong, readonly)WHC_KeyboardHeaderView * headerView;
 /// 是否启用键盘头部工具条
 @property (nonatomic, assign)BOOL enableHeader;
 
@@ -59,7 +59,7 @@ extern const NSString * WHC_KBM_FrontFieldView;
 - (void)setOffsetView:(UIView * (^)(UIView * field))block;
 @end
 
-@interface WHC_KeyboradManager : NSObject
+@interface WHC_KeyboardManager : NSObject
 
 
 /**
@@ -91,6 +91,6 @@ extern const NSString * WHC_KBM_FrontFieldView;
 /**
  移除键盘管理对象自动监听
  */
-- (void)removeKeyboradObserver;
+- (void)removeKeyboardObserver;
 
 @end

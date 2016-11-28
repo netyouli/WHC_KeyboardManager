@@ -1,12 +1,12 @@
 //
 //  WHC_ExtensionObject.swift
-//  WHC_KeyboradManager
+//  WHC_KeyboardManager
 //
 //  Created by WHC on 16/11/15.
 //  Copyright © 2016年 WHC. All rights reserved.
 //
 
-//  Github <https://github.com/netyouli/WHC_KeyboradManager>
+//  Github <https://github.com/netyouli/WHC_KeyboardManager>
 
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
