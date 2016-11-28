@@ -17,7 +17,7 @@ WHC_KeyboardManager
 
 演示
 ==============
-<img src = "https://github.com/netyouli/WHC_KeyboradManager/tree/master/WHC_KeyboradManager/demo/k1.gif", width = "375"><img src = "https://github.com/netyouli/WHC_KeyboradManager/tree/master/WHC_KeyboradManager/demo/k2.gif", width = "375">
+<img src = "https://github.com/netyouli/WHC_KeyboardManager/blob/master/WHC_KeyboradManager/demo/k1.gif", width = "375"><img src = "https://github.com/netyouli/WHC_KeyboardManager/blob/master/WHC_KeyboradManager/demo/k2.gif", width = "375">
 
 
 要求
@@ -28,8 +28,8 @@ WHC_KeyboardManager
 集成
 ==============
 * 使用CocoaPods:
-  -  【Objective-c】 pod 'WHC_KeyboardManager_oc', '~> 1.0.2'
-  -  【Swift】 pod 'WHC_KeyboardManager', '~> 1.0.2'
+  -  【Objective-c】 pod 'WHC_KeyboardManager_oc', '~> 1.0.4'
+  -  【Swift】 pod 'WHC_KeyboardManager', '~> 1.0.4'
 * 手工集成:
   -  【Objective-c】 导入文件夹WHC_KeyboardManager(OC)
   -  【Swift】 导入文件夹WHC_KeyboardManager
