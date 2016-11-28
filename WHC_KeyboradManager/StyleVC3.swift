@@ -15,7 +15,6 @@ class StyleVC3: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
         self.navigationItem.title = "UIView"
         /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
         WHC_KeyboardManager.share.addMonitorViewController(self)

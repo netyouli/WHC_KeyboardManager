@@ -157,12 +157,10 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
         UITableViewWrapperViewClass = NSClassFromString(@"UITableViewWrapperView");
         UIQueuingScrollViewClass = NSClassFromString(@"_UIQueuingScrollView");
     });
-    return !((UITableViewCellScrollViewClass == nil ||
-              [view isKindOfClass:UITableViewWrapperViewClass] == NO) &&
-             (UITableViewWrapperViewClass == nil ||
-              [view isKindOfClass:UITableViewCellScrollViewClass] == NO) &&
-             (UIQueuingScrollViewClass == nil ||
-              [view isKindOfClass:UIQueuingScrollViewClass] == NO));
+    
+    return !(([view isKindOfClass:UITableViewWrapperViewClass] == NO) &&
+             ([view isKindOfClass:UITableViewCellScrollViewClass] == NO) &&
+             ([view isKindOfClass:UIQueuingScrollViewClass] == NO));
 }
 
 /// 检查是否系统的私有输入类
@@ -177,12 +175,9 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
         UIAlertSheetTextFieldClass = NSClassFromString(@"UIAlertSheetTextField");
         UIAlertSheetTextFieldClass_iOS8 = NSClassFromString(@"_UIAlertControllerTextField");
     });
-    return !((UISearchBarTextFieldClass == nil ||
-              [view isKindOfClass:UISearchBarTextFieldClass] == NO) &&
-             (UIAlertSheetTextFieldClass == nil ||
-              [view isKindOfClass:UIAlertSheetTextFieldClass] == NO) &&
-             (UIAlertSheetTextFieldClass_iOS8 == nil ||
-              [view isKindOfClass:UIAlertSheetTextFieldClass_iOS8] == NO));
+    return !(([view isKindOfClass:UISearchBarTextFieldClass] == NO) &&
+             ([view isKindOfClass:UIAlertSheetTextFieldClass] == NO) &&
+             ([view isKindOfClass:UIAlertSheetTextFieldClass_iOS8] == NO));
 }
 
 /// 动态扫描前后field
