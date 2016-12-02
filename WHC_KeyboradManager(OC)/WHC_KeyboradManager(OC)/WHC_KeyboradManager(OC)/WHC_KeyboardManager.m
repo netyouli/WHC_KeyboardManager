@@ -88,7 +88,7 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
 /// 下一个输入视图
 @property (nonatomic, strong) UIView * nextField;
 /// 要监视处理的控制器集合
-@property (nonatomic, strong) NSMutableArray <UIViewController *> * monitorViewControllers;
+@property (nonatomic, strong) NSMutableArray <NSString *> * monitorViewControllers;
 /// 当前监视处理的控制器
 @property (nonatomic, weak) UIViewController * currentMonitorViewController;
 /// 设置移动的视图动画周期
@@ -373,7 +373,7 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
     if (_monitorViewControllers.count > 0) {
         UIViewController * topViewController = [self whc_CurrentViewController];
         _currentMonitorViewController = nil;
-        if (topViewController != nil && [_monitorViewControllers containsObject:topViewController]) {
+        if (topViewController != nil && [_monitorViewControllers containsObject:topViewController.description]) {
             _currentMonitorViewController = topViewController;
             _KeyboardConfiguration = _KeyboardConfigurations[_currentMonitorViewController.description];
         }
@@ -385,8 +385,8 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
     WHC_KBMConfiguration * configuration = [WHC_KBMConfiguration new];
     self.KeyboardConfiguration = configuration;
     _KeyboardConfigurations[vc.description] = configuration;
-    if (![_monitorViewControllers containsObject:vc]) {
-        [_monitorViewControllers addObject:vc];
+    if (![_monitorViewControllers containsObject:vc.description]) {
+        [_monitorViewControllers addObject:vc.description];
     }
     if (_didRemoveKBObserve) {
         [self addKeyboardMonitor];
@@ -398,8 +398,8 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
 - (void)removeMonitorViewController:(UIViewController *)vc {
     if (vc != nil) {
         [_KeyboardConfigurations removeObjectForKey:vc.description];
-        if ([_monitorViewControllers containsObject:vc]) {
-            [_monitorViewControllers removeObject:vc];
+        if ([_monitorViewControllers containsObject:vc.description]) {
+            [_monitorViewControllers removeObject:vc.description];
         }
     }
 }
@@ -447,7 +447,9 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
         [moveView isKindOfClass:[UICollectionView class]]) {
         UIScrollView * scrollMoveView = (UIScrollView *)moveView;
             if (scrollMoveView) {
-                [scrollMoveView removeObserver:self forKeyPath:(NSString *)kWHC_KBM_ContentOffset];
+                if (scrollMoveView.observationInfo) {
+                    [scrollMoveView removeObserver:self forKeyPath:(NSString *)kWHC_KBM_ContentOffset];
+                }
                 [UIView animateWithDuration:_moveViewAnimationDuration animations:^{
                     if (scrollMoveView.contentOffset.y < -scrollMoveView.contentInset.top) {
                         scrollMoveView.contentOffset = CGPointMake(scrollMoveView.contentOffset.x, -scrollMoveView.contentInset.top);

@@ -85,7 +85,7 @@ class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     /// 当前控制器的键盘配置
     private(set) var KeyboardConfiguration: Configuration?
     /// 监视控制器和配置集合
-    private var KeyboardConfigurations = [UIViewController: Configuration]()
+    private var KeyboardConfigurations = [String: Configuration]()
     /// 当前的输入视图(UITextView/UITextField)
     private(set) var currentField: UIView!
     /// 上一个输入视图
@@ -93,7 +93,7 @@ class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     /// 下一个输入视图
     private(set) var nextField: UIView!
     /// 要监视处理的控制器集合
-    private var monitorViewControllers = [UIViewController]()
+    private var monitorViewControllers = [String]()
     /// 当前监视处理的控制器
     private weak var currentMonitorViewController: UIViewController!
     /// 设置移动的视图动画周期
@@ -101,7 +101,7 @@ class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     /// 键盘出现的动画周期
     private var keyboardDuration: TimeInterval?
     /// 存储键盘的frame
-    private var keyboardFrame: CGRect!
+    private var keyboardFrame: CGRect! = CGRect.zero
     /// 监听UIScrollView内容偏移
     private let kContentOffset = "contentOffset"
     /// 是否已经显示了header
@@ -230,7 +230,7 @@ class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     private func updateHeaderView(complete: (() -> Void)!) {
         let headerView: UIView! = KeyboardConfiguration?.headerView
         if headerView != nil {
-            if keyboardFrame.width == 0 {
+            if keyboardFrame?.width == 0 {
                 if headerView.superview != nil {
                     UIView.animate(withDuration: moveViewAnimationDuration, animations: { 
                         headerView.layer.transform = CATransform3DMakeTranslation(0, self.keyboardFrame.height + headerView.frame.height, 0)
@@ -333,9 +333,9 @@ class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     private func setCurrentMonitorViewController() {
         let topViewController = self.whc_CurrentViewController()
         currentMonitorViewController = nil
-        if topViewController != nil && monitorViewControllers.contains(topViewController!) {
+        if topViewController != nil && monitorViewControllers.contains(topViewController!.description) {
             currentMonitorViewController = topViewController
-            KeyboardConfiguration = KeyboardConfigurations[currentMonitorViewController]
+            KeyboardConfiguration = KeyboardConfigurations[currentMonitorViewController.description]
         }
     }
     
@@ -349,9 +349,9 @@ class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     func addMonitorViewController(_ vc:UIViewController) -> WHC_KeyboardManager.Configuration {
         let configuration = WHC_KeyboardManager.Configuration()
         self.KeyboardConfiguration = configuration
-        KeyboardConfigurations.updateValue(configuration, forKey: vc)
-        if !monitorViewControllers.contains(vc) {
-            monitorViewControllers.append(vc)
+        KeyboardConfigurations.updateValue(configuration, forKey: vc.description)
+        if !monitorViewControllers.contains(vc.description) {
+            monitorViewControllers.append(vc.description)
         }
         if didRemoveKBObserve {
             addKeyboardMonitor()
@@ -365,9 +365,9 @@ class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     /// - parameter vc: 要移除的控制器
     func removeMonitorViewController(_ vc: UIViewController?) -> Void {
         if vc != nil {
-            KeyboardConfigurations.removeValue(forKey: vc!)
-            if monitorViewControllers.contains(vc!) {
-                monitorViewControllers.remove(at: monitorViewControllers.index(of: vc!)!)
+            KeyboardConfigurations.removeValue(forKey: vc!.description)
+            if monitorViewControllers.contains(vc!.description) {
+                monitorViewControllers.remove(at: monitorViewControllers.index(of: vc!.description)!)
             }
         }
     }
@@ -406,7 +406,7 @@ class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     
     @objc private func keyboardWillHide(notify: Notification) {
         if currentMonitorViewController == nil {return}
-        keyboardFrame.size.width = 0
+        keyboardFrame?.size.width = 0
         keyboardDuration = 0
         updateHeaderView(complete: nil)
         keyboardFrame = CGRect.zero
@@ -416,7 +416,9 @@ class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
             moveView is UICollectionView {
             let scrollMoveView = moveView as? UIScrollView
             if scrollMoveView != nil {
-                scrollMoveView!.removeObserver(self, forKeyPath: kContentOffset)
+                if scrollMoveView?.observationInfo != nil {
+                    scrollMoveView!.removeObserver(self, forKeyPath: kContentOffset)
+                }
                 UIView.animate(withDuration: moveViewAnimationDuration, animations: {
                     if scrollMoveView!.contentOffset.y < -scrollMoveView!.contentInset.top {
                         scrollMoveView!.contentOffset = CGPoint(x: (scrollMoveView?.contentOffset.x)!, y: -scrollMoveView!.contentInset.top)

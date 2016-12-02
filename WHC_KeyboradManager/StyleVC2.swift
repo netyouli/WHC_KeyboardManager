@@ -66,6 +66,8 @@ class StyleVC2: UIViewController {
     
     func clickRight(sender: UIBarButtonItem) {
         self.view.endEditing(true)
+        let vc = StyleVC3(nibName: "StyleVC3", bundle: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }

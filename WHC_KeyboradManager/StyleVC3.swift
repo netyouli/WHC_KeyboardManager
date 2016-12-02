@@ -44,6 +44,15 @@ class StyleVC3: UIViewController {
         stackView.whc_StartLayout()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("dddddd=\(self.description)")
+    }
+    
+    deinit {
+        print("释放了")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
