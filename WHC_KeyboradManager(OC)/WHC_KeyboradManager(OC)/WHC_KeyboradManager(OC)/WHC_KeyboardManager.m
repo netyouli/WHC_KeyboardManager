@@ -44,7 +44,8 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
 @property (nonatomic, copy) CGFloat (^offsetBlock)(UIView * field);
 /// 获取移动视图回调
 @property (nonatomic, copy) UIView* (^offsetViewBlock)(UIView * field);
-
+/// 是否添加了监听滚动视图
+@property (nonatomic, assign) BOOL didObserveScrollView;
 @end
 
 @implementation WHC_KBMConfiguration
@@ -325,7 +326,7 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
     if (_KeyboardConfiguration) {
         headerView = _KeyboardConfiguration.headerView;
     }
-    CGFloat(^offsetBlock)(UIView * field) = _KeyboardConfiguration.offsetBlock;
+    CGFloat(^offsetBlock)(UIView * field) = _KeyboardConfiguration != nil ? _KeyboardConfiguration.offsetBlock : nil;
     if (_keyboardFrame.size.height != 0 && _currentField != nil) {
         UIView * moveView = [self getCurrentOffsetView];
         UIScrollView * moveScrollView = nil;
@@ -333,7 +334,10 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
             [moveView isKindOfClass:[UIScrollView class]] ||
             [moveView isKindOfClass:[UICollectionView class]]) {
             moveScrollView = (UIScrollView *)moveView;
-            [moveScrollView addObserver:self forKeyPath:(NSString *)kWHC_KBM_ContentOffset options:NSKeyValueObservingOptionNew context:nil];
+            if (_KeyboardConfiguration && !_KeyboardConfiguration.didObserveScrollView) {
+                _KeyboardConfiguration.didObserveScrollView = YES;
+                [moveScrollView addObserver:self forKeyPath:(NSString *)kWHC_KBM_ContentOffset options:NSKeyValueObservingOptionNew context:nil];
+            }
         }
         [headerView layoutIfNeeded];
         UIView * convertView = moveScrollView == nil ? _currentMonitorViewController.view : _currentMonitorViewController.view.window;
@@ -447,7 +451,8 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
         [moveView isKindOfClass:[UICollectionView class]]) {
         UIScrollView * scrollMoveView = (UIScrollView *)moveView;
             if (scrollMoveView) {
-                if (scrollMoveView.observationInfo) {
+                if (_KeyboardConfiguration && _KeyboardConfiguration.didObserveScrollView) {
+                    _KeyboardConfiguration.didObserveScrollView = NO;
                     [scrollMoveView removeObserver:self forKeyPath:(NSString *)kWHC_KBM_ContentOffset];
                 }
                 [UIView animateWithDuration:_moveViewAnimationDuration animations:^{

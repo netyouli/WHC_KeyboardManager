@@ -48,7 +48,8 @@ class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
         fileprivate var offsetViewBlock: ((_ field: UIView?) -> UIView?)?
         /// 存储键盘头视图
         fileprivate var headerView: UIView? = WHC_KeyboardHeaderView()
-        
+        /// 是否添加了监听滚动视图
+        fileprivate var didObserveScrollView = false
         /// 是否启用键盘头部工具条
         open var enableHeader: Bool {
             set {
@@ -294,7 +295,10 @@ class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
                 moveView is UIScrollView ||
                 moveView is UICollectionView {
                 moveScrollView = moveView as? UIScrollView
-                moveScrollView?.addObserver(self, forKeyPath: kContentOffset, options: NSKeyValueObservingOptions.new, context: nil)
+                if KeyboardConfiguration != nil && !KeyboardConfiguration!.didObserveScrollView {
+                    KeyboardConfiguration!.didObserveScrollView = true
+                    moveScrollView?.addObserver(self, forKeyPath: kContentOffset, options: NSKeyValueObservingOptions.new, context: nil)
+                }
             }
             headerView?.layoutIfNeeded()
             let convertView: UIView? = moveScrollView == nil ? currentMonitorViewController!.view : currentMonitorViewController!.view.window
@@ -416,7 +420,8 @@ class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
             moveView is UICollectionView {
             let scrollMoveView = moveView as? UIScrollView
             if scrollMoveView != nil {
-                if scrollMoveView?.observationInfo != nil {
+                if KeyboardConfiguration != nil && KeyboardConfiguration!.didObserveScrollView {
+                    KeyboardConfiguration!.didObserveScrollView = false
                     scrollMoveView!.removeObserver(self, forKeyPath: kContentOffset)
                 }
                 UIView.animate(withDuration: moveViewAnimationDuration, animations: {

@@ -28,8 +28,8 @@ WHC_KeyboardManager
 集成
 ==============
 * 使用CocoaPods:
-  -  【Objective-c】 pod 'WHC_KeyboardManager_oc', '~> 1.0.6'
-  -  【Swift】 pod 'WHC_KeyboardManager', '~> 1.0.6'
+  -  【Objective-c】 pod 'WHC_KeyboardManager_oc', '~> 1.0.7'
+  -  【Swift】 pod 'WHC_KeyboardManager', '~> 1.0.7'
 * 手工集成:
   -  【Objective-c】 导入文件夹WHC_KeyboardManager(OC)
   -  【Swift】 导入文件夹WHC_KeyboardManager
