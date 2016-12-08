@@ -38,10 +38,10 @@ extension NSNotification.Name {
     static let FrontFieldView: NSNotification.Name = NSNotification.Name(rawValue: "GetFrontFieldViewNotification")
 }
 
-class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
+public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     
     /// 键盘头部视图配置类
-    class Configuration: NSObject {
+    public class Configuration: NSObject {
         /// 获取移动视图的偏移回调块
         fileprivate var offsetBlock: ((_ field: UIView?) -> CGFloat)?
         /// 获取移动视图回调
@@ -51,7 +51,7 @@ class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
         /// 是否添加了监听滚动视图
         fileprivate var didObserveScrollView = false
         /// 是否启用键盘头部工具条
-        open var enableHeader: Bool {
+        public var enableHeader: Bool {
             set {
                 if newValue {
                     if headerView == nil {
@@ -71,14 +71,14 @@ class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
         /// 设置键盘挡住要移动视图的偏移量
         ///
         /// - parameter block: 回调block
-        func setOffset(block: @escaping ((_ field: UIView?) -> CGFloat)) {
+        public func setOffset(block: @escaping ((_ field: UIView?) -> CGFloat)) {
             offsetBlock = block
         }
         
         /// 设置键盘挡住的Field要移动的视图
         ///
         /// - parameter block: 回调block
-        func setOffsetView(block: @escaping ((_ field: UIView?) -> UIView?)) {
+        public func setOffsetView(block: @escaping ((_ field: UIView?) -> UIView?)) {
             offsetViewBlock = block
         }
     }
@@ -350,7 +350,7 @@ class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     /// - parameter vc: 设置要监听的控制器
     /// return 返回默认的键盘头部配置对象
     @discardableResult
-    func addMonitorViewController(_ vc:UIViewController) -> WHC_KeyboardManager.Configuration {
+    public func addMonitorViewController(_ vc:UIViewController) -> WHC_KeyboardManager.Configuration {
         let configuration = WHC_KeyboardManager.Configuration()
         self.KeyboardConfiguration = configuration
         KeyboardConfigurations.updateValue(configuration, forKey: vc.description)
@@ -367,7 +367,7 @@ class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     /// 移除监听的控制器对象
     ///
     /// - parameter vc: 要移除的控制器
-    func removeMonitorViewController(_ vc: UIViewController?) -> Void {
+    public func removeMonitorViewController(_ vc: UIViewController?) -> Void {
         if vc != nil {
             KeyboardConfigurations.removeValue(forKey: vc!.description)
             if monitorViewControllers.contains(vc!.description) {
@@ -378,7 +378,7 @@ class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     
     
     /// 移除键盘管理监听
-    func removeKeyboardObserver() {
+    public func removeKeyboardObserver() {
         KeyboardConfigurations.removeAll()
         monitorViewControllers.removeAll()
         NotificationCenter.default.removeObserver(self)
@@ -443,7 +443,7 @@ class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     }
 
     //MARK: - 滑动监听 -
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if currentMonitorViewController == nil {return}
         if keyPath != nil && keyPath! == kContentOffset && currentField != nil {
             let contentOffset = (change?[.newKey] as? NSValue)?.cgPointValue

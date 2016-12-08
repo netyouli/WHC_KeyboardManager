@@ -29,7 +29,7 @@
 
 import UIKit
 
-class WHC_KeyboardHeaderView: UIView {
+public class WHC_KeyboardHeaderView: UIView {
 
     private(set) var currentFieldView: UIView?
     private(set) var nextFieldView: UIView?
@@ -39,11 +39,11 @@ class WHC_KeyboardHeaderView: UIView {
     private let kWidth: CGFloat = 60
     
     /// 点击前一个按钮回调
-    var clickFrontButtonBlock: (() -> Void)!
+    public var clickFrontButtonBlock: (() -> Void)!
     /// 点击下一个按钮回调
-    var clickNextButtonBlock: (() -> Void)!
+    public var clickNextButtonBlock: (() -> Void)!
     /// 点击完成按钮回调
-    var clickDoneButtonBlock: (() -> Void)!
+    public var clickDoneButtonBlock: (() -> Void)!
     
     /// 只读
     private(set) lazy var nextButton = UIButton()
@@ -52,7 +52,7 @@ class WHC_KeyboardHeaderView: UIView {
     private(set) lazy var lineView = UIView()
     
     /// 隐藏上一个下一个按钮只保留done按钮
-    var hideNextAndFrontButton = false {
+    public var hideNextAndFrontButton = false {
         didSet {
             frontButton.isHidden = hideNextAndFrontButton
             nextButton.isHidden = hideNextAndFrontButton
@@ -149,7 +149,7 @@ class WHC_KeyboardHeaderView: UIView {
         NotificationCenter.default.removeObserver(self)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

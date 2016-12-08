@@ -29,7 +29,7 @@
 
 import UIKit
 
-extension NSObject {
+public extension NSObject {
     
     /// 获取app当前显示的控制器
     ///
