@@ -459,7 +459,11 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
                     if (scrollMoveView.contentOffset.y < -scrollMoveView.contentInset.top) {
                         scrollMoveView.contentOffset = CGPointMake(scrollMoveView.contentOffset.x, -scrollMoveView.contentInset.top);
                     }else if (scrollMoveView.contentOffset.y > scrollMoveView.contentSize.height - scrollMoveView.bounds.size.height + scrollMoveView.contentInset.bottom) {
-                        scrollMoveView.contentOffset = CGPointMake(scrollMoveView.contentOffset.x, scrollMoveView.contentSize.height - scrollMoveView.bounds.size.height + scrollMoveView.contentInset.bottom);
+                        if (scrollMoveView.contentSize.height == 0) {
+                            scrollMoveView.contentOffset = CGPointMake(scrollMoveView.contentOffset.x, -scrollMoveView.contentInset.top);
+                        }else {
+                            scrollMoveView.contentOffset = CGPointMake(scrollMoveView.contentOffset.x, scrollMoveView.contentSize.height - scrollMoveView.bounds.size.height + scrollMoveView.contentInset.bottom);
+                        }
                     }
                 }];
             }

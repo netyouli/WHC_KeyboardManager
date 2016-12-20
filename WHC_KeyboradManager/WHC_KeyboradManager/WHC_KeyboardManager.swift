@@ -428,8 +428,11 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
                     if scrollMoveView!.contentOffset.y < -scrollMoveView!.contentInset.top {
                         scrollMoveView!.contentOffset = CGPoint(x: (scrollMoveView?.contentOffset.x)!, y: -scrollMoveView!.contentInset.top)
                     }else if scrollMoveView!.contentOffset.y > (scrollMoveView!.contentSize.height - scrollMoveView!.bounds.height + scrollMoveView!.contentInset.bottom) {
-                        
-                        scrollMoveView!.contentOffset = CGPoint(x: (scrollMoveView?.contentOffset.x)!, y: (scrollMoveView!.contentSize.height - scrollMoveView!.bounds.height + scrollMoveView!.contentInset.bottom))
+                        if scrollMoveView!.contentSize.height == 0 {
+                            scrollMoveView!.contentOffset = CGPoint(x: scrollMoveView!.contentOffset.x, y: -scrollMoveView!.contentInset.top)
+                        }else {
+                            scrollMoveView!.contentOffset = CGPoint(x: (scrollMoveView?.contentOffset.x)!, y: (scrollMoveView!.contentSize.height - scrollMoveView!.bounds.height + scrollMoveView!.contentInset.bottom))
+                        }
                     }
                 })
             }
