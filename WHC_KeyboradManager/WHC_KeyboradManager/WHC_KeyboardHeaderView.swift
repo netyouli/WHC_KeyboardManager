@@ -31,9 +31,9 @@ import UIKit
 
 public class WHC_KeyboardHeaderView: UIView {
 
-    private(set) var currentFieldView: UIView?
-    private(set) var nextFieldView: UIView?
-    private(set) var frontFieldView: UIView?
+    private(set) public var currentFieldView: UIView?
+    private(set) public var nextFieldView: UIView?
+    private(set) public var frontFieldView: UIView?
     
     private let kMargin: CGFloat = 0
     private let kWidth: CGFloat = 60
@@ -46,10 +46,10 @@ public class WHC_KeyboardHeaderView: UIView {
     public var clickDoneButtonBlock: (() -> Void)!
     
     /// 只读
-    private(set) lazy var nextButton = UIButton()
-    private(set) lazy var frontButton = UIButton()
-    private(set) lazy var doneButton = UIButton()
-    private(set) lazy var lineView = UIView()
+    private(set) public lazy var nextButton = UIButton()
+    private(set) public lazy var frontButton = UIButton()
+    private(set) public lazy var doneButton = UIButton()
+    private(set) public lazy var lineView = UIView()
     
     /// 隐藏上一个下一个按钮只保留done按钮
     public var hideNextAndFrontButton = false {

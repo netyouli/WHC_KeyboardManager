@@ -31,11 +31,11 @@ import UIKit
 
 extension NSNotification.Name {
     /// 获取下一个编辑框视图的通知
-    static let NextFieldView: NSNotification.Name = NSNotification.Name(rawValue: "GetNextFieldViewNotification")
+    public static let NextFieldView: NSNotification.Name = NSNotification.Name(rawValue: "GetNextFieldViewNotification")
     /// 获取当前编辑框视图的通知
-    static let CurrentFieldView: NSNotification.Name = NSNotification.Name(rawValue: "GetCurrentFieldViewNotification")
+    public static let CurrentFieldView: NSNotification.Name = NSNotification.Name(rawValue: "GetCurrentFieldViewNotification")
     /// 获取上一个编辑框视图的通知
-    static let FrontFieldView: NSNotification.Name = NSNotification.Name(rawValue: "GetFrontFieldViewNotification")
+    public static let FrontFieldView: NSNotification.Name = NSNotification.Name(rawValue: "GetFrontFieldViewNotification")
 }
 
 public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
@@ -111,7 +111,7 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     private var didRemoveKBObserve = false
     
     /// 单利对象
-    static var share: WHC_KeyboardManager {
+    public static var share: WHC_KeyboardManager {
         struct WHC_KeyboardManagerInstance {
             static let kbManager = WHC_KeyboardManager()
         }
