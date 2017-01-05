@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-
+`echo "3.0" > .swift-version`
   s.name         = "WHC_KeyboardManager"
   s.version      = "1.1.1"
   s.summary      = "iOS平台轻量级的键盘管理器，使用简单功能强大，拒绝全局监控，无入侵性，键盘再也不会挡住输入控件"
