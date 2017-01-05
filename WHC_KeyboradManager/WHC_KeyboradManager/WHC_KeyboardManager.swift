@@ -438,7 +438,11 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
             }
         }else {
             var moveViewFrame = moveView.frame
-            moveViewFrame.origin.y = 0
+            if currentMonitorViewController.view === moveView && currentMonitorViewController.navigationController != nil && currentMonitorViewController.edgesForExtendedLayout == .none {
+                moveViewFrame.origin.y = currentMonitorViewController.navigationController!.navigationBar.bounds.height
+            }else {
+                moveViewFrame.origin.y = 0
+            }
             UIView.animate(withDuration: moveViewAnimationDuration, animations: {
                 moveView.frame = moveViewFrame
             })

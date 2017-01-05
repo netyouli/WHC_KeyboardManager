@@ -469,7 +469,11 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
             }
         }else {
             CGRect moveViewFrame = moveView.frame;
-            moveViewFrame.origin.y = 0;
+            if (_currentMonitorViewController.view == moveView && _currentMonitorViewController.navigationController != nil && _currentMonitorViewController.edgesForExtendedLayout == UIRectEdgeNone) {
+                moveViewFrame.origin.y = _currentMonitorViewController.navigationController.navigationBar.bounds.size.height;
+            }else {
+                moveViewFrame.origin.y = 0;
+            }
             [UIView animateWithDuration:_moveViewAnimationDuration animations:^{
                 moveView.frame = moveViewFrame;
             }];
