@@ -84,15 +84,15 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     }
     
     /// 当前控制器的键盘配置
-    private(set) var KeyboardConfiguration: Configuration?
+    private(set) public var KeyboardConfiguration: Configuration?
     /// 监视控制器和配置集合
     private var KeyboardConfigurations = [String: Configuration]()
     /// 当前的输入视图(UITextView/UITextField)
-    private(set) var currentField: UIView!
+    private(set) public var currentField: UIView!
     /// 上一个输入视图
-    private(set) var frontField: UIView!
+    private(set) public var frontField: UIView!
     /// 下一个输入视图
-    private(set) var nextField: UIView!
+    private(set) public var nextField: UIView!
     /// 要监视处理的控制器集合
     private var monitorViewControllers = [String]()
     /// 当前监视处理的控制器

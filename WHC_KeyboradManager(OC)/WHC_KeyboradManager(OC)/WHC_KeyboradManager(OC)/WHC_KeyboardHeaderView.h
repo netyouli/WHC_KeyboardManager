@@ -29,13 +29,23 @@
 #import <UIKit/UIKit.h>
 
 @interface WHC_KeyboardHeaderView : UIView
-@property (nonatomic, strong, readonly)UIView * currentFieldView;
-@property (nonatomic, strong, readonly)UIView * nextFieldView;
-@property (nonatomic, strong, readonly)UIView * frontFieldView;
+
+/****自定义键盘头部样式属性****/
+
+/// 当前编辑视图
+@property (nonatomic, strong, readonly)UIView   * currentFieldView;
+/// 下一个编辑视图
+@property (nonatomic, strong, readonly)UIView   * nextFieldView;
+/// 前一个编辑视图
+@property (nonatomic, strong, readonly)UIView   * frontFieldView;
+/// next按钮
 @property (nonatomic, strong, readonly)UIButton * nextButton;
+/// front按钮
 @property (nonatomic, strong, readonly)UIButton * frontButton;
+/// 完成按钮
 @property (nonatomic, strong, readonly)UIButton * doneButton;
-@property (nonatomic, strong, readonly)UIView * lineView;
+/// 底部分割线
+@property (nonatomic, strong, readonly)UIView   * lineView;
 
 ///// 点击前一个按钮回调
 @property (nonatomic, copy)void (^clickFrontButtonBlock)(void);
@@ -45,4 +55,5 @@
 @property (nonatomic, copy)void (^clickDoneButtonBlock)(void);
 /// 隐藏上一个下一个按钮只保留done按钮
 @property (nonatomic, assign)BOOL hideNextAndFrontButton;
+
 @end
