@@ -204,7 +204,7 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
 }
 
 - (void)scanFrontNextField {
-    NSArray <UIView *> * fields = [self startScan:_currentMonitorViewController.view];
+    NSArray <UIView *> * fields = [self startScan:[self getCurrentOffsetView]];
     fields = [fields sortedArrayUsingComparator:^NSComparisonResult(UIView *  _Nonnull field1, UIView *  _Nonnull field2) {
         CGRect fieldConvertFrame1 = [field1 convertRect:field1.bounds toView:_currentMonitorViewController.view];
         CGRect fieldConvertFrame2 = [field2 convertRect:field2.bounds toView:_currentMonitorViewController.view];
@@ -244,7 +244,7 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
                 [tempSuperview isKindOfClass:[UITableView class]] ||
                 [tempSuperview isKindOfClass:[UICollectionView class]]) {
                 if ([tempSuperview isKindOfClass:[UITextView class]] == NO && ![self checkIsPrivateContainerClassWithView:tempSuperview]) {
-                    if (((UIScrollView *)tempSuperview).contentSize.height > tempSuperview.frame.size.height || ((UIScrollView *)tempSuperview).bounces ) {
+                    if (((UIScrollView *)tempSuperview).contentSize.height > tempSuperview.frame.size.height && ((UIScrollView *)tempSuperview).isScrollEnabled ) {
                         return tempSuperview;
                     }
                 }

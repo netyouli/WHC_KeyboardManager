@@ -1,4 +1,4 @@
 osx_image: xcode8
-language: swift
-xcode_project: WHC_KeyboradManager.xcodeproj # path to your xcodeproj folder
-xcode_schemes: WHC_KeyboradManager
+language: objective-c
+xcode_project: WHC_Debuger.xcodeproj # path to your xcodeproj folder
+xcode_schemes: WHC_Debuger

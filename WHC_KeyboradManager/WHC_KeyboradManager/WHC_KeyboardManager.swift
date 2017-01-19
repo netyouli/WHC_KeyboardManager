@@ -182,7 +182,7 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
             }
             return subFields
         }
-        var fields = startScan(view: currentMonitorViewController.view)
+        var fields = startScan(view: getCurrentOffsetView())
         fields.sort { (field1, field2) -> Bool in
             let fieldConvertFrame1 = field1.convert(field1.bounds, to: currentMonitorViewController.view)
             let fieldConvertFrame2 = field2.convert(field1.bounds, to: currentMonitorViewController.view)
@@ -216,7 +216,7 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
                     tempSuperview.isKind(of: UITableView.classForCoder()) ||
                     tempSuperview.isKind(of: UICollectionView.classForCoder()) {
                     if tempSuperview.isKind(of: UITextView.classForCoder()) == false && !checkIsPrivateContainerClass(tempSuperview) {
-                        if (tempSuperview as! UIScrollView).contentSize.height > tempSuperview.frame.height || (tempSuperview as! UIScrollView).bounces {
+                        if (tempSuperview as! UIScrollView).contentSize.height > tempSuperview.frame.height && (tempSuperview as! UIScrollView).isScrollEnabled {
                             return tempSuperview
                         }
                     }
