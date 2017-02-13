@@ -6,8 +6,8 @@ WHC_KeyboardManager
 [![Pod License](http://img.shields.io/cocoapods/l/WHC_KeyboardManager.svg?style=flat)](https://opensource.org/licenses/MIT)
 简介
 ==============
-- **高效**: 轻量级拒绝复杂或看不懂的Api
-- **安全**: 拒绝监听干扰整个App,无入侵性,局部键盘监控处理
+- **高效**: 轻量级实用键盘管理器
+- **安全**: 拒绝监听干扰整个App,无入侵性,局部控制器键盘自动管理
 - **优势**: 集成简单设置灵活
 - **简单**: 无需任何复杂配置
 - **灵活**: 可自定义键盘处理配置
@@ -28,8 +28,8 @@ WHC_KeyboardManager
 集成
 ==============
 * 使用CocoaPods:
-  -  【Objective-c】 pod 'WHC_KeyboardManager_oc', '~> 1.1.2'
-  -  【Swift】 pod 'WHC_KeyboardManager', '~> 1.1.2'
+  -  【Objective-c】 pod 'WHC_KeyboardManager_oc', '~> 1.1.3'
+  -  【Swift】 pod 'WHC_KeyboardManager', '~> 1.1.3'
 * 手工集成:
   -  【Objective-c】 导入文件夹WHC_KeyboardManager(OC)
   -  【Swift】 导入文件夹WHC_KeyboardManager
@@ -65,7 +65,9 @@ override func viewDidLoad() {
 
 推荐
 ==============
-- WHC_DataModelFactory mac工具github地址：https://github.com/netyouli/WHC_DataModelFactory
+* iOS平台最好用自动布局库: [AutoLayoutKit](https://github.com/netyouli/WHC_AutoLayoutKit)
+* iOS开发辅助Mac工具: [DataModelFactory](https://github.com/netyouli/WHC_DataModelFactory)
+* iOS平台最强大Sqlite库: [ModelSqliteKit](https://github.com/netyouli/WHC_ModelSqliteKit)
 
 ## <a id="期待"></a>期待
 
