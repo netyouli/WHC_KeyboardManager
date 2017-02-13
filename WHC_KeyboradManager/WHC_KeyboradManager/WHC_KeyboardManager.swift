@@ -438,7 +438,7 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
             }
         }else {
             var moveViewFrame = moveView.frame
-            if currentMonitorViewController.view === moveView && currentMonitorViewController.navigationController != nil && currentMonitorViewController.edgesForExtendedLayout == .none {
+            if currentMonitorViewController.view === moveView && currentMonitorViewController.navigationController != nil && currentMonitorViewController.edgesForExtendedLayout == .none && !currentMonitorViewController.navigationController!.isNavigationBarHidden {
                 moveViewFrame.origin.y = currentMonitorViewController.navigationController!.navigationBar.bounds.height
             }else {
                 moveViewFrame.origin.y = 0
