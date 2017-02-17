@@ -109,6 +109,10 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     private var didShowHeader = false
     /// 是否已经移除了键盘监听
     private var didRemoveKBObserve = false
+    /// 初始化标示
+    private let kNotInitValue: CGFloat = -888888.88
+    /// 保存moveView初始y
+    private lazy var initMoveViewY: CGFloat = self.kNotInitValue
     
     /// 单利对象
     public static var share: WHC_KeyboardManager {
@@ -299,6 +303,10 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
                     KeyboardConfiguration!.didObserveScrollView = true
                     moveScrollView?.addObserver(self, forKeyPath: kContentOffset, options: NSKeyValueObservingOptions.new, context: nil)
                 }
+            }else {
+                if initMoveViewY == kNotInitValue {
+                    initMoveViewY = moveView.frame.origin.y
+                }
             }
             headerView?.layoutIfNeeded()
             let convertView: UIView? = moveScrollView == nil ? currentMonitorViewController!.view : currentMonitorViewController!.view.window
@@ -438,11 +446,14 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
             }
         }else {
             var moveViewFrame = moveView.frame
-            if currentMonitorViewController.view === moveView && currentMonitorViewController.navigationController != nil && currentMonitorViewController.edgesForExtendedLayout == .none && !currentMonitorViewController.navigationController!.isNavigationBarHidden {
-                moveViewFrame.origin.y = currentMonitorViewController.navigationController!.navigationBar.bounds.height
+            moveViewFrame.origin.y = initMoveViewY
+            /**** Give up the following method ***/
+            /*if currentMonitorViewController.view === moveView && currentMonitorViewController.navigationController != nil && (currentMonitorViewController.edgesForExtendedLayout == .none || !currentMonitorViewController.navigationController!.navigationBar.isTranslucent) && !currentMonitorViewController.navigationController!.isNavigationBarHidden {
+                moveViewFrame.origin.y = currentMonitorViewController.navigationController!.navigationBar.frame.maxY
             }else {
                 moveViewFrame.origin.y = 0
-            }
+            }*/
+            initMoveViewY = kNotInitValue
             UIView.animate(withDuration: moveViewAnimationDuration, animations: {
                 moveView.frame = moveViewFrame
             })

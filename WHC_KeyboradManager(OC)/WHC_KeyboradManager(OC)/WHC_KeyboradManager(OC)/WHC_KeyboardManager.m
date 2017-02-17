@@ -77,6 +77,9 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
 
 @end
 
+/// 初始化标示
+const static CGFloat kNotInitValue = -888888.88;
+
 @interface WHC_KeyboardManager ()
 /// 当前控制器的键盘配置
 @property (nonatomic, strong) WHC_KBMConfiguration * KeyboardConfiguration;
@@ -102,6 +105,8 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
 @property (nonatomic, assign) BOOL didShowHeader;
 /// 是否已经移除了键盘监听
 @property (nonatomic, assign) BOOL didRemoveKBObserve;
+/// 保存moveView初始y
+@property (nonatomic, assign) CGFloat initMoveViewY;
 
 @end
 
@@ -338,6 +343,10 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
                 _KeyboardConfiguration.didObserveScrollView = YES;
                 [moveScrollView addObserver:self forKeyPath:(NSString *)kWHC_KBM_ContentOffset options:NSKeyValueObservingOptionNew context:nil];
             }
+        }else {
+            if (_initMoveViewY == kNotInitValue) {
+                _initMoveViewY = moveView.frame.origin.y;
+            }
         }
         [headerView layoutIfNeeded];
         UIView * convertView = moveScrollView == nil ? _currentMonitorViewController.view : _currentMonitorViewController.view.window;
@@ -469,11 +478,15 @@ const static NSString * kWHC_KBM_ContentOffset = @"contentOffset";
             }
         }else {
             CGRect moveViewFrame = moveView.frame;
+            moveViewFrame.origin.y = _initMoveViewY;
+            _initMoveViewY = kNotInitValue;
+            /**** Give up the following method ***/
+            /*
             if (_currentMonitorViewController.view == moveView && _currentMonitorViewController.navigationController != nil && _currentMonitorViewController.edgesForExtendedLayout == UIRectEdgeNone && !_currentMonitorViewController.navigationController.navigationBarHidden) {
                 moveViewFrame.origin.y = _currentMonitorViewController.navigationController.navigationBar.bounds.size.height;
             }else {
                 moveViewFrame.origin.y = 0;
-            }
+            }*/
             [UIView animateWithDuration:_moveViewAnimationDuration animations:^{
                 moveView.frame = moveViewFrame;
             }];
