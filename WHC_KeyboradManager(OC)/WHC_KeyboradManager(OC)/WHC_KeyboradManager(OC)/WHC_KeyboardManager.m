@@ -124,6 +124,7 @@ const static CGFloat kNotInitValue = -888888.88;
 - (instancetype)init {
     self = [super init];
     if (self) {
+        _initMoveViewY = kNotInitValue;
         _KeyboardConfigurations = [NSMutableDictionary dictionary];
         _monitorViewControllers = [NSMutableArray array];
         _moveViewAnimationDuration = 0.5;
