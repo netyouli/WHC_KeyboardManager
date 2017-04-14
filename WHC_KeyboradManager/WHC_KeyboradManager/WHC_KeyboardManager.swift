@@ -276,7 +276,7 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
                     headerView.alpha = 0
                     let duration = keyboardDuration == nil ? 0.25 : keyboardDuration!
                     UIView.animate(withDuration: duration, delay: duration, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                            headerView.alpha = 1
+                            headerView.alpha = 0.9
                         }, completion: { (finished) in
                             self.didShowHeader = true
                             complete?()
@@ -292,7 +292,7 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     private func handleKeyboardDidShowToAdjust() {
         let headerView: UIView! = KeyboardConfiguration?.headerView
         let offsetBlock = KeyboardConfiguration?.offsetBlock
-        if keyboardFrame != nil && keyboardFrame.height != 0 && currentField != nil {
+        if keyboardFrame != nil && keyboardFrame.height != 0 && currentField != nil && !checkIsPrivateInputClass(currentField) {
             let moveView = getCurrentOffsetView()
             var moveScrollView: UIScrollView!
             if moveView is UITableView ||
@@ -308,11 +308,12 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
                     initMoveViewY = moveView.frame.origin.y
                 }
             }
-            headerView?.layoutIfNeeded()
             let convertView: UIView? = moveScrollView == nil ? currentMonitorViewController!.view : currentMonitorViewController!.view.window
+            var defaultOffset: CGFloat = 0
             var convertRect = currentField.convert(currentField.bounds, to: convertView)
             if convertView!.frame.height < UIScreen.main.bounds.height && currentMonitorViewController.navigationController != nil {
-                convertRect.origin.y += currentMonitorViewController.navigationController!.navigationBar.frame.height
+                defaultOffset = currentMonitorViewController.navigationController!.navigationBar.frame.height
+                convertRect.origin.y += defaultOffset
             }
             let yOffset = convertRect.maxY - keyboardFrame!.minY
             let headerHeight: CGFloat = headerView != nil ? headerView.frame.height : 0
@@ -332,7 +333,7 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
                     }, completion: { (success) in})
             }else {
                 var sumOffsetY = -(moveOffset + yOffset)
-                sumOffsetY = min(0, sumOffsetY)
+                sumOffsetY = min(defaultOffset, sumOffsetY)
                 var moveViewFrame = moveView.frame
                 moveViewFrame.origin.y = sumOffsetY
                 UIView.animate(withDuration: moveViewAnimationDuration, animations: {
@@ -422,6 +423,9 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
         keyboardDuration = 0
         updateHeaderView(complete: nil)
         keyboardFrame = CGRect.zero
+        if currentField != nil && checkIsPrivateInputClass(currentField) {
+            return
+        }
         let moveView = getCurrentOffsetView()
         if moveView is UITableView ||
             moveView is UIScrollView ||

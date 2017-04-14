@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    //self.edgesForExtendedLayout = UIRectEdgeNone;
     _tableView.whc_LeftSpace(0)
     .whc_RightSpace(0)
     .whc_TopSpace(0)

@@ -310,7 +310,7 @@ const static CGFloat kNotInitValue = -888888.88;
                 headerView.alpha = 0;
                 NSTimeInterval duration = _keyboardDuration == 0 ? 0.25 : _keyboardDuration;
                 [UIView animateWithDuration:_moveViewAnimationDuration delay:duration options:UIViewAnimationOptionCurveEaseOut animations:^{
-                    headerView.alpha = 1;
+                    headerView.alpha = 0.9;
                 } completion:^(BOOL finished) {
                     _didShowHeader = YES;
                     if (complete) {
@@ -333,7 +333,7 @@ const static CGFloat kNotInitValue = -888888.88;
         headerView = _KeyboardConfiguration.headerView;
     }
     CGFloat(^offsetBlock)(UIView * field) = _KeyboardConfiguration != nil ? _KeyboardConfiguration.offsetBlock : nil;
-    if (_keyboardFrame.size.height != 0 && _currentField != nil) {
+    if (_keyboardFrame.size.height != 0 && _currentField != nil && ![self checkIsPrivateInputClassWithView:_currentField]) {
         UIView * moveView = [self getCurrentOffsetView];
         UIScrollView * moveScrollView = nil;
         if ([moveView isKindOfClass:[UITableView class]] ||
@@ -349,11 +349,13 @@ const static CGFloat kNotInitValue = -888888.88;
                 _initMoveViewY = moveView.frame.origin.y;
             }
         }
-        [headerView layoutIfNeeded];
+        
         UIView * convertView = moveScrollView == nil ? _currentMonitorViewController.view : _currentMonitorViewController.view.window;
         CGRect convertRect = [_currentField convertRect:_currentField.bounds toView:convertView];
+        CGFloat defaultOffset = 0;
         if (convertView.frame.size.height < [UIScreen mainScreen].bounds.size.height && _currentMonitorViewController.navigationController) {
-            convertRect.origin.y += CGRectGetMaxY(_currentMonitorViewController.navigationController.navigationBar.frame);
+            defaultOffset = CGRectGetMaxY(_currentMonitorViewController.navigationController.navigationBar.frame);
+            convertRect.origin.y += defaultOffset;
         }
         CGFloat yOffset = CGRectGetMaxY(convertRect) - CGRectGetMinY(_keyboardFrame);
         CGFloat headerHeight = headerView != nil ? headerView.frame.size.height : 0;
@@ -372,7 +374,7 @@ const static CGFloat kNotInitValue = -888888.88;
             }];
         }else {
             CGFloat sumOffsetY = -(moveOffset + yOffset);
-            sumOffsetY = MIN(0, sumOffsetY);
+            sumOffsetY = MIN(defaultOffset, sumOffsetY);
             CGRect moveViewFrame = moveView.frame;
             moveViewFrame.origin.y = sumOffsetY;
             
@@ -455,43 +457,44 @@ const static CGFloat kNotInitValue = -888888.88;
     _keyboardDuration = 0;
     [self updateHeaderViewWithComplete:nil];
     _keyboardFrame = CGRectZero;
+    if (_currentField && [self checkIsPrivateInputClassWithView:_currentField]) return;
     UIView * moveView = [self getCurrentOffsetView];
     if ([moveView isKindOfClass:[UITableView class]] ||
         [moveView isKindOfClass:[UIScrollView class]] ||
         [moveView isKindOfClass:[UICollectionView class]]) {
         UIScrollView * scrollMoveView = (UIScrollView *)moveView;
-            if (scrollMoveView) {
-                if (_KeyboardConfiguration && _KeyboardConfiguration.didObserveScrollView) {
-                    _KeyboardConfiguration.didObserveScrollView = NO;
-                    [scrollMoveView removeObserver:self forKeyPath:(NSString *)kWHC_KBM_ContentOffset];
-                }
-                [UIView animateWithDuration:_moveViewAnimationDuration animations:^{
-                    if (scrollMoveView.contentOffset.y < -scrollMoveView.contentInset.top) {
-                        scrollMoveView.contentOffset = CGPointMake(scrollMoveView.contentOffset.x, -scrollMoveView.contentInset.top);
-                    }else if (scrollMoveView.contentOffset.y > scrollMoveView.contentSize.height - scrollMoveView.bounds.size.height + scrollMoveView.contentInset.bottom) {
-                        if (scrollMoveView.contentSize.height == 0) {
-                            scrollMoveView.contentOffset = CGPointMake(scrollMoveView.contentOffset.x, -scrollMoveView.contentInset.top);
-                        }else {
-                            scrollMoveView.contentOffset = CGPointMake(scrollMoveView.contentOffset.x, scrollMoveView.contentSize.height - scrollMoveView.bounds.size.height + scrollMoveView.contentInset.bottom);
-                        }
-                    }
-                }];
+        if (scrollMoveView) {
+            if (_KeyboardConfiguration && _KeyboardConfiguration.didObserveScrollView) {
+                _KeyboardConfiguration.didObserveScrollView = NO;
+                [scrollMoveView removeObserver:self forKeyPath:(NSString *)kWHC_KBM_ContentOffset];
             }
-        }else {
-            CGRect moveViewFrame = moveView.frame;
-            moveViewFrame.origin.y = _initMoveViewY;
-            _initMoveViewY = kNotInitValue;
-            /**** Give up the following method ***/
-            /*
-            if (_currentMonitorViewController.view == moveView && _currentMonitorViewController.navigationController != nil && _currentMonitorViewController.edgesForExtendedLayout == UIRectEdgeNone && !_currentMonitorViewController.navigationController.navigationBarHidden) {
-                moveViewFrame.origin.y = _currentMonitorViewController.navigationController.navigationBar.bounds.size.height;
-            }else {
-                moveViewFrame.origin.y = 0;
-            }*/
             [UIView animateWithDuration:_moveViewAnimationDuration animations:^{
-                moveView.frame = moveViewFrame;
+                if (scrollMoveView.contentOffset.y < -scrollMoveView.contentInset.top) {
+                    scrollMoveView.contentOffset = CGPointMake(scrollMoveView.contentOffset.x, -scrollMoveView.contentInset.top);
+                }else if (scrollMoveView.contentOffset.y > scrollMoveView.contentSize.height - scrollMoveView.bounds.size.height + scrollMoveView.contentInset.bottom) {
+                    if (scrollMoveView.contentSize.height == 0) {
+                        scrollMoveView.contentOffset = CGPointMake(scrollMoveView.contentOffset.x, -scrollMoveView.contentInset.top);
+                    }else {
+                        scrollMoveView.contentOffset = CGPointMake(scrollMoveView.contentOffset.x, scrollMoveView.contentSize.height - scrollMoveView.bounds.size.height + scrollMoveView.contentInset.bottom);
+                    }
+                }
             }];
         }
+    }else {
+        CGRect moveViewFrame = moveView.frame;
+        moveViewFrame.origin.y = _initMoveViewY;
+        _initMoveViewY = kNotInitValue;
+        /**** Give up the following method ***/
+        /*
+         if (_currentMonitorViewController.view == moveView && _currentMonitorViewController.navigationController != nil && _currentMonitorViewController.edgesForExtendedLayout == UIRectEdgeNone && !_currentMonitorViewController.navigationController.navigationBarHidden) {
+         moveViewFrame.origin.y = _currentMonitorViewController.navigationController.navigationBar.bounds.size.height;
+         }else {
+         moveViewFrame.origin.y = 0;
+         }*/
+        [UIView animateWithDuration:_moveViewAnimationDuration animations:^{
+            moveView.frame = moveViewFrame;
+        }];
+    }
 }
 
 #pragma mark - 滚动监听 -
@@ -499,19 +502,19 @@ const static CGFloat kNotInitValue = -888888.88;
     if (_currentMonitorViewController == nil) return;
     if (keyPath && [keyPath isEqualToString:(NSString *)kWHC_KBM_ContentOffset] && _currentField) {
         UIScrollView * scrollView = object;
-            if (scrollView != nil && (scrollView.dragging || scrollView.decelerating)) {
-                CGRect convertRect = [_currentField convertRect:_currentField.bounds toView:_currentMonitorViewController.view.window];
-                CGFloat yOffset = CGRectGetMaxY(convertRect) - CGRectGetMinY(_keyboardFrame);
-                if (yOffset > 0 || CGRectGetMinY(convertRect) < 0) {
-                    if ([_currentField isKindOfClass:[UITextView class]]) {
-                        [((UITextView *)_currentField) resignFirstResponder];
-                    }else if ([_currentField isKindOfClass:[UITextField class]]) {
-                        [((UITextField *)_currentField) resignFirstResponder];
-                    }else {
-                        [_currentField endEditing:YES];
-                    }
+        if (scrollView != nil && (scrollView.dragging || scrollView.decelerating)) {
+            CGRect convertRect = [_currentField convertRect:_currentField.bounds toView:_currentMonitorViewController.view.window];
+            CGFloat yOffset = CGRectGetMaxY(convertRect) - CGRectGetMinY(_keyboardFrame);
+            if (yOffset > 0 || CGRectGetMinY(convertRect) < 0) {
+                if ([_currentField isKindOfClass:[UITextView class]]) {
+                    [((UITextView *)_currentField) resignFirstResponder];
+                }else if ([_currentField isKindOfClass:[UITextField class]]) {
+                    [((UITextField *)_currentField) resignFirstResponder];
+                }else {
+                    [_currentField endEditing:YES];
                 }
             }
+        }
     }
 }
 

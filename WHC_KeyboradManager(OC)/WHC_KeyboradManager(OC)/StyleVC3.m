@@ -24,7 +24,6 @@
     /// 键盘处理配置
     /*******只需要在要处理键盘的界面创建WHC_KeyboardManager对象即可无需任何其他设置*******/
     [[WHC_KeyboardManager share] addMonitorViewController:self];
-    
     /********************* 构建UI ***********************/
     _stackView = [WHC_StackView new];
     /// 设置垂直布局

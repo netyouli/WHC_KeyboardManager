@@ -35,16 +35,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
-        if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
-            UIBlurEffect * blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
-            UIVisualEffectView * blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-            [self addSubview:blurEffectView];
-            blurEffectView.translatesAutoresizingMaskIntoConstraints = NO;
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:blurEffectView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:blurEffectView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:0]];
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:blurEffectView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:blurEffectView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
-        }
         
         _nextButton = [UIButton new];
         _frontButton = [UIButton new];
@@ -111,6 +101,12 @@
         
     }
     return self;
+}
+
+- (void)setHideNextAndFrontButton:(BOOL)hideNextAndFrontButton {
+    _hideNextAndFrontButton = hideNextAndFrontButton;
+    _nextButton.hidden = hideNextAndFrontButton;
+    _frontButton.hidden = hideNextAndFrontButton;
 }
 
 - (void)dealloc {
