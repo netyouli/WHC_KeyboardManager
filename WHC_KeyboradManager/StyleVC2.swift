@@ -21,6 +21,7 @@ class StyleVC2: UIViewController {
         self.view.backgroundColor = UIColor.white
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "done", style: .plain, target: self, action: #selector(clickRight(sender:)))
         
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "done", style: .plain, target: self, action: #selector(clickLeft(sender:)))
         /// 键盘处理配置
         /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
         let configuration = WHC_KeyboardManager.share.addMonitorViewController(self)
@@ -64,10 +65,16 @@ class StyleVC2: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func clickLeft(sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func clickRight(sender: UIBarButtonItem) {
         self.view.endEditing(true)
-        let vc = StyleVC3(nibName: "StyleVC3", bundle: nil)
-        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = StyleVC2(nibName: "StyleVC2", bundle: nil)
+        let currentVC = self.whc_CurrentViewController()
+        currentVC?.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }

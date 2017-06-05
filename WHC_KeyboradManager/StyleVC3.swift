@@ -39,6 +39,9 @@ class StyleVC3: UIViewController {
         for i in 0 ..< 8 {
             let text = UITextField()
             text.backgroundColor = UIColor.init(red: 253.0 / 255, green: 246.0 / 255.0, blue: 220.0 / 255, alpha: 1)
+            if i == 2 {
+                text.keyboardType = .numberPad
+            }
             text.placeholder = "UITextField \(i)"
             stackView.addSubview(text)
         }

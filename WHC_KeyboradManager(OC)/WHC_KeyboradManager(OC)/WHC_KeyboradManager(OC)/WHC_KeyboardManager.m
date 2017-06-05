@@ -452,7 +452,13 @@ const static CGFloat kNotInitValue = -888888.88;
 }
 
 - (void)keyboardWillHide:(NSNotification *)notify {
-    if (_currentMonitorViewController == nil) return;
+    if (_currentMonitorViewController == nil) {
+        UIView * headerView = _KeyboardConfiguration.headerView;
+        if (headerView && headerView.superview) {
+            [headerView removeFromSuperview];
+        }
+        return;
+    }
     _keyboardFrame.size.width = 0;
     _keyboardDuration = 0;
     [self updateHeaderViewWithComplete:nil];
@@ -482,7 +488,9 @@ const static CGFloat kNotInitValue = -888888.88;
         }
     }else {
         CGRect moveViewFrame = moveView.frame;
-        moveViewFrame.origin.y = _initMoveViewY;
+        if (_initMoveViewY != kNotInitValue) {
+            moveViewFrame.origin.y = _initMoveViewY;
+        }
         _initMoveViewY = kNotInitValue;
         /**** Give up the following method ***/
         /*

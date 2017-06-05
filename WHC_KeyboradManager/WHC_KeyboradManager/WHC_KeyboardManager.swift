@@ -418,7 +418,14 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     }
     
     @objc private func keyboardWillHide(notify: Notification) {
-        if currentMonitorViewController == nil {return}
+        if currentMonitorViewController == nil {
+            if let headerView = KeyboardConfiguration?.headerView {
+                if headerView.superview != nil {
+                    headerView.removeFromSuperview()
+                }
+            }
+            return
+        }
         keyboardFrame?.size.width = 0
         keyboardDuration = 0
         updateHeaderView(complete: nil)
@@ -450,7 +457,9 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
             }
         }else {
             var moveViewFrame = moveView.frame
-            moveViewFrame.origin.y = initMoveViewY
+            if initMoveViewY != kNotInitValue {
+                moveViewFrame.origin.y = initMoveViewY
+            }
             /**** Give up the following method ***/
             /*if currentMonitorViewController.view === moveView && currentMonitorViewController.navigationController != nil && (currentMonitorViewController.edgesForExtendedLayout == .none || !currentMonitorViewController.navigationController!.navigationBar.isTranslucent) && !currentMonitorViewController.navigationController!.isNavigationBarHidden {
                 moveViewFrame.origin.y = currentMonitorViewController.navigationController!.navigationBar.frame.maxY
