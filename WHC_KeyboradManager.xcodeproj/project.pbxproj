@@ -20,15 +20,11 @@
 		FE1031D41DDC460600A9F284 /* WHC_KeyboardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031D31DDC460600A9F284 /* WHC_KeyboardHeaderView.swift */; };
 		FE6DCE0C1DE1740600E7992A /* StyleVC3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6DCE0A1DE1740600E7992A /* StyleVC3.swift */; };
 		FE6DCE0D1DE1740600E7992A /* StyleVC3.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE6DCE0B1DE1740600E7992A /* StyleVC3.xib */; };
-		FE8356931F2444EF00CD1CDD /* TestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8356911F2444EF00CD1CDD /* TestVC.swift */; };
-		FE8356941F2444EF00CD1CDD /* TestVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8356921F2444EF00CD1CDD /* TestVC.xib */; };
 		FE8BB4C81DDD76A300934189 /* StyleVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8BB4C61DDD76A300934189 /* StyleVC2.swift */; };
 		FE8BB4C91DDD76A300934189 /* StyleVC2.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8BB4C71DDD76A300934189 /* StyleVC2.xib */; };
 		FE8BB4CB1DDD76C200934189 /* StyleVC1.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8BB4CA1DDD76C200934189 /* StyleVC1.xib */; };
 		FE8BB4CF1DDD799C00934189 /* op_check.png in Resources */ = {isa = PBXBuildFile; fileRef = FE8BB4CD1DDD799C00934189 /* op_check.png */; };
 		FE8BB4D01DDD799C00934189 /* op_uncheck.png in Resources */ = {isa = PBXBuildFile; fileRef = FE8BB4CE1DDD799C00934189 /* op_uncheck.png */; };
-		FEBC6BDC1F21D10E00581F7A /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBC6BDB1F21D10E00581F7A /* TestModel.swift */; };
-		FEBC6BDE1F21D1BB00581F7A /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBC6BDD1F21D1BB00581F7A /* TestView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,15 +43,11 @@
 		FE1031D31DDC460600A9F284 /* WHC_KeyboardHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_KeyboardHeaderView.swift; sourceTree = "<group>"; };
 		FE6DCE0A1DE1740600E7992A /* StyleVC3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleVC3.swift; sourceTree = "<group>"; };
 		FE6DCE0B1DE1740600E7992A /* StyleVC3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StyleVC3.xib; sourceTree = "<group>"; };
-		FE8356911F2444EF00CD1CDD /* TestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestVC.swift; sourceTree = "<group>"; };
-		FE8356921F2444EF00CD1CDD /* TestVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestVC.xib; sourceTree = "<group>"; };
 		FE8BB4C61DDD76A300934189 /* StyleVC2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleVC2.swift; sourceTree = "<group>"; };
 		FE8BB4C71DDD76A300934189 /* StyleVC2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StyleVC2.xib; sourceTree = "<group>"; };
 		FE8BB4CA1DDD76C200934189 /* StyleVC1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StyleVC1.xib; sourceTree = "<group>"; };
 		FE8BB4CD1DDD799C00934189 /* op_check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = op_check.png; sourceTree = "<group>"; };
 		FE8BB4CE1DDD799C00934189 /* op_uncheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = op_uncheck.png; sourceTree = "<group>"; };
-		FEBC6BDB1F21D10E00581F7A /* TestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
-		FEBC6BDD1F21D1BB00581F7A /* TestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,10 +90,6 @@
 				FE8BB4C71DDD76A300934189 /* StyleVC2.xib */,
 				FE6DCE0A1DE1740600E7992A /* StyleVC3.swift */,
 				FE6DCE0B1DE1740600E7992A /* StyleVC3.xib */,
-				FEBC6BDB1F21D10E00581F7A /* TestModel.swift */,
-				FEBC6BDD1F21D1BB00581F7A /* TestView.swift */,
-				FE8356911F2444EF00CD1CDD /* TestVC.swift */,
-				FE8356921F2444EF00CD1CDD /* TestVC.xib */,
 				FE1031BA1DD999F900A9F284 /* Assets.xcassets */,
 				FE1031BC1DD999F900A9F284 /* LaunchScreen.storyboard */,
 				FE1031BF1DD999F900A9F284 /* Info.plist */,
@@ -205,7 +193,6 @@
 				FE8BB4CF1DDD799C00934189 /* op_check.png in Resources */,
 				FE6DCE0D1DE1740600E7992A /* StyleVC3.xib in Resources */,
 				FE1031BE1DD999F900A9F284 /* LaunchScreen.storyboard in Resources */,
-				FE8356941F2444EF00CD1CDD /* TestVC.xib in Resources */,
 				FE1031BB1DD999F900A9F284 /* Assets.xcassets in Resources */,
 				FE8BB4D01DDD799C00934189 /* op_uncheck.png in Resources */,
 				FE8BB4C91DDD76A300934189 /* StyleVC2.xib in Resources */,
@@ -222,16 +209,13 @@
 				FE1031B61DD999F900A9F284 /* StyleVC1.swift in Sources */,
 				FE1031D41DDC460600A9F284 /* WHC_KeyboardHeaderView.swift in Sources */,
 				FE1031D21DDAF27800A9F284 /* WHC_ExtensionKeyboardObject.swift in Sources */,
-				FEBC6BDC1F21D10E00581F7A /* TestModel.swift in Sources */,
 				FE1031CE1DDAEDE600A9F284 /* WHC_AutoLayout.swift in Sources */,
 				FE1031CF1DDAEDE600A9F284 /* WHC_Frame.swift in Sources */,
-				FE8356931F2444EF00CD1CDD /* TestVC.swift in Sources */,
 				FE8BB4C81DDD76A300934189 /* StyleVC2.swift in Sources */,
 				FE1031B41DD999F900A9F284 /* AppDelegate.swift in Sources */,
 				FE6DCE0C1DE1740600E7992A /* StyleVC3.swift in Sources */,
 				FE1031D01DDAEDE600A9F284 /* WHC_StackView.swift in Sources */,
 				FE1031CD1DDAEDE600A9F284 /* WHC_AutoCellHeight.swift in Sources */,
-				FEBC6BDE1F21D1BB00581F7A /* TestView.swift in Sources */,
 				FE1031C71DD99A6A00A9F284 /* WHC_KeyboardManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

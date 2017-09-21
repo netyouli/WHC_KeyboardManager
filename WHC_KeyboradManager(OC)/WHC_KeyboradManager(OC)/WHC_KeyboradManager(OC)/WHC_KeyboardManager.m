@@ -357,7 +357,9 @@ const static CGFloat kNotInitValue = -888888.88;
             defaultOffset = CGRectGetMaxY(_currentMonitorViewController.navigationController.navigationBar.frame);
             convertRect.origin.y += defaultOffset;
         }
-        [headerView layoutIfNeeded];
+        if (headerView) {
+            [headerView layoutIfNeeded];
+        }
         CGFloat yOffset = CGRectGetMaxY(convertRect) - CGRectGetMinY(_keyboardFrame);
         CGFloat headerHeight = headerView != nil ? headerView.frame.size.height : 0;
         CGFloat moveOffset = offsetBlock == nil ? headerHeight : offsetBlock(_currentField) + headerHeight;

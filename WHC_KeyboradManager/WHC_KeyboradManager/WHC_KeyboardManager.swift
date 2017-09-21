@@ -315,7 +315,7 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
                 defaultOffset = currentMonitorViewController.navigationController!.navigationBar.frame.height
                 convertRect.origin.y += defaultOffset
             }
-            headerView.layoutIfNeeded()
+            headerView?.layoutIfNeeded()
             let yOffset = convertRect.maxY - keyboardFrame!.minY
             let headerHeight: CGFloat = headerView != nil ? headerView.frame.height : 0
             var moveOffset: CGFloat = offsetBlock == nil ? headerHeight : offsetBlock!(currentField) + headerHeight

@@ -15,6 +15,7 @@ class StyleVC3: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.edgesForExtendedLayout = []
         self.navigationItem.title = "UIView"
         self.view.backgroundColor = UIColor.orange
         /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
@@ -32,7 +33,7 @@ class StyleVC3: UIViewController {
         
         self.view.addSubview(stackView)
         stackView.whc_Left(0)
-            .whc_Top(64)
+            .whc_Top(0)
             .whc_Right(0)
             .whc_HeightAuto()
         
@@ -50,7 +51,6 @@ class StyleVC3: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("dddddd=\(self.description)")
     }
     
     deinit {
