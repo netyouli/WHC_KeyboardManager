@@ -381,6 +381,10 @@ const static CGFloat kNotInitValue = -888888.88;
             
             [UIView animateWithDuration:_moveViewAnimationDuration animations:^{
                 moveView.frame = moveViewFrame;
+            } completion:^(BOOL finished) {
+                if (finished && moveView.frame.origin.y != moveViewFrame.origin.y) {
+                    moveView.frame = moveViewFrame;
+                }
             }];
         }
     }

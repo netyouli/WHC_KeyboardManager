@@ -1,10 +1,10 @@
 //
 //  WHC_ViewExtension.swift
-//  WHC_AutoLayoutKit(Swift)
+//  WHC_Layout
 //  Created by WHC on 16/7/7.
 //  Copyright © 2016年 吴海超. All rights reserved.
 
-//  Github <https://github.com/netyouli/WHC_AutoLayoutKit>
+//  Github <https://github.com/netyouli/WHC_Layout>
 
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,21 +25,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-// VERSION:(2.6)
 
-import UIKit
+#if os(iOS) || os(tvOS)
+    import UIKit
+#else
+    import AppKit
+#endif
 
-extension UIView {
-    
-    var whc_ScreenWidth: CGFloat {
+public extension WHC_VIEW {
+    #if os(iOS) || os(tvOS)
+    public var whc_sw: CGFloat {
         return UIScreen.main.bounds.width
     }
     
-    var whc_ScreenHeight: CGFloat {
+    public var whc_sh: CGFloat {
         return UIScreen.main.bounds.height
     }
+    #else
+    public var whc_sw: CGFloat {
+        return NSScreen.main == nil ? 0 : NSScreen.main!.frame.width
+    }
     
-    var whc_Width: CGFloat {
+    public var whc_sh: CGFloat {
+        return NSScreen.main == nil ? 0 : NSScreen.main!.frame.height
+    }
+    #endif
+    
+    public var whc_w: CGFloat {
         set {
             var rect = self.frame
             rect.size.width = newValue
@@ -51,7 +63,7 @@ extension UIView {
         }
     }
     
-    var whc_Height: CGFloat {
+    public var whc_h: CGFloat {
         set {
             var rect = self.frame
             rect.size.height = newValue
@@ -63,7 +75,7 @@ extension UIView {
         }
     }
     
-    var whc_X: CGFloat {
+    public var whc_x: CGFloat {
         set {
             var rect = self.frame
             rect.origin.x = newValue
@@ -75,7 +87,7 @@ extension UIView {
         }
     }
     
-    var whc_Y: CGFloat {
+    public var whc_y: CGFloat {
         set {
             var rect = self.frame
             rect.origin.y = newValue
@@ -87,9 +99,9 @@ extension UIView {
         }
     }
     
-    var whc_MaxX: CGFloat {
+    public var whc_maxX: CGFloat {
         set {
-            self.whc_Width = newValue - self.whc_X
+            self.whc_w = newValue - self.whc_x
         }
         
         get {
@@ -97,9 +109,9 @@ extension UIView {
         }
     }
     
-    var whc_MaxY: CGFloat {
+    public var whc_maxY: CGFloat {
         set {
-            self.whc_Height = newValue - self.whc_Y
+            self.whc_h = newValue - self.whc_y
         }
         
         get {
@@ -107,9 +119,9 @@ extension UIView {
         }
     }
     
-    var whc_MidX: CGFloat {
+    public var whc_midX: CGFloat {
         set {
-            self.whc_Width = newValue * 2
+            self.whc_w = newValue * 2
         }
         
         get {
@@ -117,9 +129,9 @@ extension UIView {
         }
     }
     
-    var whc_MidY: CGFloat {
+    public var whc_midY: CGFloat {
         set {
-            self.whc_Height = newValue * 2
+            self.whc_h = newValue * 2
         }
         
         get {
@@ -127,7 +139,8 @@ extension UIView {
         }
     }
     
-    var whc_CenterX: CGFloat {
+    #if os(iOS) || os(tvOS)
+    public var whc_cx: CGFloat {
         set {
             var center = self.center
             center.x = newValue
@@ -139,7 +152,7 @@ extension UIView {
         }
     }
     
-    var whc_CenterY: CGFloat {
+    public var whc_cy: CGFloat {
         set {
             var center = self.center
             center.y = newValue
@@ -150,8 +163,9 @@ extension UIView {
             return self.center.y
         }
     }
+    #endif
     
-    var whc_Xy: CGPoint {
+    public var whc_xy: CGPoint {
         set {
             var rect = self.frame
             rect.origin = newValue
@@ -163,7 +177,7 @@ extension UIView {
         }
     }
     
-    var whc_Size: CGSize {
+    public var whc_s: CGSize {
         set {
             var rect = self.frame
             rect.size = newValue
@@ -175,3 +189,4 @@ extension UIView {
         }
     }
 }
+

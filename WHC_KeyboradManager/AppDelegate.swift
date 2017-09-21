@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UITableView.whc_InitConfig()
         let tabbarVC = UITabBarController()
         let nav1 = UINavigationController(rootViewController: StyleVC1(nibName: "StyleVC1",bundle: nil))
         let nav2 = UINavigationController(rootViewController: StyleVC2(nibName: "StyleVC2",bundle: nil))

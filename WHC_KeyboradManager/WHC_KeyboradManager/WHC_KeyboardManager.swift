@@ -339,6 +339,10 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
                 moveViewFrame.origin.y = sumOffsetY
                 UIView.animate(withDuration: moveViewAnimationDuration, animations: {
                     moveView.frame = moveViewFrame
+                }, completion: { (end) in
+                    if end && moveView.frame.minY != moveViewFrame.minY {
+                        moveView.frame = moveViewFrame
+                    }
                 })
             }
         }
