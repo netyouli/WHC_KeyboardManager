@@ -15,6 +15,8 @@ WHC_KeyboardManager
 - **咨询**: 712641411
 - **作者**: 吴海超
 
+**bug修复：兼容swift4修复初始偏移错误bug**
+
 演示
 ==============
 ![](https://github.com/netyouli/WHC_KeyboardManager/blob/master/WHC_KeyboradManager/demo/k1.gif)
@@ -31,7 +33,7 @@ WHC_KeyboardManager
 
     **【Objective-c】** pod 'WHC_KeyboardManager_oc'
 
-    **【Swift3.0+】** pod 'WHC_KeyboardManager'
+    **【Swift4.0+】** pod 'WHC_KeyboardManager'
 
 使用到第三方库
 ==============
