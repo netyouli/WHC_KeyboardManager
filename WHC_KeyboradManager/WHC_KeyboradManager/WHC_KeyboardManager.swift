@@ -40,6 +40,10 @@ extension NSNotification.Name {
 
 public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     
+    struct WHCObserve {
+        static var kObserve = "WHCObserve"
+    }
+    
     /// 键盘头部视图配置类
     public class Configuration: NSObject {
         /// 获取移动视图的偏移回调块
@@ -48,8 +52,6 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
         fileprivate var offsetViewBlock: ((_ field: UIView?) -> UIView?)?
         /// 存储键盘头视图
         fileprivate var headerView: UIView? = WHC_KeyboardHeaderView()
-        /// 是否添加了监听滚动视图
-        fileprivate var didObserveScrollView = false
         /// 是否启用键盘头部工具条
         public var enableHeader: Bool {
             set {
@@ -83,8 +85,6 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
         }
     }
     
-    /// 当前控制器的键盘配置
-    private(set) public var KeyboardConfiguration: Configuration?
     /// 监视控制器和配置集合
     private var KeyboardConfigurations = [String: Configuration]()
     /// 当前的输入视图(UITextView/UITextField)
@@ -98,7 +98,7 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     /// 当前监视处理的控制器
     private weak var currentMonitorViewController: UIViewController!
     /// 设置移动的视图动画周期
-    private lazy var moveViewAnimationDuration: TimeInterval = 0.5
+    private lazy var moveViewAnimationDuration: TimeInterval = 0.25
     /// 键盘出现的动画周期
     private var keyboardDuration: TimeInterval?
     /// 存储键盘的frame
@@ -172,7 +172,7 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
             if view.isUserInteractionEnabled && view.alpha != 0 && !view.isHidden {
                 if view is UITextView {
                     if !subFields.contains(view) && (view as! UITextView).isEditable {
-                            subFields.append(view)
+                        subFields.append(view)
                     }
                 }else if view is UITextField {
                     if !subFields.contains(view) && (view as! UITextField).isEnabled && !checkIsPrivateInputClass(view) {
@@ -209,12 +209,12 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     }
     
     /// 动态获取偏移视图
-    private func getCurrentOffsetView() -> UIView {
-        if let offsetView = KeyboardConfiguration?.offsetViewBlock?(currentField) {
+    private func getCurrentOffsetView() -> UIView! {
+        if let offsetView = getCurrentConfig()?.offsetViewBlock?(currentField) {
             return offsetView
         }
         if currentField != nil {
-        var superView = currentField
+            var superView = currentField
             while let tempSuperview = superView?.superview {
                 if tempSuperview.isKind(of: UIScrollView.classForCoder()) ||
                     tempSuperview.isKind(of: UITableView.classForCoder()) ||
@@ -225,28 +225,32 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
                         }
                     }
                 }
-                superView = tempSuperview
+                if tempSuperview is UIWindow {
+                    break
+                }else {
+                    superView = tempSuperview
+                }
             }
+            return currentMonitorViewController?.view ?? superView
         }
-        return currentMonitorViewController.view
+        return nil
+    }
+    
+    private func autoRemoveHeader() {
+        KeyboardConfigurations.forEach({ (key, value) in
+            value.headerView?.removeFromSuperview()
+        })
+        didShowHeader = false
     }
     
     /// 动态更新键盘头部视图
     private func updateHeaderView(complete: (() -> Void)!) {
-        let headerView: UIView! = KeyboardConfiguration?.headerView
-        if headerView != nil {
-            if keyboardFrame?.width == 0 {
-                if headerView.superview != nil {
-                    UIView.animate(withDuration: moveViewAnimationDuration, animations: { 
-                        headerView.layer.transform = CATransform3DMakeTranslation(0, self.keyboardFrame.height + headerView.frame.height, 0)
-                        }, completion: { (finished) in
-                            headerView.layer.transform = CATransform3DIdentity
-                            self.didShowHeader = false
-                            headerView.removeFromSuperview()
-                            complete?()
-                    })
-                }
-            }else {
+        if keyboardFrame?.width == 0 {
+            autoRemoveHeader()
+            complete?()
+        }else {
+            let headerView: UIView! = getCurrentConfig()?.headerView
+            if headerView != nil {
                 let addHeaderViewConstraint = {(headerView: UIView) in
                     headerView.superview?.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: headerView.superview!, attribute: NSLayoutAttribute.left, multiplier: 1, constant: 0))
                     
@@ -276,74 +280,82 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
                     headerView.alpha = 0
                     let duration = keyboardDuration == nil ? 0.25 : keyboardDuration!
                     UIView.animate(withDuration: duration, delay: duration, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                            headerView.alpha = 0.9
-                        }, completion: { (finished) in
-                            self.didShowHeader = true
-                            complete?()
+                        headerView.alpha = 0.9
+                    }, completion: { (finished) in
+                        self.didShowHeader = true
+                        complete?()
                     })
                 }
             }
-        }else {
-            complete?()
         }
     }
     
     /// 处理键盘出现时自动调整当前UI(输入视图不被遮挡)
     private func handleKeyboardDidShowToAdjust() {
+        let KeyboardConfiguration = getCurrentConfig()
         let headerView: UIView! = KeyboardConfiguration?.headerView
         let offsetBlock = KeyboardConfiguration?.offsetBlock
         if keyboardFrame != nil && keyboardFrame.height != 0 && currentField != nil && !checkIsPrivateInputClass(currentField) {
-            let moveView = getCurrentOffsetView()
-            var moveScrollView: UIScrollView!
-            if moveView is UITableView ||
-                moveView is UIScrollView ||
-                moveView is UICollectionView {
-                moveScrollView = moveView as? UIScrollView
-                if KeyboardConfiguration != nil && !KeyboardConfiguration!.didObserveScrollView {
-                    KeyboardConfiguration!.didObserveScrollView = true
-                    moveScrollView?.addObserver(self, forKeyPath: kContentOffset, options: NSKeyValueObservingOptions.new, context: nil)
-                }
-            }else {
-                if initMoveViewY == kNotInitValue {
-                    initMoveViewY = moveView.frame.origin.y
-                }
-            }
-            let convertView: UIView? = moveScrollView == nil ? currentMonitorViewController!.view : currentMonitorViewController!.view.window
-            var defaultOffset: CGFloat = 0
-            var convertRect = currentField.convert(currentField.bounds, to: convertView)
-            if convertView!.frame.height < UIScreen.main.bounds.height && currentMonitorViewController.navigationController != nil {
-                defaultOffset = currentMonitorViewController.navigationController!.navigationBar.frame.height
-                convertRect.origin.y += defaultOffset
-            }
-            headerView?.layoutIfNeeded()
-            let yOffset = convertRect.maxY - keyboardFrame!.minY
-            let headerHeight: CGFloat = headerView != nil ? headerView.frame.height : 0
-            var moveOffset: CGFloat = offsetBlock == nil ? headerHeight : offsetBlock!(currentField) + headerHeight
-            
-            if offsetBlock == nil && headerView == nil {
-                if nextField != nil {
-                    let nextFrame = nextField.convert(nextField.bounds, to: convertView)
-                    moveOffset += nextFrame.maxY - convertRect.maxY
-                }
-            }
-            if moveScrollView != nil {
-                var sumOffsetY = moveScrollView.contentOffset.y + moveOffset + yOffset
-                sumOffsetY = max(sumOffsetY, -moveScrollView.contentInset.top)
-                UIView.animate(withDuration: moveViewAnimationDuration, animations: {
-                    moveScrollView.contentOffset = CGPoint(x: moveScrollView.contentOffset.x, y: sumOffsetY)
-                    }, completion: { (success) in})
-            }else {
-                var sumOffsetY = -(moveOffset + yOffset)
-                sumOffsetY = min(defaultOffset, sumOffsetY)
-                var moveViewFrame = moveView.frame
-                moveViewFrame.origin.y = sumOffsetY
-                UIView.animate(withDuration: moveViewAnimationDuration, animations: {
-                    moveView.frame = moveViewFrame
-                }, completion: { (end) in
-                    if end && moveView.frame.minY != moveViewFrame.minY {
-                        moveView.frame = moveViewFrame
+            if let moveView = getCurrentOffsetView() {
+                var moveScrollView: UIScrollView!
+                if moveView is UITableView ||
+                    moveView is UIScrollView ||
+                    moveView is UICollectionView {
+                    moveScrollView = moveView as? UIScrollView
+                    var didObs = false
+                    if let obs = objc_getAssociatedObject(moveScrollView!, &WHCObserve.kObserve) as? NSNumber {
+                        if obs.boolValue {
+                            didObs = true
+                        }
                     }
-                })
+                    if !didObs {
+                        objc_setAssociatedObject(moveScrollView!, &WHCObserve.kObserve, NSNumber(value: true), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                        moveScrollView?.addObserver(self, forKeyPath: kContentOffset, options: NSKeyValueObservingOptions.new, context: nil)
+                    }
+                }else {
+                    if initMoveViewY == kNotInitValue {
+                        initMoveViewY = moveView.frame.origin.y
+                    }
+                }
+                let convertView: UIView? = moveScrollView == nil ? currentMonitorViewController!.view : currentMonitorViewController!.view.window
+                var defaultOffset: CGFloat = 0
+                var convertRect = currentField.convert(currentField.bounds, to: convertView)
+                if convertView!.frame.height < UIScreen.main.bounds.height && currentMonitorViewController.navigationController != nil {
+                    if !currentMonitorViewController.navigationController!.isNavigationBarHidden && currentMonitorViewController.edgesForExtendedLayout == .all {
+                        defaultOffset = currentMonitorViewController.navigationController!.navigationBar.frame.height
+                    }
+                    convertRect.origin.y += defaultOffset
+                }
+                headerView?.layoutIfNeeded()
+                let yOffset = convertRect.maxY - keyboardFrame!.minY
+                let headerHeight: CGFloat = headerView != nil ? headerView.frame.height : 0
+                var moveOffset: CGFloat = offsetBlock == nil ? headerHeight : offsetBlock!(currentField) + headerHeight
+                
+                if offsetBlock == nil && headerView == nil {
+                    if nextField != nil {
+                        let nextFrame = nextField.convert(nextField.bounds, to: convertView)
+                        moveOffset += nextFrame.maxY - convertRect.maxY
+                    }
+                }
+                if moveScrollView != nil {
+                    var sumOffsetY = moveScrollView.contentOffset.y + moveOffset + yOffset
+                    sumOffsetY = max(sumOffsetY, -moveScrollView.contentInset.top)
+                    UIView.animate(withDuration: moveViewAnimationDuration, animations: {
+                        moveScrollView.contentOffset = CGPoint(x: moveScrollView.contentOffset.x, y: sumOffsetY)
+                    }, completion: { (success) in})
+                }else {
+                    var sumOffsetY = -(moveOffset + yOffset)
+                    sumOffsetY = min(initMoveViewY, sumOffsetY)
+                    var moveViewFrame = moveView.frame
+                    moveViewFrame.origin.y = sumOffsetY
+                    UIView.animate(withDuration: moveViewAnimationDuration, animations: {
+                        moveView.frame = moveViewFrame
+                    }, completion: { (end) in
+                        if end && moveView.frame.minY != moveViewFrame.minY{
+                            moveView.frame = moveViewFrame
+                        }
+                    })
+                }
             }
         }
     }
@@ -353,12 +365,11 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
         currentMonitorViewController = nil
         if topViewController != nil && monitorViewControllers.contains(topViewController!.description) {
             currentMonitorViewController = topViewController
-            KeyboardConfiguration = KeyboardConfigurations[currentMonitorViewController.description]
         }
     }
     
     //MARK: - 公开接口Api -
-
+    
     /// 设置要监听处理键盘的控制器
     ///
     /// - parameter vc: 设置要监听的控制器
@@ -366,7 +377,6 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     @discardableResult
     public func addMonitorViewController(_ vc:UIViewController) -> WHC_KeyboardManager.Configuration {
         let configuration = WHC_KeyboardManager.Configuration()
-        self.KeyboardConfiguration = configuration
         KeyboardConfigurations.updateValue(configuration, forKey: vc.description)
         if !monitorViewControllers.contains(vc.description) {
             monitorViewControllers.append(vc.description)
@@ -401,11 +411,21 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     
     //MARK: - 发送通知 -
     private func sendFieldViewNotify() {
-        if KeyboardConfiguration?.headerView != nil {
+        if getCurrentConfig()?.headerView != nil {
             NotificationCenter.default.post(name: NSNotification.Name.CurrentFieldView, object: currentField)
             NotificationCenter.default.post(name: NSNotification.Name.NextFieldView, object: nextField)
             NotificationCenter.default.post(name: NSNotification.Name.FrontFieldView, object: frontField)
         }
+    }
+    
+    private func getCurrentConfig() -> Configuration? {
+        var config: Configuration!
+        if let currentVC = self.whc_CurrentViewController() {
+            if let tmpConfig = KeyboardConfigurations[currentVC.description] {
+                config = tmpConfig
+            }
+        }
+        return config
     }
     
     // MARK: - 键盘监听处理 -
@@ -423,14 +443,6 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     }
     
     @objc private func keyboardWillHide(notify: Notification) {
-        if currentMonitorViewController == nil {
-            if let headerView = KeyboardConfiguration?.headerView {
-                if headerView.superview != nil {
-                    headerView.removeFromSuperview()
-                }
-            }
-            return
-        }
         keyboardFrame?.size.width = 0
         keyboardDuration = 0
         updateHeaderView(complete: nil)
@@ -438,46 +450,49 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
         if currentField != nil && checkIsPrivateInputClass(currentField) {
             return
         }
-        let moveView = getCurrentOffsetView()
-        if moveView is UITableView ||
-            moveView is UIScrollView ||
-            moveView is UICollectionView {
-            let scrollMoveView = moveView as? UIScrollView
-            if scrollMoveView != nil {
-                if KeyboardConfiguration != nil && KeyboardConfiguration!.didObserveScrollView {
-                    KeyboardConfiguration!.didObserveScrollView = false
-                    scrollMoveView!.removeObserver(self, forKeyPath: kContentOffset)
-                }
-                UIView.animate(withDuration: moveViewAnimationDuration, animations: {
-                    if scrollMoveView!.contentOffset.y < -scrollMoveView!.contentInset.top {
-                        scrollMoveView!.contentOffset = CGPoint(x: (scrollMoveView?.contentOffset.x)!, y: -scrollMoveView!.contentInset.top)
-                    }else if scrollMoveView!.contentOffset.y > (scrollMoveView!.contentSize.height - scrollMoveView!.bounds.height + scrollMoveView!.contentInset.bottom) {
-                        if scrollMoveView!.contentSize.height == 0 {
-                            scrollMoveView!.contentOffset = CGPoint(x: scrollMoveView!.contentOffset.x, y: -scrollMoveView!.contentInset.top)
-                        }else {
-                            scrollMoveView!.contentOffset = CGPoint(x: (scrollMoveView?.contentOffset.x)!, y: (scrollMoveView!.contentSize.height - scrollMoveView!.bounds.height + scrollMoveView!.contentInset.bottom))
+        if let moveView = getCurrentOffsetView() {
+            if moveView is UITableView ||
+                moveView is UIScrollView ||
+                moveView is UICollectionView {
+                let scrollMoveView = moveView as? UIScrollView
+                if scrollMoveView != nil {
+                    if let obs = objc_getAssociatedObject(scrollMoveView!, &WHCObserve.kObserve) as? NSNumber {
+                        if obs.boolValue {
+                            scrollMoveView!.removeObserver(self, forKeyPath: kContentOffset)
+                            objc_setAssociatedObject(scrollMoveView!, &WHCObserve.kObserve, NSNumber(value: false), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
                         }
                     }
+                    UIView.animate(withDuration: moveViewAnimationDuration, animations: {
+                        if scrollMoveView!.contentOffset.y < -scrollMoveView!.contentInset.top {
+                            scrollMoveView!.contentOffset = CGPoint(x: (scrollMoveView?.contentOffset.x)!, y: -scrollMoveView!.contentInset.top)
+                        }else if scrollMoveView!.contentOffset.y > (scrollMoveView!.contentSize.height - scrollMoveView!.bounds.height + scrollMoveView!.contentInset.bottom) {
+                            if scrollMoveView!.contentSize.height == 0 {
+                                scrollMoveView!.contentOffset = CGPoint(x: scrollMoveView!.contentOffset.x, y: -scrollMoveView!.contentInset.top)
+                            }else {
+                                scrollMoveView!.contentOffset = CGPoint(x: (scrollMoveView?.contentOffset.x)!, y: (scrollMoveView!.contentSize.height - scrollMoveView!.bounds.height + scrollMoveView!.contentInset.bottom))
+                            }
+                        }
+                    })
+                }
+            }else {
+                var moveViewFrame = moveView.frame
+                if initMoveViewY != kNotInitValue {
+                    moveViewFrame.origin.y = initMoveViewY
+                }
+                /**** Give up the following method ***/
+                /*if currentMonitorViewController.view === moveView && currentMonitorViewController.navigationController != nil && (currentMonitorViewController.edgesForExtendedLayout == .none || !currentMonitorViewController.navigationController!.navigationBar.isTranslucent) && !currentMonitorViewController.navigationController!.isNavigationBarHidden {
+                 moveViewFrame.origin.y = currentMonitorViewController.navigationController!.navigationBar.frame.maxY
+                 }else {
+                 moveViewFrame.origin.y = 0
+                 }*/
+                initMoveViewY = kNotInitValue
+                UIView.animate(withDuration: moveViewAnimationDuration, animations: {
+                    moveView.frame = moveViewFrame
                 })
             }
-        }else {
-            var moveViewFrame = moveView.frame
-            if initMoveViewY != kNotInitValue {
-                moveViewFrame.origin.y = initMoveViewY
-            }
-            /**** Give up the following method ***/
-            /*if currentMonitorViewController.view === moveView && currentMonitorViewController.navigationController != nil && (currentMonitorViewController.edgesForExtendedLayout == .none || !currentMonitorViewController.navigationController!.navigationBar.isTranslucent) && !currentMonitorViewController.navigationController!.isNavigationBarHidden {
-                moveViewFrame.origin.y = currentMonitorViewController.navigationController!.navigationBar.frame.maxY
-            }else {
-                moveViewFrame.origin.y = 0
-            }*/
-            initMoveViewY = kNotInitValue
-            UIView.animate(withDuration: moveViewAnimationDuration, animations: {
-                moveView.frame = moveViewFrame
-            })
         }
     }
-
+    
     //MARK: - 滑动监听 -
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if currentMonitorViewController == nil {return}
@@ -523,3 +538,4 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
         }
     }
 }
+

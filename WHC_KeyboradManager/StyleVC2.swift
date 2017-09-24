@@ -69,11 +69,15 @@ class StyleVC2: UIViewController {
     }
     
     @objc func clickLeft(sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func clickRight(sender: UIBarButtonItem) {
-        self.view.endEditing(true)
+//        self.view.endEditing(true)
+        let vc = StyleVC1(nibName: "StyleVC1", bundle: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
+//        let nv = UINavigationController(rootViewController: vc)
+//        self.navigationController?.pushViewController(nv, animated: true)
 //        let vc = TestVC(nibName: "TestVC", bundle: nil)
 //        vc.view.backgroundColor = UIColor(white: 0, alpha: 0.7)
 //        let currentVC = self.whc_CurrentViewController()

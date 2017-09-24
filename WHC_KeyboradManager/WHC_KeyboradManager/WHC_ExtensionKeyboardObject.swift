@@ -36,10 +36,8 @@ public extension NSObject {
     /// - returns: app当前显示的控制器
     public func whc_CurrentViewController() -> UIViewController? {
         var currentViewController: UIViewController!
-        let window = UIApplication.shared.delegate?.window
-        if window != nil && window! != nil {
-            currentViewController = window!!.rootViewController
-        }
+        let window = UIApplication.shared.keyWindow
+        currentViewController = window?.rootViewController
         return scanCurrentController(currentViewController)
     }
     

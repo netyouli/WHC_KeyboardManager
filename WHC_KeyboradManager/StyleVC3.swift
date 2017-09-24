@@ -20,7 +20,6 @@ class StyleVC3: UIViewController {
         self.view.backgroundColor = UIColor.orange
         /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
         WHC_KeyboardManager.share.addMonitorViewController(self)
-        
         /********************* 构建UI ***********************/
         /// 设置垂直布局
         stackView.whc_Orientation = .vertical
@@ -41,7 +40,7 @@ class StyleVC3: UIViewController {
             let text = UITextField()
             text.backgroundColor = UIColor.init(red: 253.0 / 255, green: 246.0 / 255.0, blue: 220.0 / 255, alpha: 1)
             if i == 2 {
-                text.keyboardType = .numberPad
+//                text.keyboardType = .numberPad
             }
             text.placeholder = "UITextField \(i)"
             stackView.addSubview(text)
