@@ -21,6 +21,7 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"UIView";
     self.view.backgroundColor = [UIColor whiteColor];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     /// 键盘处理配置
     /*******只需要在要处理键盘的界面创建WHC_KeyboardManager对象即可无需任何其他设置*******/
     [[WHC_KeyboardManager share] addMonitorViewController:self];
@@ -37,7 +38,7 @@
     
     [self.view addSubview:_stackView];
     _stackView.whc_LeftSpace(0)
-    .whc_TopSpace(64)
+    .whc_TopSpace(0)
     .whc_RightSpaceToView(0, self.view)
     .whc_HeightAuto();
     

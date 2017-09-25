@@ -17,7 +17,6 @@ class StyleVC3: UIViewController {
         // Do any additional setup after loading the view.
         self.edgesForExtendedLayout = []
         self.navigationItem.title = "UIView"
-        self.view.backgroundColor = UIColor.orange
         /*******只需要在要处理键盘的界面创建WHC_KeyboradManager对象即可无需任何其他设置*******/
         WHC_KeyboardManager.share.addMonitorViewController(self)
         /********************* 构建UI ***********************/
@@ -36,12 +35,9 @@ class StyleVC3: UIViewController {
             .whc_Right(0)
             .whc_HeightAuto()
         
-        for i in 0 ..< 8 {
+        for i in 0 ..< 10 {
             let text = UITextField()
             text.backgroundColor = UIColor.init(red: 253.0 / 255, green: 246.0 / 255.0, blue: 220.0 / 255, alpha: 1)
-            if i == 2 {
-//                text.keyboardType = .numberPad
-            }
             text.placeholder = "UITextField \(i)"
             stackView.addSubview(text)
         }
@@ -50,6 +46,10 @@ class StyleVC3: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     deinit {

@@ -157,25 +157,29 @@ public class WHC_KeyboardHeaderView: UIView {
     
     //MARK: - ACTION -
     @objc private func clickFront(button: UIButton) {
-        if frontFieldView != nil {
-            if frontFieldView is UITextField {
-                (frontFieldView as? UITextField)?.becomeFirstResponder()
-            }else if frontFieldView is UITextView {
-                (frontFieldView as? UITextView)?.becomeFirstResponder()
+        if WHC_KeyboardManager.share.moveDidAnimation {
+            if frontFieldView != nil {
+                if frontFieldView is UITextField {
+                    (frontFieldView as? UITextField)?.becomeFirstResponder()
+                }else if frontFieldView is UITextView {
+                    (frontFieldView as? UITextView)?.becomeFirstResponder()
+                }
             }
+            clickFrontButtonBlock?()
         }
-        clickFrontButtonBlock?()
     }
     
     @objc private func clickNext(button: UIButton) {
-        if nextFieldView != nil {
-            if nextFieldView is UITextField {
-                (nextFieldView as? UITextField)?.becomeFirstResponder()
-            }else if nextFieldView is UITextView {
-                (nextFieldView as? UITextView)?.becomeFirstResponder()
+        if WHC_KeyboardManager.share.moveDidAnimation {
+            if nextFieldView != nil {
+                if nextFieldView is UITextField {
+                    (nextFieldView as? UITextField)?.becomeFirstResponder()
+                }else if nextFieldView is UITextView {
+                    (nextFieldView as? UITextView)?.becomeFirstResponder()
+                }
             }
+            clickNextButtonBlock?()
         }
-        clickNextButtonBlock?()
     }
     
     @objc private func clickDone(button: UIButton) {

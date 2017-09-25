@@ -130,28 +130,32 @@
 
 #pragma mark - ACTION -
 - (void)clickFront:(UIButton *)button {
-    if (_frontFieldView) {
-        if ([_frontFieldView isKindOfClass:[UITextField class]]) {
-            [((UITextField *)_frontFieldView) becomeFirstResponder];
-        }else if ([_frontFieldView isKindOfClass:[UITextView class]]) {
-            [((UITextView *)_frontFieldView) becomeFirstResponder];
+    if ([WHC_KeyboardManager share].moveDidAnimation) {
+        if (_frontFieldView) {
+            if ([_frontFieldView isKindOfClass:[UITextField class]]) {
+                [((UITextField *)_frontFieldView) becomeFirstResponder];
+            }else if ([_frontFieldView isKindOfClass:[UITextView class]]) {
+                [((UITextView *)_frontFieldView) becomeFirstResponder];
+            }
         }
-    }
-    if (_clickFrontButtonBlock) {
-        _clickFrontButtonBlock();
+        if (_clickFrontButtonBlock) {
+            _clickFrontButtonBlock();
+        }
     }
 }
 
 - (void)clickNext:(UIButton *)button {
-    if (_nextFieldView) {
-        if ([_nextFieldView isKindOfClass:[UITextField class]]) {
-            [((UITextField *)_nextFieldView) becomeFirstResponder];
-        }else if ([_nextFieldView isKindOfClass:[UITextView class]]) {
-            [((UITextView *)_nextFieldView) becomeFirstResponder];
+    if ([WHC_KeyboardManager share].moveDidAnimation) {
+        if (_nextFieldView) {
+            if ([_nextFieldView isKindOfClass:[UITextField class]]) {
+                [((UITextField *)_nextFieldView) becomeFirstResponder];
+            }else if ([_nextFieldView isKindOfClass:[UITextView class]]) {
+                [((UITextView *)_nextFieldView) becomeFirstResponder];
+            }
         }
-    }
-    if (_clickNextButtonBlock) {
-        _clickNextButtonBlock();
+        if (_clickNextButtonBlock) {
+            _clickNextButtonBlock();
+        }
     }
 }
 

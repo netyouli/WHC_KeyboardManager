@@ -98,7 +98,7 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     /// 当前监视处理的控制器
     private weak var currentMonitorViewController: UIViewController!
     /// 设置移动的视图动画周期
-    private lazy var moveViewAnimationDuration: TimeInterval = 0.25
+    private lazy var moveViewAnimationDuration: TimeInterval = 0.5
     /// 键盘出现的动画周期
     private var keyboardDuration: TimeInterval?
     /// 存储键盘的frame
@@ -113,6 +113,8 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     private let kNotInitValue: CGFloat = -888888.88
     /// 保存moveView初始y
     private lazy var initMoveViewY: CGFloat = self.kNotInitValue
+    /// 偏移动画是否完成
+    private(set) lazy var moveDidAnimation = true
     
     /// 单利对象
     public static var share: WHC_KeyboardManager {
@@ -225,7 +227,7 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
                         }
                     }
                 }
-                if tempSuperview is UIWindow {
+                if NSStringFromClass(tempSuperview.classForCoder) == "UIViewControllerWrapperView" {
                     break
                 }else {
                     superView = tempSuperview
@@ -322,7 +324,7 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
                 var convertRect = currentField.convert(currentField.bounds, to: convertView)
                 if convertView!.frame.height < UIScreen.main.bounds.height && currentMonitorViewController.navigationController != nil {
                     if !currentMonitorViewController.navigationController!.isNavigationBarHidden && currentMonitorViewController.edgesForExtendedLayout == .all {
-                        defaultOffset = currentMonitorViewController.navigationController!.navigationBar.frame.height
+                        defaultOffset = currentMonitorViewController.navigationController!.navigationBar.frame.maxY
                     }
                     convertRect.origin.y += defaultOffset
                 }
@@ -348,12 +350,14 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
                     sumOffsetY = min(initMoveViewY, sumOffsetY)
                     var moveViewFrame = moveView.frame
                     moveViewFrame.origin.y = sumOffsetY
+                    moveDidAnimation = false
                     UIView.animate(withDuration: moveViewAnimationDuration, animations: {
                         moveView.frame = moveViewFrame
                     }, completion: { (end) in
                         if end && moveView.frame.minY != moveViewFrame.minY{
                             moveView.frame = moveViewFrame
                         }
+                        self.moveDidAnimation = true
                     })
                 }
             }

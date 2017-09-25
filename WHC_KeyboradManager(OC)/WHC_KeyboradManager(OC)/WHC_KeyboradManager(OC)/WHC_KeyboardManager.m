@@ -127,6 +127,7 @@ const static CGFloat kNotInitValue = -888888.88;
         _KeyboardConfigurations = [NSMutableDictionary dictionary];
         _monitorViewControllers = [NSMutableArray array];
         _moveViewAnimationDuration = 0.5;
+        _moveDidAnimation = YES;
         [self addKeyboardMonitor];
     }
     return self;
@@ -255,7 +256,7 @@ const static CGFloat kNotInitValue = -888888.88;
                     }
                 }
             }
-            if ([tempSuperview isKindOfClass:UIWindow.self]) {
+            if ([NSStringFromClass(tempSuperview.classForCoder) isEqualToString:@"UIViewControllerWrapperView"]) {
                 break;
             }else {
                 tempSuperview = tempSuperview.superview;
@@ -276,6 +277,7 @@ const static CGFloat kNotInitValue = -888888.88;
     _didShowHeader = NO;
 }
 
+/// 获取当前配置
 - (WHC_KBMConfiguration *)getCurrentConfig {
     WHC_KBMConfiguration * config = nil;
     UIViewController * currentVC = [self whc_CurrentViewController];
@@ -363,6 +365,7 @@ const static CGFloat kNotInitValue = -888888.88;
                 didObs = YES;
             }
             if (!obs) {
+                objc_setAssociatedObject(moveScrollView, &WHCObserve, @(YES), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
                 [moveScrollView addObserver:self forKeyPath:(NSString *)kWHC_KBM_ContentOffset options:NSKeyValueObservingOptionNew context:nil];
             }
         }else {
@@ -403,13 +406,14 @@ const static CGFloat kNotInitValue = -888888.88;
             sumOffsetY = MIN(_initMoveViewY, sumOffsetY);
             CGRect moveViewFrame = moveView.frame;
             moveViewFrame.origin.y = sumOffsetY;
-            
+            _moveDidAnimation = NO;
             [UIView animateWithDuration:_moveViewAnimationDuration animations:^{
                 moveView.frame = moveViewFrame;
             } completion:^(BOOL finished) {
                 if (finished && moveView.frame.origin.y != moveViewFrame.origin.y) {
                     moveView.frame = moveViewFrame;
                 }
+                _moveDidAnimation = YES;
             }];
         }
     }

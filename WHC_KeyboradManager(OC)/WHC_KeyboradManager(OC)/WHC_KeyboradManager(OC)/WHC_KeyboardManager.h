@@ -60,7 +60,8 @@ extern const NSString * WHC_KBM_FrontFieldView;
 @end
 
 @interface WHC_KeyboardManager : NSObject
-
+/// 偏移动画是否完成
+@property (nonatomic, assign, readonly) BOOL moveDidAnimation;
 
 /**
  键盘管理单利对象
