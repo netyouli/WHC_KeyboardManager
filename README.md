@@ -15,7 +15,7 @@ WHC_KeyboardManager
 - **咨询**: 712641411
 - **作者**: 吴海超
 
-**bug修复：兼容swift4修复初始偏移错误bug**
+**bug修复：修复headerview 在push或者pop不消失bug**
 
 演示
 ==============
