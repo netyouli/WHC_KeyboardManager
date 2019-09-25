@@ -1,0 +1,6 @@
+framework module Pods_WHC_KeyboradManager {
+  umbrella header "Pods-WHC_KeyboradManager-umbrella.h"
+
+  export *
+  module * { export * }
+}

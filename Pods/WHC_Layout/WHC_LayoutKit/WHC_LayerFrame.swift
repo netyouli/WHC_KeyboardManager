@@ -1,9 +1,10 @@
 //
-//  WHC_ViewExtension.swift
-//  WHC_Layout
-//  Created by WHC on 16/7/7.
-//  Copyright © 2016年 吴海超. All rights reserved.
-
+//  WHC_LayerFrame.swift
+//  WHC_LayerFrame
+//
+//  Created by WHC on 2017/12/3.
+//  Copyright © 2017年 WHC. All rights reserved.
+//
 //  Github <https://github.com/netyouli/WHC_Layout>
 
 //
@@ -25,14 +26,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
 #if os(iOS) || os(tvOS)
     import UIKit
 #else
     import AppKit
 #endif
 
-public extension WHC_VIEW {
+extension CALayer {
     #if os(iOS) || os(tvOS)
     public var whc_sw: CGFloat {
         return UIScreen.main.bounds.width
@@ -43,11 +43,11 @@ public extension WHC_VIEW {
     }
     #else
     public var whc_sw: CGFloat {
-        return NSScreen.main == nil ? 0 : NSScreen.main!.frame.width
+    return NSScreen.main == nil ? 0 : NSScreen.main!.frame.width
     }
     
     public var whc_sh: CGFloat {
-        return NSScreen.main == nil ? 0 : NSScreen.main!.frame.height
+    return NSScreen.main == nil ? 0 : NSScreen.main!.frame.height
     }
     #endif
     
@@ -139,31 +139,31 @@ public extension WHC_VIEW {
         }
     }
     
-    #if os(iOS) || os(tvOS)
-    public var whc_cx: CGFloat {
+    /// 锚点x
+    public var whc_ax: CGFloat {
         set {
-            var center = self.center
-            center.x = newValue
-            self.center = center
+            var anchor = self.anchorPoint
+            anchor.x = newValue
+            self.anchorPoint = anchor
         }
         
         get {
-            return self.center.x
+            return self.anchorPoint.x
         }
     }
     
-    public var whc_cy: CGFloat {
+    /// 锚点y
+    public var whc_ay: CGFloat {
         set {
-            var center = self.center
-            center.y = newValue
-            self.center = center
+            var anchor = self.anchorPoint
+            anchor.y = newValue
+            self.anchorPoint = anchor
         }
         
         get {
-            return self.center.y
+            return self.anchorPoint.y
         }
     }
-    #endif
     
     public var whc_xy: CGPoint {
         set {
@@ -189,4 +189,5 @@ public extension WHC_VIEW {
         }
     }
 }
+
 

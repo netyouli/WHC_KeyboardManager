@@ -7,15 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0DE5A753FFD47A3145298D8C /* Pods_WHC_KeyboradManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE9A81DA3AD7AEBC9EA213F /* Pods_WHC_KeyboradManager.framework */; };
 		FE1031B41DD999F900A9F284 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031B31DD999F900A9F284 /* AppDelegate.swift */; };
 		FE1031B61DD999F900A9F284 /* StyleVC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031B51DD999F900A9F284 /* StyleVC1.swift */; };
 		FE1031BB1DD999F900A9F284 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE1031BA1DD999F900A9F284 /* Assets.xcassets */; };
 		FE1031BE1DD999F900A9F284 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE1031BC1DD999F900A9F284 /* LaunchScreen.storyboard */; };
 		FE1031C71DD99A6A00A9F284 /* WHC_KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031C61DD99A6A00A9F284 /* WHC_KeyboardManager.swift */; };
-		FE1031CD1DDAEDE600A9F284 /* WHC_AutoCellHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031C91DDAEDE500A9F284 /* WHC_AutoCellHeight.swift */; };
-		FE1031CE1DDAEDE600A9F284 /* WHC_AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031CA1DDAEDE500A9F284 /* WHC_AutoLayout.swift */; };
-		FE1031CF1DDAEDE600A9F284 /* WHC_Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031CB1DDAEDE500A9F284 /* WHC_Frame.swift */; };
-		FE1031D01DDAEDE600A9F284 /* WHC_StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031CC1DDAEDE500A9F284 /* WHC_StackView.swift */; };
 		FE1031D21DDAF27800A9F284 /* WHC_ExtensionKeyboardObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031D11DDAF27800A9F284 /* WHC_ExtensionKeyboardObject.swift */; };
 		FE1031D41DDC460600A9F284 /* WHC_KeyboardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1031D31DDC460600A9F284 /* WHC_KeyboardHeaderView.swift */; };
 		FE6DCE0C1DE1740600E7992A /* StyleVC3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6DCE0A1DE1740600E7992A /* StyleVC3.swift */; };
@@ -28,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4EE9A81DA3AD7AEBC9EA213F /* Pods_WHC_KeyboradManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WHC_KeyboradManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7531ADF1CB0BAF4EC9AB6DD /* Pods-WHC_KeyboradManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WHC_KeyboradManager.debug.xcconfig"; path = "Target Support Files/Pods-WHC_KeyboradManager/Pods-WHC_KeyboradManager.debug.xcconfig"; sourceTree = "<group>"; };
+		E27E820FA3ADD45A97F3BBDB /* Pods-WHC_KeyboradManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WHC_KeyboradManager.release.xcconfig"; path = "Target Support Files/Pods-WHC_KeyboradManager/Pods-WHC_KeyboradManager.release.xcconfig"; sourceTree = "<group>"; };
 		FE1031B01DD999F900A9F284 /* WHC_KeyboradManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WHC_KeyboradManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE1031B31DD999F900A9F284 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE1031B51DD999F900A9F284 /* StyleVC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleVC1.swift; sourceTree = "<group>"; };
@@ -35,10 +35,6 @@
 		FE1031BD1DD999F900A9F284 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FE1031BF1DD999F900A9F284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE1031C61DD99A6A00A9F284 /* WHC_KeyboardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_KeyboardManager.swift; sourceTree = "<group>"; };
-		FE1031C91DDAEDE500A9F284 /* WHC_AutoCellHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_AutoCellHeight.swift; sourceTree = "<group>"; };
-		FE1031CA1DDAEDE500A9F284 /* WHC_AutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_AutoLayout.swift; sourceTree = "<group>"; };
-		FE1031CB1DDAEDE500A9F284 /* WHC_Frame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_Frame.swift; sourceTree = "<group>"; };
-		FE1031CC1DDAEDE500A9F284 /* WHC_StackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_StackView.swift; sourceTree = "<group>"; };
 		FE1031D11DDAF27800A9F284 /* WHC_ExtensionKeyboardObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_ExtensionKeyboardObject.swift; sourceTree = "<group>"; };
 		FE1031D31DDC460600A9F284 /* WHC_KeyboardHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WHC_KeyboardHeaderView.swift; sourceTree = "<group>"; };
 		FE6DCE0A1DE1740600E7992A /* StyleVC3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleVC3.swift; sourceTree = "<group>"; };
@@ -55,17 +51,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DE5A753FFD47A3145298D8C /* Pods_WHC_KeyboradManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		81AA37061A6A01212E5B7A0B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A7531ADF1CB0BAF4EC9AB6DD /* Pods-WHC_KeyboradManager.debug.xcconfig */,
+				E27E820FA3ADD45A97F3BBDB /* Pods-WHC_KeyboradManager.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		881EFA6C520995CEAAE5DD21 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4EE9A81DA3AD7AEBC9EA213F /* Pods_WHC_KeyboradManager.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FE1031A71DD999F900A9F284 = {
 			isa = PBXGroup;
 			children = (
 				FE1031B21DD999F900A9F284 /* WHC_KeyboardManager */,
 				FE1031B11DD999F900A9F284 /* Products */,
+				81AA37061A6A01212E5B7A0B /* Pods */,
+				881EFA6C520995CEAAE5DD21 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,7 +97,6 @@
 			isa = PBXGroup;
 			children = (
 				FE8BB4CC1DDD799C00934189 /* images */,
-				FE1031C81DDAEDE500A9F284 /* WHC_AutoLayoutKit */,
 				FE1031C51DD99A4B00A9F284 /* WHC_KeyboardManager */,
 				FE1031B31DD999F900A9F284 /* AppDelegate.swift */,
 				FE1031B51DD999F900A9F284 /* StyleVC1.swift */,
@@ -109,17 +124,6 @@
 			path = WHC_KeyboradManager;
 			sourceTree = "<group>";
 		};
-		FE1031C81DDAEDE500A9F284 /* WHC_AutoLayoutKit */ = {
-			isa = PBXGroup;
-			children = (
-				FE1031C91DDAEDE500A9F284 /* WHC_AutoCellHeight.swift */,
-				FE1031CA1DDAEDE500A9F284 /* WHC_AutoLayout.swift */,
-				FE1031CB1DDAEDE500A9F284 /* WHC_Frame.swift */,
-				FE1031CC1DDAEDE500A9F284 /* WHC_StackView.swift */,
-			);
-			path = WHC_AutoLayoutKit;
-			sourceTree = "<group>";
-		};
 		FE8BB4CC1DDD799C00934189 /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,9 +140,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FE1031C21DD999F900A9F284 /* Build configuration list for PBXNativeTarget "WHC_KeyboradManager" */;
 			buildPhases = (
+				B5842218B18F47685D762CC3 /* [CP] Check Pods Manifest.lock */,
 				FE1031AC1DD999F900A9F284 /* Sources */,
 				FE1031AD1DD999F900A9F284 /* Frameworks */,
 				FE1031AE1DD999F900A9F284 /* Resources */,
+				2056B8EDC9D6669AAB588E53 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -156,19 +162,19 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = WHC;
 				TargetAttributes = {
 					FE1031AF1DD999F900A9F284 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 7F5YZXGNJ3;
+						DevelopmentTeam = J56ZV24477;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = FE1031AB1DD999F900A9F284 /* Build configuration list for PBXProject "WHC_KeyboradManager" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -201,6 +207,49 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2056B8EDC9D6669AAB588E53 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WHC_KeyboradManager/Pods-WHC_KeyboradManager-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/WHC_Layout/WHC_Layout.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WHC_Layout.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WHC_KeyboradManager/Pods-WHC_KeyboradManager-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5842218B18F47685D762CC3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WHC_KeyboradManager-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FE1031AC1DD999F900A9F284 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -209,13 +258,9 @@
 				FE1031B61DD999F900A9F284 /* StyleVC1.swift in Sources */,
 				FE1031D41DDC460600A9F284 /* WHC_KeyboardHeaderView.swift in Sources */,
 				FE1031D21DDAF27800A9F284 /* WHC_ExtensionKeyboardObject.swift in Sources */,
-				FE1031CE1DDAEDE600A9F284 /* WHC_AutoLayout.swift in Sources */,
-				FE1031CF1DDAEDE600A9F284 /* WHC_Frame.swift in Sources */,
 				FE8BB4C81DDD76A300934189 /* StyleVC2.swift in Sources */,
 				FE1031B41DD999F900A9F284 /* AppDelegate.swift in Sources */,
 				FE6DCE0C1DE1740600E7992A /* StyleVC3.swift in Sources */,
-				FE1031D01DDAEDE600A9F284 /* WHC_StackView.swift in Sources */,
-				FE1031CD1DDAEDE600A9F284 /* WHC_AutoCellHeight.swift in Sources */,
 				FE1031C71DD99A6A00A9F284 /* WHC_KeyboardManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,20 +283,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -287,20 +342,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -327,29 +392,31 @@
 		};
 		FE1031C31DD999F900A9F284 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A7531ADF1CB0BAF4EC9AB6DD /* Pods-WHC_KeyboradManager.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7F5YZXGNJ3;
+				DEVELOPMENT_TEAM = J56ZV24477;
 				INFOPLIST_FILE = WHC_KeyboradManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "WHC.WHC-KeyboradManager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		FE1031C41DD999F900A9F284 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E27E820FA3ADD45A97F3BBDB /* Pods-WHC_KeyboradManager.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7F5YZXGNJ3;
+				DEVELOPMENT_TEAM = J56ZV24477;
 				INFOPLIST_FILE = WHC_KeyboradManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "WHC.WHC-KeyboradManager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

@@ -127,7 +127,7 @@ extension UITableView {
         self.whc_ReloadData()
     }
     
-    @objc fileprivate func whc_ReloadRowsAtIndexPaths(_ indexPaths: [IndexPath], withRowAnimation: UITableViewRowAnimation) {
+    @objc fileprivate func whc_ReloadRowsAtIndexPaths(_ indexPaths: [IndexPath], withRowAnimation: UITableView.RowAnimation) {
         if cacheHeightDictionary != nil {
             for indexPath in indexPaths {
                 let sectionCacheHeightDictionary = cacheHeightDictionary[(indexPath as NSIndexPath).section]
@@ -139,7 +139,7 @@ extension UITableView {
         self.whc_ReloadRowsAtIndexPaths(indexPaths, withRowAnimation: withRowAnimation)
     }
     
-    @objc fileprivate func whc_ReloadSections(_ sections: IndexSet, withRowAnimation animation: UITableViewRowAnimation) {
+    @objc fileprivate func whc_ReloadSections(_ sections: IndexSet, withRowAnimation animation: UITableView.RowAnimation) {
         if cacheHeightDictionary != nil {
             for (idx,_) in sections.enumerated() {
                 let _ = self.cacheHeightDictionary?.removeValue(forKey: idx)
@@ -148,7 +148,7 @@ extension UITableView {
         self.whc_ReloadSections(sections, withRowAnimation: animation)
     }
     
-    @objc fileprivate func whc_DeleteRowsAtIndexPaths(_ indexPaths: [IndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+    @objc fileprivate func whc_DeleteRowsAtIndexPaths(_ indexPaths: [IndexPath], withRowAnimation animation: UITableView.RowAnimation) {
         if cacheHeightDictionary != nil {
             for indexPath in indexPaths {
                 if cacheHeightDictionary[(indexPath as NSIndexPath).section] != nil {
@@ -159,7 +159,7 @@ extension UITableView {
         self.whc_DeleteRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
     }
     
-    @objc fileprivate func whc_DeleteSections(_ sections: IndexSet, withRowAnimation animation: UITableViewRowAnimation) {
+    @objc fileprivate func whc_DeleteSections(_ sections: IndexSet, withRowAnimation animation: UITableView.RowAnimation) {
         if cacheHeightDictionary != nil {
             for (idx,_) in sections.enumerated() {
                let _ = self.cacheHeightDictionary?.removeValue(forKey: idx)
@@ -194,7 +194,7 @@ extension UITableView {
         self.whc_MoveRowAtIndexPath(indexPath, toIndexPath: newIndexPath)
     }
     
-    @objc fileprivate func whc_InsertSections(_ sections: IndexSet, withRowAnimation animation: UITableViewRowAnimation) {
+    @objc fileprivate func whc_InsertSections(_ sections: IndexSet, withRowAnimation animation: UITableView.RowAnimation) {
         if cacheHeightDictionary != nil {
             let firstSection = sections.first
             let moveSection = cacheHeightDictionary.count
@@ -211,7 +211,7 @@ extension UITableView {
         self.whc_InsertSections(sections, withRowAnimation: animation)
     }
     
-    @objc fileprivate func whc_InsertRowsAtIndexPaths(_ indexPaths: [IndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+    @objc fileprivate func whc_InsertRowsAtIndexPaths(_ indexPaths: [IndexPath], withRowAnimation animation: UITableView.RowAnimation) {
         if cacheHeightDictionary != nil {
             for indexPath in indexPaths {
                 var sectionMap = cacheHeightDictionary[(indexPath as NSIndexPath).section]
@@ -257,30 +257,30 @@ extension UITableView {
     }
 }
 
-public extension UITableViewCell {
+extension UITableViewCell {
     /// cell上最底部的视图
-    public var whc_CellBottomView: UIView! {
+    public var whc_CellBottomView: UIView? {
         set {
             objc_setAssociatedObject(self, &WHC_CellAssociatedObjectKey.kCellBottomView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
             let value = objc_getAssociatedObject(self, &WHC_CellAssociatedObjectKey.kCellBottomView)
             if value != nil {
-                return value as! UIView
+                return value as? UIView
             }
             return nil
         }
     }
     
     /// cell上最底部的视图集合
-    public var whc_CellBottomViews: [UIView]! {
+    public var whc_CellBottomViews: [UIView]? {
         set {
             objc_setAssociatedObject(self, &WHC_CellAssociatedObjectKey.kCellBottomViews, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
             let value = objc_getAssociatedObject(self, &WHC_CellAssociatedObjectKey.kCellBottomViews)
             if value != nil {
-                return value as! [UIView]
+                return value as? [UIView]
             }
             return nil
         }
@@ -301,14 +301,14 @@ public extension UITableViewCell {
     }
     
     /// cell上嵌套tableview对象
-    public var whc_CellTableView: UITableView! {
+    public var whc_CellTableView: UITableView? {
         set {
             objc_setAssociatedObject(self, &WHC_CellAssociatedObjectKey.kCellTableView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
             let value = objc_getAssociatedObject(self, &WHC_CellAssociatedObjectKey.kCellTableView)
             if value != nil {
-                return value as! UITableView
+                return value as? UITableView
             }
             return nil
         }
@@ -382,11 +382,15 @@ public extension UITableViewCell {
         if cell?.whc_CellBottomView != nil {
             bottomView = cell?.whc_CellBottomView
         }else if cell?.whc_CellBottomViews?.count > 0 {
-            bottomView = cell?.whc_CellBottomViews[0]
-            for i in 1 ..< cell!.whc_CellBottomViews.count {
-                let view: UIView! = cell?.whc_CellBottomViews[i]
-                if bottomView.frame.maxY < view.frame.maxY {
-                    bottomView = view
+            bottomView = cell?.whc_CellBottomViews?[0]
+            let count = cell?.whc_CellBottomViews?.count ?? 0
+            if count > 1 {
+                for i in 1 ..< count {
+                    if let view: UIView = cell?.whc_CellBottomViews?[i] {
+                        if bottomView.frame.maxY < view.frame.maxY {
+                            bottomView = view
+                        }
+                    }
                 }
             }
         }else {

@@ -28,8 +28,7 @@
 // THE SOFTWARE.
 
 import UIKit
-
-public extension NSObject {
+extension NSObject {
     
     /// 获取app当前显示的控制器
     ///

@@ -135,13 +135,13 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
     
     //MARK: - 私有方法 -
     private func addKeyboardMonitor() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notify:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notify:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notify:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notify:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(myTextFieldDidBeginEditing(notify:)), name: NSNotification.Name.UITextFieldTextDidBeginEditing, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(myTextFieldDidEndEditing(notify:)), name: NSNotification.Name.UITextFieldTextDidEndEditing, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(myTextFieldDidBeginEditing(notify:)), name: NSNotification.Name.UITextViewTextDidBeginEditing, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(myTextFieldDidEndEditing(notify:)), name: NSNotification.Name.UITextViewTextDidEndEditing, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(myTextFieldDidBeginEditing(notify:)), name: UITextField.textDidBeginEditingNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(myTextFieldDidEndEditing(notify:)), name: UITextField.textDidEndEditingNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(myTextFieldDidBeginEditing(notify:)), name: UITextView.textDidBeginEditingNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(myTextFieldDidEndEditing(notify:)), name: UITextView.textDidEndEditingNotification, object: nil)
     }
     
     /// 检查是否是系统的私有滚动类
@@ -199,7 +199,7 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
             return field1Y != field2Y ? field1Y < field2Y : field1X < field2X
         }
         frontField = nil;nextField = nil
-        let index = fields.index(of: currentField)
+        let index = fields.firstIndex(of: currentField)
         if index != nil {
             if index! > 0 {
                 frontField = fields[index! - 1]
@@ -254,13 +254,13 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
             let headerView: UIView! = getCurrentConfig()?.headerView
             if headerView != nil {
                 let addHeaderViewConstraint = {(headerView: UIView) in
-                    headerView.superview?.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: headerView.superview!, attribute: NSLayoutAttribute.left, multiplier: 1, constant: 0))
+                    headerView.superview?.addConstraint(NSLayoutConstraint(item: headerView, attribute: .left, relatedBy: .equal, toItem: headerView.superview!, attribute: .left, multiplier: 1, constant: 0))
                     
-                    headerView.superview?.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: headerView.superview!, attribute: NSLayoutAttribute.right, multiplier: 1, constant: 0))
+                    headerView.superview?.addConstraint(NSLayoutConstraint(item: headerView, attribute: .right, relatedBy: .equal, toItem: headerView.superview!, attribute: .right, multiplier: 1, constant: 0))
                     
-                    headerView.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 44))
+                    headerView.addConstraint(NSLayoutConstraint(item: headerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 44))
                     
-                    headerView.superview?.addConstraint(NSLayoutConstraint(item: headerView, attribute: NSLayoutAttribute.lastBaseline, relatedBy: NSLayoutRelation.equal, toItem: headerView.superview!, attribute: NSLayoutAttribute.lastBaseline, multiplier: 1, constant: -self.keyboardFrame.height))
+                    headerView.superview?.addConstraint(NSLayoutConstraint(item: headerView, attribute: .lastBaseline, relatedBy: .equal, toItem: headerView.superview!, attribute: .lastBaseline, multiplier: 1, constant: -self.keyboardFrame.height))
                 }
                 if headerView.superview == nil {
                     currentMonitorViewController.view.window?.addSubview(headerView)
@@ -281,7 +281,7 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
                 if !didShowHeader {
                     headerView.alpha = 0
                     let duration = keyboardDuration == nil ? 0.25 : keyboardDuration!
-                    UIView.animate(withDuration: duration, delay: duration, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                    UIView.animate(withDuration: duration, delay: duration, options: .curveEaseOut, animations: {
                         headerView.alpha = 0.9
                     }, completion: { (finished) in
                         self.didShowHeader = true
@@ -399,7 +399,7 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
         if vc != nil {
             KeyboardConfigurations.removeValue(forKey: vc!.description)
             if monitorViewControllers.contains(vc!.description) {
-                monitorViewControllers.remove(at: monitorViewControllers.index(of: vc!.description)!)
+                monitorViewControllers.remove(at: monitorViewControllers.firstIndex(of: vc!.description)!)
             }
         }
     }
@@ -440,8 +440,8 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
         }
         if currentMonitorViewController == nil {return}
         let userInfo = notify.userInfo
-        keyboardFrame = (userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-        keyboardDuration = (userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
+        keyboardFrame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        keyboardDuration = (userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
         updateHeaderView(complete: nil)
         handleKeyboardDidShowToAdjust()
     }
@@ -505,7 +505,10 @@ public class WHC_KeyboardManager: NSObject,UITextFieldDelegate {
             if contentOffset != nil {
                 let scrollView = object as? UIScrollView
                 if scrollView != nil && (scrollView!.isDragging || scrollView!.isDecelerating) {
-                    let convertRect = currentField.convert(currentField.bounds, to: currentMonitorViewController!.view.window!)
+                    var convertRect = CGRect.zero
+                    if let toView = currentMonitorViewController?.view.window {
+                        convertRect = currentField.convert(currentField.bounds, to: toView)
+                    }
                     let yOffset = convertRect.maxY - keyboardFrame!.minY
                     if yOffset > 0 || convertRect.minY < 0 {
                         if currentField is UITextView {

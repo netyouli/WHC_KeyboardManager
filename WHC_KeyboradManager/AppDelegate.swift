@@ -7,13 +7,13 @@
 //
 
 import UIKit
-
+import WHC_Layout
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UITableView.whc_InitConfig()
         let tabbarVC = UITabBarController()
@@ -21,12 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let nav2 = UINavigationController(rootViewController: StyleVC2(nibName: "StyleVC2",bundle: nil))
         let nav3 = UINavigationController(rootViewController: StyleVC3(nibName: "StyleVC3",bundle: nil))
         nav1.tabBarItem.title = "样式1"
-        nav1.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 5, 5, 5)
+        nav1.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         nav1.tabBarItem.image = UIImage(named: "op_uncheck")
-        nav2.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 5, 5, 5)
+        nav2.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         nav2.tabBarItem.title = "样式2"
         nav2.tabBarItem.image = UIImage(named: "op_uncheck")
-        nav3.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 5, 5, 5)
+        nav3.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         nav3.tabBarItem.title = "样式3"
         nav3.tabBarItem.image = UIImage(named: "op_uncheck")
         tabbarVC.viewControllers = [nav1,nav2,nav3]

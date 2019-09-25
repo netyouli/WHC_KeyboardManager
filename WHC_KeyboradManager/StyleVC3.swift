@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import WHC_Layout
 class StyleVC3: UIViewController {
 
     private lazy var stackView: WHC_StackView = WHC_StackView()
@@ -27,7 +27,7 @@ class StyleVC3: UIViewController {
         /// 设置垂直间隙
         stackView.whc_VSpace = 20
         /// 设置子视图内边距
-        stackView.whc_Edge = UIEdgeInsetsMake(16, 16, 0, 16)
+        stackView.whc_Edge = UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16)
         
         self.view.addSubview(stackView)
         stackView.whc_Left(0)

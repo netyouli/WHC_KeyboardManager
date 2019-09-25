@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import WHC_Layout
 class StyleVC2: UIViewController {
 
     deinit {
@@ -39,7 +39,7 @@ class StyleVC2: UIViewController {
         /// 设置子视图高度
         stackView.whc_SubViewHeight = 40
         /// 设置子视图内边距
-        stackView.whc_Edge = UIEdgeInsetsMake(0, 16, 0, 16)
+        stackView.whc_Edge = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         
         scrollView.addSubview(stackView)
         stackView.whc_Left(0)
