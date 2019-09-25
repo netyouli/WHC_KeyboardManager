@@ -538,7 +538,10 @@ const static CGFloat kNotInitValue = -888888.88;
     if (keyPath && [keyPath isEqualToString:(NSString *)kWHC_KBM_ContentOffset] && _currentField) {
         UIScrollView * scrollView = object;
         if (scrollView != nil && (scrollView.dragging || scrollView.decelerating)) {
-            CGRect convertRect = [_currentField convertRect:_currentField.bounds toView:_currentMonitorViewController.view.window];
+            CGRect convertRect = CGRectZero;
+            if (_currentMonitorViewController.view.window) {
+                convertRect = [_currentField convertRect:_currentField.bounds toView:_currentMonitorViewController.view.window];
+            }
             CGFloat yOffset = CGRectGetMaxY(convertRect) - CGRectGetMinY(_keyboardFrame);
             if (yOffset > 0 || CGRectGetMinY(convertRect) < 0) {
                 if ([_currentField isKindOfClass:[UITextView class]]) {

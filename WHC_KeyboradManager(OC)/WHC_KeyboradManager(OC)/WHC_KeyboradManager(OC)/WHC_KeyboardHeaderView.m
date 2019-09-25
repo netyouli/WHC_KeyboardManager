@@ -29,18 +29,24 @@
 #import "WHC_KeyboardHeaderView.h"
 #import "WHC_KeyboardManager.h"
 
+@interface WHC_KeyboardHeaderView ()
+@property (nonatomic, strong)UIToolbar * toolbar;
+@end
+
 @implementation WHC_KeyboardHeaderView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
-        
+        self.backgroundColor = [UIColor clearColor];
+        _toolbar.backgroundColor = [UIColor clearColor];
+        CGSize size = [UIScreen mainScreen].bounds.size;
+        _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, size.width, 44)];
         _nextButton = [UIButton new];
         _frontButton = [UIButton new];
         _doneButton = [UIButton new];
         _lineView = [UIView new];
-        
+        [self addSubview:_toolbar];
         [self addSubview:_nextButton];
         [self addSubview:_frontButton];
         [self addSubview:_doneButton];
@@ -50,15 +56,16 @@
         _frontButton.translatesAutoresizingMaskIntoConstraints = NO;
         _doneButton.translatesAutoresizingMaskIntoConstraints = NO;
         _lineView.translatesAutoresizingMaskIntoConstraints = NO;
+        _toolbar.translatesAutoresizingMaskIntoConstraints = NO;
         
-        _lineView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1];
+        _lineView.backgroundColor = [self kbLine];
         [_frontButton setTitle:@"←" forState: UIControlStateNormal];
         [_nextButton setTitle:@"→" forState: UIControlStateNormal];
         [_doneButton setTitle:@"完成" forState: UIControlStateNormal];
 
-        [_frontButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_doneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_frontButton setTitleColor:[self kbBlack] forState:UIControlStateNormal];
+        [_nextButton setTitleColor:[self kbBlack] forState:UIControlStateNormal];
+        [_doneButton setTitleColor:[self kbBlack] forState:UIControlStateNormal];
         
         [_frontButton setTitleColor:[UIColor grayColor] forState:UIControlStateSelected];
         [_nextButton setTitleColor:[UIColor grayColor] forState:UIControlStateSelected];
@@ -72,6 +79,15 @@
         
         CGFloat kMargin = 0;
         CGFloat kWidth = 60;
+        
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:_toolbar attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
+        
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:_toolbar attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
+        
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:_toolbar attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:0]];
+        
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:_toolbar attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
+        
         
         [self addConstraint:[NSLayoutConstraint constraintWithItem:_frontButton attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:kMargin]];
         [_frontButton addConstraint:[NSLayoutConstraint constraintWithItem:_frontButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:kWidth]];
@@ -101,6 +117,34 @@
         
     }
     return self;
+}
+
+- (UIColor *)kbBlack {
+    if (@available(iOS 13.0, *)) {
+           return [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+               if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                   return [UIColor colorWithWhite:1 alpha:1];
+               }
+               return [UIColor colorWithWhite:0 alpha:1];
+           }];
+       } else {
+           // Fallback on earlier versions
+           return [UIColor blackColor];
+       }
+}
+
+- (UIColor *)kbLine {
+    if (@available(iOS 13.0, *)) {
+        return [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+            if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                return [UIColor colorWithWhite:0.2 alpha:1];
+            }
+            return [UIColor colorWithRed:244.0 / 255.0 green:244.0 / 255.0 blue:244.0 / 255.0 alpha:1];
+        }];
+    } else {
+        // Fallback on earlier versions
+        return [UIColor colorWithRed:244.0 / 255.0 green:244.0 / 255.0 blue:244.0 / 255.0 alpha:1];
+    }
 }
 
 - (void)setHideNextAndFrontButton:(BOOL)hideNextAndFrontButton {
