@@ -15,8 +15,6 @@ WHC_KeyboardManager
 - **咨询**: 712641411
 - **作者**: 吴海超
 
-**bug修复：修复headerview 在push或者pop不消失bug**
-
 演示
 ==============
 ![](https://github.com/netyouli/WHC_KeyboardManager/blob/master/WHC_KeyboradManager/demo/k1.gif)
@@ -33,7 +31,7 @@ WHC_KeyboardManager
 
     **【Objective-c】** pod 'WHC_KeyboardManager_oc'
 
-    **【Swift4.0+】** pod 'WHC_KeyboardManager'
+    **【Swift5.0+】** pod 'WHC_KeyboardManager'
 
 使用到第三方库
 ==============

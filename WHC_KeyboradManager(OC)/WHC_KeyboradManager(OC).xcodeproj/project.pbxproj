@@ -179,7 +179,7 @@
 				TargetAttributes = {
 					FE6DCE161DE1C73E00E7992A = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 7F5YZXGNJ3;
+						DevelopmentTeam = J56ZV24477;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
@@ -190,6 +190,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -345,11 +346,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 7F5YZXGNJ3;
+				DEVELOPMENT_TEAM = J56ZV24477;
 				INFOPLIST_FILE = "WHC_KeyboradManager(OC)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "WHC.WHC-KeyboradManager-OC-";
+				PRODUCT_BUNDLE_IDENTIFIER = "WHC.WHC-KeyboradManager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -361,11 +362,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 7F5YZXGNJ3;
+				DEVELOPMENT_TEAM = J56ZV24477;
 				INFOPLIST_FILE = "WHC_KeyboradManager(OC)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "WHC.WHC-KeyboradManager-OC-";
+				PRODUCT_BUNDLE_IDENTIFIER = "WHC.WHC-KeyboradManager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
