@@ -60,12 +60,6 @@ override func viewDidLoad() {
 }
 ```
 
-推荐
-==============
-* iOS平台最好用自动布局库: [AutoLayoutKit](https://github.com/netyouli/WHC_AutoLayoutKit)
-* iOS开发辅助Mac工具: [DataModelFactory](https://github.com/netyouli/WHC_DataModelFactory)
-* iOS平台最强大Sqlite库: [ModelSqliteKit](https://github.com/netyouli/WHC_ModelSqliteKit)
-
 ## <a id="期待"></a>期待
 
 - 如果您在使用过程中有任何问题，欢迎issue me! 很乐意为您解答任何相关问题!
